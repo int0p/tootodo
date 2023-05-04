@@ -70,42 +70,35 @@
 
 </script>
 
-<div class="clock-container">
-    <div class="clock">
-        <svg viewBox="0 0 {vw} {vh}">
 
-            <circle {cx} {cy} {r} stroke="black" fill="transparent"  />
-            <circle {cx} {cy} r="1" stroke="red" fill="transparent"  />
+<div class="clock">
+    <svg viewBox="0 0 {vw} {vh}">
+        <circle {cx} {cy} {r} stroke="black" fill="transparent"  />
+        <circle {cx} {cy} r="1" stroke="red" fill="transparent"  />
 
-            {#each lines as line}
-                <line
-                        x1={getLineCoordinates(line).x1}
-                        y1={getLineCoordinates(line).y1}
-                        x2={getLineCoordinates(line).x2}
-                        y2={getLineCoordinates(line).y2}
-                        stroke="black"
-                        stroke-width="{line.stroke_width === 'thick' ? 1.5 : 0.5}"
-                />
-                <text
-                        x={getTextCoordinates(line).x}
-                        y={getTextCoordinates(line).y}
-                        font-size="8"
-                >{line.text}</text>
-            {/each}
-        </svg>
-    </div>
+        {#each lines as line}
+            <line
+                    x1={getLineCoordinates(line).x1}
+                    y1={getLineCoordinates(line).y1}
+                    x2={getLineCoordinates(line).x2}
+                    y2={getLineCoordinates(line).y2}
+                    stroke="black"
+                    stroke-width="{line.stroke_width === 'thick' ? 1.5 : 0.5}"
+            />
+            <text
+                    x={getTextCoordinates(line).x}
+                    y={getTextCoordinates(line).y}
+                    font-size="8"
+            >{line.text}</text>
+        {/each}
+    </svg>
 </div>
 
 <style>
-    .clock-container {
-        width:90vw;
-        height:40vh;
-    }
-
-    .clock-container .clock {
+.clock {
         color: rgb(50, 50, 50);
-        width: 20em;
-        height: 20em;
+        width: 20rem;
+        height: 20rem;
         padding: 10px;
         border-radius: 20%;
         border: 15px solid rgb(55, 55, 55);
