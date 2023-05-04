@@ -8,6 +8,7 @@
         Button,
         Hr,
         Toolbar, ToolbarButton,
+        Pagination, PaginationItem,
     } from 'flowbite-svelte';
 
     let timeLeft = 1500; // 25 minutes in seconds
@@ -61,10 +62,14 @@
     </div>
 </div>
 
-
-<h1>{session === 'work' ? 'Work Session' : 'Break Session'}</h1>
-<p>{Math.floor(timeLeft / 60)}:{('0' + (timeLeft % 60)).slice(-2)}</p>
-<Button on:click={timer ? stopTimer : startTimer}>{timer ? 'Stop' : 'Start'}</Button>
+<div class="flex space-x-3 m-4">
+    <Button on:click={timer ? stopTimer : startTimer}> Reset </Button>
+    <PaginationItem >Work</PaginationItem>
+    <PaginationItem >Break</PaginationItem>
+    <Button on:click={timer ? stopTimer : startTimer}>{timer ? 'Stop' : 'Start'}</Button>
+</div>
+<!--<h1>{session === 'work' ? 'Work Session' : 'Break Session'}</h1>-->
+<!--<p>{Math.floor(timeLeft / 60)}:{('0' + (timeLeft % 60)).slice(-2)}</p>-->
 
 <style lang="scss">
     .timeController{
