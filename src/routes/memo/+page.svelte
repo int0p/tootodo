@@ -14,7 +14,7 @@
         },
         {
             id : uuid(),
-            title : "힘들어요",
+            title : "갑자기 500 internal error",
             save:false,
             ask:false,
         },
