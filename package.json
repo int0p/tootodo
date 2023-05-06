@@ -39,6 +39,7 @@
 		"iconify-icon": "^1.0.7",
 		"moment": "^2.29.4",
 		"precss": "^4.0.0",
-		"svelte-kit": "^1.2.0"
+		"svelte-kit": "^1.2.0",
+		"uuid": "^9.0.0"
 	}
 }
