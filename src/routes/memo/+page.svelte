@@ -15,14 +15,14 @@
         {
             id : uuid(),
             title : "갑자기 500 internal error",
-            save:false,
+            save:true,
             ask:false,
         },
         {
             id : uuid(),
-            title : "어쨰서요",
+            title : "어쨰서죠",
             save:false,
-            ask:false,
+            ask:true,
         },
     ];
 
