@@ -24,13 +24,15 @@
             save:false,
             ask:false,
         },
-    ]
+    ];
+
+    $: console.log(memos);
 </script>
 
-<MemoAdd>
+<MemoAdd bind:memos>
 
 </MemoAdd>
 
-<MemoList memos={memos}>
+<MemoList bind:memos>
 
 </MemoList>
