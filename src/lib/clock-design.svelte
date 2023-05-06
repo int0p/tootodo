@@ -1,5 +1,6 @@
 
 <script>
+    import Icon from '@iconify/svelte';
     ///////////////// var //////////////////
     // svg setting
     // circle
@@ -77,31 +78,45 @@
 <div class="clock">
     <svg viewBox="0 0 {vw} {vh}">
         <circle {cx} {cy} {r} stroke="black" fill="transparent"  />
-        <circle {cx} {cy} r="1" stroke="red" fill="transparent"  />
-        <rect
-                x="calc({cx} - 0.7 * {r})"
-                y = "calc({cy} - 0.3 * {r})"
-                width = "calc({r} * 2 * 0.7)"
-                height ="calc({r} * 2 * 0.21)"
-                fill="transparent"
-                stroke="black"
-        ></rect>
 
-        <text
-                x="25"
-                y = "80"
-                font-size="8"
-        >{currentTime}</text>
-        <text
-                x="64"
-                y = "80"
-                font-size="8"
-        > - </text>
-        <text
-                x="73"
-                y = "80"
-                font-size="8"
-        >{currentTime}</text>
+<!--        <rect-->
+<!--                x="calc({cx} - 0.7 * {r})"-->
+<!--                y = "calc({cy} - 0.3 * {r})"-->
+<!--                width = "calc({r} * 2 * 0.7)"-->
+<!--                height ="calc({r} * 2 * 0.21)"-->
+<!--                fill="white"-->
+<!--                stroke="black"-->
+<!--        ></rect>-->
+
+<!--        <circle {cx} {cy} r="1" stroke="black" fill="transparent" />-->
+
+<!--        <text-->
+<!--                x="25"-->
+<!--                y = "80"-->
+<!--                font-size="8"-->
+<!--        >{currentTime}</text>-->
+<!--        <text-->
+<!--                x="64"-->
+<!--                y = "80"-->
+<!--                font-size="8"-->
+<!--        > - </text>-->
+<!--        <text-->
+<!--                x="73"-->
+<!--                y = "80"-->
+<!--                font-size="8"-->
+<!--        >{currentTime}</text>-->
+
+        <g transform="translate(50,50)" >
+            <Icon icon="bi:play-circle" width="30"/>
+        </g>
+
+        <g transform="translate(5,110)" >
+            <Icon icon="lucide:timer-reset" />
+        </g>
+
+        <g transform="translate(110,110)" >
+            <Icon icon="tabler:repeat" />
+        </g>
 
         {#each lines as line}
             <line

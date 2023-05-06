@@ -5,7 +5,7 @@
 
     import { Alert,
         Heading, P, A, Mark, Secondary, Span,
-        Button,
+        Button,Badge,
         Hr,
         Toolbar, ToolbarButton,
         Pagination, PaginationItem,
@@ -44,32 +44,40 @@
     onDestroy(() => {
         stopTimer();
     });
+
+    let currentTime = new Date().toLocaleTimeString('en-US', { timeStyle:'short' });
 </script>
 
 <div class="flex justify-center items-center">
     <div class="timeController">
-        <Button outline gradient color="purpleToPink">-05</Button>
-        <Button outline gradient color="purpleToPink">-10</Button>
-        <Button outline gradient color="purpleToPink">-25</Button>
-        <Button outline gradient color="purpleToPink">-60</Button>
+        <Button outline gradient color="cyanToBlue">-05</Button>
+        <Button outline gradient color="cyanToBlue">-05</Button>
+        <Button outline gradient color="cyanToBlue">-05</Button>
+        <Button outline gradient color="cyanToBlue">-05</Button>
+        <Button outline gradient color="cyanToBlue">-05</Button>
+        <Button outline gradient color="cyanToBlue">-05</Button>
     </div>
-    <ClockDesign />
+    <div class="flex-col">
+        <ClockDesign />
+        <div class="flex space-x-2 mt-4 justify-around">
+            <Badge large color="pink" class="w-[100px]">{Math.floor(timeLeft / 60)}:{('0' + (timeLeft % 60)).slice(-2)}</Badge>
+            <div class="flex-col">
+                <p><span class="text-pink-800">current time:</span> {currentTime}</p>
+                <p><span class="text-pink-800">goal: </span> {currentTime} - {currentTime}</p>
+            </div>
+        </div>
+    </div>
     <div class="timeController ">
         <Button outline gradient color="pinkToOrange">+05</Button>
         <Button outline gradient color="pinkToOrange">+10</Button>
         <Button outline gradient color="pinkToOrange">+25</Button>
+        <Button outline gradient color="pinkToOrange">+25</Button>
+        <Button outline gradient color="pinkToOrange">+60</Button>
         <Button outline gradient color="pinkToOrange">+60</Button>
     </div>
 </div>
 
-<div class="flex space-x-3 m-4">
-    <Button on:click={timer ? stopTimer : startTimer}> Reset </Button>
-    <PaginationItem >Work</PaginationItem>
-    <PaginationItem >Break</PaginationItem>
-    <Button on:click={timer ? stopTimer : startTimer}>{timer ? 'Stop' : 'Start'}</Button>
-</div>
-<!--<h1>{session === 'work' ? 'Work Session' : 'Break Session'}</h1>-->
-<!--<p>{Math.floor(timeLeft / 60)}:{('0' + (timeLeft % 60)).slice(-2)}</p>-->
+
 
 <style lang="scss">
     .timeController{
@@ -77,10 +85,9 @@
       flex-direction: column;
       margin: 10px;
       width: 4.5rem;
-      height: 18rem;
+      height: 25rem;
       justify-content: space-between;
       align-items: stretch;
-
     }
 </style>
 
