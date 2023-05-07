@@ -25,14 +25,14 @@
             ask:true,
         },
     ];
-    function addMemoHandler(e){
+    function handlerAddMemo(e){
         memos = [...memos, e.detail];
     }
 
     $: console.log(memos);
 </script>
 
-<MemoAdd {memos} on:addMemo={addMemoHandler}>
+<MemoAdd {memos} on:addMemo={handlerAddMemo}>
 
 </MemoAdd>
 
