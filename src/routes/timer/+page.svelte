@@ -15,12 +15,6 @@
 </script>
 
 <div class="p-8 ">
-    <!--  시작페이지 -->
-    <Heading tag="h1" class="mb-4" customSize="text-4xl font-extrabold  md:text-5xl lg:text-6xl">
-<!--        Hello {data.name}!-->
-        WinYeah
-    </Heading>
-
     <!-- 그룹, 세션 추가 및 선택 -->
     <ButtonGroup class="w-full">
         <Button color="none" class="flex-shrink-0 text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white hover:bg-gray-200 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">

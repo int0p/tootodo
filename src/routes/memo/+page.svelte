@@ -43,6 +43,10 @@
     $: console.log(memos);
 </script>
 
+<!--목표: memoList는 memo를 보여주고, memoAdd는 memo를 추가하는 역할을 한다.-->
+<!--현실: memoList에 메모의 북마크를 토글하거나 삭제하는 기능이 있다.-->
+<!--TODO: memoList와 memoAdd를 합치거나, 다른 방식으로 나누어야함.-->
+
 <MemoAdd {memos} on:addMemo={handlerAddMemo}>
 
 </MemoAdd>
