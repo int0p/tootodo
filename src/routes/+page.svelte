@@ -7,7 +7,7 @@
 </script>
 
 <div class="flex w-full">
-    <div class="flex-col "  >
+    <div class="flex-col w-2/3"  >
 <!--        TODO: css grid배우고 navbar +layout으로 옮기기.-->
         <Navbar class="" let:hidden let:toggle>
             <NavBrand href="/" >
@@ -17,13 +17,12 @@
                 </Heading>
             </NavBrand>
             <NavHamburger on:click={toggle} />
-            <ButtonGroup class="space-x-px" style="padding-bottom: 0px;" >
-
+            <ButtonGroup >
                 <NavUl {hidden}>
-                    <Button href="/" active={true}><Icon icon="mdi:timer-edit" width="34"/></Button>
-                    <Button href="/workList"><Icon icon="material-symbols:folder-copy"  width="34"/></Button>
-                    <Button href="/statistics"><Icon icon="uim:chart-pie" width="34" /></Button>
-                    <NavLi href="/setting"><Icon icon="ant-design:setting-filled" width="36" /></NavLi>
+                    <Button href="/" active={true}><Icon icon="radix-icons:lap-timer" width="24"/></Button>
+                    <Button href="/workList"><Icon icon="material-symbols:folder-copy"  width="24"/></Button>
+                    <Button href="/statistics"><Icon icon="uim:chart-pie" width="24" /></Button>
+                    <NavLi href="/setting"><Icon icon="ant-design:setting-filled" width="32" /></NavLi>
                 </NavUl>
             </ButtonGroup>
 
@@ -31,5 +30,5 @@
         <Timer class=""/>
         <Memo class=""/>
     </div>
-    <Daily class=""/>
+    <Daily class="w-1/4"/>
 </div>

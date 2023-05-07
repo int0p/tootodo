@@ -10,9 +10,9 @@
 
 </script>
 
-<div class="flex-col">
-    <Hr class="my-4 mx-auto md:my-8 " width="w-full" height="h-1">{month}월 {day}일</Hr>
-    <div class="flex gap-2 mb-4">
+<div class="flex-col m-8 ">
+    <Hr class="my-4 mx-auto md:my-8 " height="h-1">{month}월 {day}일</Hr>
+    <div class="flex gap-2 mb-4 justify-center">
         <Button outline color="dark">M</Button>
         <Button outline color="dark">T</Button>
         <Button outline color="dark">W</Button>
