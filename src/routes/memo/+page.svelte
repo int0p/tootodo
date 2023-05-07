@@ -28,6 +28,9 @@
     function handlerAddMemo(e){
         memos = [...memos, e.detail];
     }
+    function handlerRemoveMemo(e){
+        memos = memos.filter(memo => memo.id !== e.detail.id);
+    }
 
     $: console.log(memos);
 </script>
@@ -36,6 +39,7 @@
 
 </MemoAdd>
 
-<MemoList bind:memos>
+<MemoList {memos}
+          on:removeMemo={handlerRemoveMemo}>
 
 </MemoList>
