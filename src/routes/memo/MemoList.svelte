@@ -11,6 +11,12 @@
             id,
         });
     }
+
+    function handleToggle(id){
+        dispatch("toggleSave", {
+            id,
+        });
+    }
 </script>
 
 {#each memos as {title,ask,save,id} (id)}
@@ -18,13 +24,13 @@
 <!--        message display-->
         <Alert color ={ ask ? "green" : "yellow"} >
             <!-- ask값이 true일땐 gpt와의 대화 모드가 되므로 대화창의 색을 초록으로 바꾼다. -->
-            <span slot="icon">
+            <span slot="icon" on:click={()=>handleToggle(id)}>
     <!--           save값이 true일땐 아이콘을 꽉찬 북마크으로 설정한다. -->
                 {#if save}
-                        <Icon icon="material-symbols:bookmark-rounded" width="22"/>
-                    {:else}
-                        <Icon icon="material-symbols:bookmark-outline-rounded" width="22"/>
-                    {/if}
+                    <Icon icon="material-symbols:bookmark-rounded" width="22"/>
+                {:else}
+                    <Icon icon="material-symbols:bookmark-outline-rounded" width="22"/>
+                {/if}
             </span>
             {title}
         </Alert>

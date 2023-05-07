@@ -31,6 +31,14 @@
     function handlerRemoveMemo(e){
         memos = memos.filter(memo => memo.id !== e.detail.id);
     }
+    function handlerToggleSave(e){
+        memos = memos.map(memo => {
+            if(memo.id === e.detail.id){
+                memo.save = !memo.save;
+            }
+            return memo;
+        })
+    }
 
     $: console.log(memos);
 </script>
@@ -40,6 +48,7 @@
 </MemoAdd>
 
 <MemoList {memos}
-          on:removeMemo={handlerRemoveMemo}>
+          on:removeMemo={handlerRemoveMemo}
+            on:toggleSave={handlerToggleSave}>
 
 </MemoList>
