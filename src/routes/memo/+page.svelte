@@ -25,11 +25,14 @@
             ask:true,
         },
     ];
+    function addMemoHandler(e){
+        memos = [...memos, e.detail];
+    }
 
     $: console.log(memos);
 </script>
 
-<MemoAdd bind:memos>
+<MemoAdd {memos} on:addMemo={addMemoHandler}>
 
 </MemoAdd>
 

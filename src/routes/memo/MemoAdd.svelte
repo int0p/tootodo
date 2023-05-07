@@ -2,21 +2,36 @@
 import Icon from "@iconify/svelte";
 import {Alert, Textarea, ToolbarButton} from "flowbite-svelte";
 import {v4 as uuid} from "uuid";
+import {createEventDispatcher} from "svelte";
+
 export let memos = [];
 let inputText = "";
+//// add memo in component
+// function handleAddMemo(){
+//     console.log(inputText.$$.ctx[0]);
+//     if(!inputText) return;
+//     memos = [
+//         ...memos,
+//         {
+//             id : uuid(),
+//             title : inputText.$$.ctx[0],
+//             save:false,
+//             ask:false,
+//         }
+//     ];
+// }
+
+//// add memo in parent page
+const dispatch = createEventDispatcher();
 function handleAddMemo(){
-    console.log(inputText.$$.ctx[0]);
-    if(!inputText) return;
-    memos = [
-        ...memos,
-        {
-            id : uuid(),
-            title : inputText.$$.ctx[0],
-            save:false,
-            ask:false,
-        }
-    ];
+    dispatch("addMemo", {
+        id : uuid(),
+        title : inputText.$$.ctx[0],
+        save:false,
+        ask:true,
+    });
 }
+
 </script>
 
 <form on:submit|preventDefault={handleAddMemo}>
