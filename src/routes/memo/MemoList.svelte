@@ -5,6 +5,9 @@
 
     export let memos = [];
     let listDiv;
+    let autoScroll = true;
+    let prevListLength= memos.length;
+
     beforeUpdate(() => {
         if (listDiv) {
             console.log(listDiv.offsetHeight);
@@ -12,8 +15,17 @@
     });
     afterUpdate(() => {
         console.log(listDiv.offsetHeight);
+        if (autoScroll) {
+            listDiv.scrollTo(0, listDiv.scrollHeight);
+        }
+        autoScroll = false;
     });
 
+    $:{
+        console.log(memos.length, prevListLength);
+        autoScroll = memos.length > prevListLength ;
+        prevListLength = memos.length;
+    }
     const dispatch = createEventDispatcher();
 
     function handleRemoveMemo(id){
@@ -29,7 +41,7 @@
     }
 </script>
 
-<div bind:this={listDiv}>
+<div bind:this={listDiv} style="max-height: 648px; overflow:auto;">
     {#each memos as {title,ask,save,id} (id)}
         <div class="flex justify-end m-3">
             <!--        message display-->
