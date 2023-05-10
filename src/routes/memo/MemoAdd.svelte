@@ -40,7 +40,6 @@ onDestroy(() => {
     console.log('Destroyed');
 });
 
-
 function handleAddMemo(){
     const memo = {
         id : uuid(),
