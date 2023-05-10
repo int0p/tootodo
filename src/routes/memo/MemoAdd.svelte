@@ -4,7 +4,7 @@
 import Icon from "@iconify/svelte";
 import {Alert, Textarea, ToolbarButton, Input} from "flowbite-svelte";
 import {v4 as uuid} from "uuid";
-import {createEventDispatcher} from "svelte";
+import {createEventDispatcher,onDestroy, onMount, beforeUpdate, afterUpdate} from "svelte";
 
 let inputText = "";
 let isSave = true;
@@ -29,6 +29,18 @@ let isAsk = false;
 //// add memo in parent page
 const dispatch = createEventDispatcher();
 
+onMount(() => {
+    console.log('Mounted');
+    return () => {
+        console.log('Destroyed 2');
+    };
+});
+
+onDestroy(() => {
+    console.log('Destroyed');
+});
+
+
 function handleAddMemo(){
     const memo = {
         id : uuid(),
@@ -43,12 +55,12 @@ function handleAddMemo(){
     const isCancelled = dispatch("addMemo", memo,{
         cancelable: true,
     });
-    clearInput();
+    // clearInput();
     if(isCancelled){
         console.log("event cancelled");
     }
 }
-function clearInput(){
+export function clearInput(){
 //     TODO: inputText.$$.ctx[0] = ""; 이렇게 하면 안되나?
     const input = document.getElementById("inputText");
     input.value = "";
