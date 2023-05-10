@@ -4,17 +4,18 @@
     import {afterUpdate, beforeUpdate, createEventDispatcher} from "svelte";
 
     export let memos = [];
+    let listDivHeight=0;
     let listDiv;
     let autoScroll = true;
     let prevListLength= memos.length;
 
     beforeUpdate(() => {
-        if (listDiv) {
-            console.log(listDiv.offsetHeight);
+        if (listDivHeight) {
+            console.log(listDivHeight);
         }
     });
     afterUpdate(() => {
-        console.log(listDiv.offsetHeight);
+        console.log(listDivHeight);
         if (autoScroll) {
             listDiv.scrollTo(0, listDiv.scrollHeight);
         }
@@ -41,9 +42,9 @@
     }
 </script>
 
-<div bind:this={listDiv} style="max-height: 648px; overflow:auto;">
+<div  bind:this={listDiv} bind:offsetHeight={listDivHeight} style="max-height: 648px; overflow:auto;">
     {#each memos as {title,ask,save,id} (id)}
-        <div class="flex justify-end m-3">
+        <div class="flex justify-end m-3" >
             <!--        message display-->
             <Alert color ={ ask ? "green" : "yellow"} >
                 <!-- ask값이 true일땐 gpt와의 대화 모드가 되므로 대화창의 색을 초록으로 바꾼다. -->
