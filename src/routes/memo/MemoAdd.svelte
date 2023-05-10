@@ -2,10 +2,9 @@
 
 <script>
 import Icon from "@iconify/svelte";
-import {Alert, Textarea, ToolbarButton} from "flowbite-svelte";
+import {Alert, Textarea, ToolbarButton, Input} from "flowbite-svelte";
 import {v4 as uuid} from "uuid";
 import {createEventDispatcher} from "svelte";
-
 
 let inputText = "";
 let isSave = true;
@@ -37,9 +36,24 @@ function handleAddMemo(){
         save:isSave,
         ask:isAsk,
     };
+    // 공백이 있을경우 추가 안함
     const hasOnlySpace = memo.title.trim()==="";
     if(hasOnlySpace) return;
-    dispatch("addMemo", memo);
+    // dispatch. cancelable으로 입력 된 후 입력 form 초기화
+    const isCancelled = dispatch("addMemo", memo,{
+        cancelable: true,
+    });
+    clearInput();
+    if(isCancelled){
+        console.log("event cancelled");
+    }
+}
+function clearInput(){
+//     TODO: inputText.$$.ctx[0] = ""; 이렇게 하면 안되나?
+    const input = document.getElementById("inputText");
+    input.value = "";
+    isSave = true;
+    isAsk = false;
 }
 
 </script>
@@ -72,9 +86,8 @@ function handleAddMemo(){
                 <span class="sr-only">Store</span>
             </ToolbarButton>
 
-            <Textarea id="chat" class="mx-4" rows="1" placeholder="Your message..."
+            <Textarea id="inputText" class="mx-4" rows="1" placeholder="Your message..."
                             bind:this={inputText}/>
-<!--            TODO: flowbite comp로 말고 그냥 textarea하는게 나을듯. -->
 
             <ToolbarButton type="submit" color="blue" class="rounded-full text-blue-600 dark:text-blue-500">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" /></svg>
