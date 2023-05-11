@@ -8,34 +8,58 @@
     export let memos = [
         {
             id : uuid(),
-            title : "모르겠어요",
+            title : "5/3,2023 개발 시작",
             save:false,
             ask:false,
         },
         {
             id : uuid(),
-            title : "갑자기 500 internal error",
+            title : "5/4 시계 svg디자인",
             save:true,
             ask:false,
         },
         {
             id : uuid(),
-            title : "어쨰서죠",
+            title : "5/5 전체 레이아웃 디자인",
             save:false,
-            ask:true,
+            ask:false,
+        },
+        {
+            id : uuid(),
+            title : "5/7 메모 추가, 삭제, 토글",
+            save:false,
+            ask:false,
+        },
+        {
+            id : uuid(),
+            title : "5/10 입력 폼 초기화 기능, 라이프 사이클로 show/hide list, scroll 기능 추가",
+            save:false,
+            ask:false,
+        },
+        {
+            id : uuid(),
+            title : "5/11 저장된 메모만 보는 기능 추가, MVVM 리펙토링",
+            save:true,
+            ask:false,
+        },
+        {
+            id : uuid(),
+            title : "5/11 타이머 시계 디자인 수정",
+            save:true,
+            ask:false,
+        },
+        {
+            id : uuid(),
+            title : "5/12 타이머 함수 구현",
+            save:true,
+            ask:false,
         },
     ];
     let memoList;
-    let savedList = [];
-    let showSaved = true;
 
     function handlerAddMemo(e){
         e.preventDefault();
         memos = [...memos, e.detail];
-        if(e.detail.save){
-            savedList = [...savedList, e.detail];
-            // console.log(savedList);
-        }
         memoList.clearInput();
     }
     function handlerRemoveMemo(e){
@@ -61,18 +85,6 @@
         bind:this={memoList}
          on:addMemo={handlerAddMemo}/>
 
-<Checkbox bind:checked={showSaved} class="w-full p-4" >Show/Hide Saved Memo</Checkbox>
-{#if showSaved}
-    <div class="border-2 ml-8 mr-8">
-        {#each savedList as sme (sme.id)}
-                <Blockquote border bg class="p-2 m-2">
-                <p>{sme.title}</p>
-                </Blockquote>
-        {/each}
-    </div>
-    <Hr/>
-
-{/if}
 
 <MemoList
         {memos}
