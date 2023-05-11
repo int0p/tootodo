@@ -66,31 +66,39 @@
     let memoList;
     export let todoList = [];
 
+    // handler. TODO: add는 memo전체 받고 remove와 toggle은 id만 받아서 코드가 헷갈림.
     function handlerAddMemo(e){
         e.preventDefault();
         memos = [...memos, e.detail];
-        addTodoList(e.detail);
+        addTodo(e.detail);
         memoList.clearInput();
     }
     function handlerRemoveMemo(e){
-        memos = memos.filter(memo => memo.id !== e.detail.id);
-        removeTodoList(e.detail);
+        const targetID = e.detail.id;
+        memos = memos.filter(memo => memo.id !== targetID);
+        removeTodo(targetID);
     }
     function handlerToggleSave(e){
+        const targetID = e.detail.id;
         memos = memos.map(memo => {
             if(memo.id === e.detail.id){
                 memo.save = !memo.save;
+                // memo에 따라 todoList에 추가하거나 삭제한다.
+                if(memo.save === false) removeTodo(targetID);
+                else {
+                    addTodo(memo);
+                    // console.log(todoList);
+                }
             }
             return memo;
         });
-        removeTodoList(e.detail);
     }
-    function addTodoList(todo){
-        todoList = [...todoList, todo];
+    function addTodo(todo){
+        if(todo.save)
+            todoList = [...todoList, todo];
     }
-    function removeTodoList(todo){
-        console.log(todo.id);
-        todoList = todoList.filter(toodo => toodo.id !== todo.id);
+    function removeTodo(todoID){
+        todoList = todoList.filter(toodo => toodo.id !== todoID);
     }
     // $: console.log(todoList);
 </script>

@@ -2,6 +2,7 @@
     import {Alert, Blockquote, Button, Checkbox, Hr, ToolbarButton, List, Li, Heading, P} from "flowbite-svelte";
     import Icon from "@iconify/svelte";
     import {afterUpdate, beforeUpdate, createEventDispatcher} from "svelte";
+    import {slide} from "svelte/transition";
 
     export let memos = [];
     export let todoList = [];
@@ -57,7 +58,7 @@
             class="text-lg font-semibold text-gray-900 dark:text-white">Show/Hide Todo List</Heading>
 </Checkbox>
 {#if showTodo}
-    <div class="border-2 ml-8 mr-8">
+    <div in:slide out:slide class="border-2 ml-8 mr-8">
         <List tag="ul" class="space-y-1">
             {#each todoList as todo (todo.id)}
                 <Li class="p-2 m-2">{todo.title}</Li>
@@ -74,10 +75,10 @@
         <div class="flex justify-end m-3 " >
             <P class="text-xs mt-8 mr-2">{date}</P>
             <!--        message display-->
+            <!-- ask값이 true일땐 gpt와의 대화 모드가 되므로 대화창의 색을 초록으로 바꾼다. -->
             <Alert color ={ ask ? "green" : "yellow"} >
-                <!-- ask값이 true일땐 gpt와의 대화 모드가 되므로 대화창의 색을 초록으로 바꾼다. -->
+                <!--           save값이 true일땐 아이콘을 꽉찬 북마크으로 설정한다. -->
                 <span slot="icon" on:click={()=>handleToggle(id)}>
-    <!--           save값이 true일땐 아이콘을 꽉찬 북마크으로 설정한다. -->
                     {#if save}
                         <Icon icon="material-symbols:bookmark-rounded" width="22"/>
                     {:else}
