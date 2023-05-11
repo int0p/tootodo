@@ -51,11 +51,11 @@
                 <span slot="icon" on:click={()=>handleToggle(id)}>
     <!--           save값이 true일땐 아이콘을 꽉찬 북마크으로 설정한다. -->
                     {#if save}
-                    <Icon icon="material-symbols:bookmark-rounded" width="22"/>
-                {:else}
-                    <Icon icon="material-symbols:bookmark-outline-rounded" width="22"/>
-                {/if}
-            </span>
+                        <Icon icon="material-symbols:bookmark-rounded" width="22"/>
+                    {:else}
+                        <Icon icon="material-symbols:bookmark-outline-rounded" width="22"/>
+                    {/if}
+                </span>
                 {title}
             </Alert>
 
