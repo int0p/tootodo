@@ -45,7 +45,7 @@
     }
 
     // saved memo list --> todo list
-    let showTodo = true;
+    let showTodo = false;
 
 </script>
 
