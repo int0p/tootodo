@@ -56,14 +56,17 @@
         },
     ];
     let memoList;
+    export let todoList = [];
 
     function handlerAddMemo(e){
         e.preventDefault();
         memos = [...memos, e.detail];
+        addTodoList(e.detail);
         memoList.clearInput();
     }
     function handlerRemoveMemo(e){
         memos = memos.filter(memo => memo.id !== e.detail.id);
+        removeTodoList(e.detail);
     }
     function handlerToggleSave(e){
         memos = memos.map(memo => {
@@ -71,9 +74,15 @@
                 memo.save = !memo.save;
             }
             return memo;
-        })
+        });
+        removeTodoList(e.detail);
     }
-    $: console.log(memos);
+    function addTodoList(todo){
+        todoList = [...todoList, todo];
+    }
+    function removeTodoList(todo){
+        todoList = todoList.filter(todo => todo.id !== todo.id);
+    }
 </script>
 
 <!--목표: memoList는 memo를 보여주고, memoAdd는 memo를 추가하는 역할을 한다.-->
@@ -88,5 +97,6 @@
 
 <MemoList
         {memos}
+        bind:todoList
         on:removeMemo={handlerRemoveMemo}
         on:toggleSave={handlerToggleSave}/>

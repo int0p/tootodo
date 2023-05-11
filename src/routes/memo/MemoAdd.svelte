@@ -10,6 +10,17 @@ let inputText = "";
 let isSave = true;
 let isAsk = false;
 
+// onMount(() => {
+//     console.log('Mounted');
+//     return () => {
+//         console.log('Destroyed 2');
+//     };
+// });
+//
+// onDestroy(() => {
+//     console.log('Destroyed');
+// });
+
 //// add memo in component
 // export let memos = [];
 // function handleAddMemo(){
@@ -29,17 +40,6 @@ let isAsk = false;
 //// add memo in parent page
 const dispatch = createEventDispatcher();
 
-onMount(() => {
-    console.log('Mounted');
-    return () => {
-        console.log('Destroyed 2');
-    };
-});
-
-onDestroy(() => {
-    console.log('Destroyed');
-});
-
 function handleAddMemo(){
     const memo = {
         id : uuid(),
@@ -56,7 +56,7 @@ function handleAddMemo(){
     });
     // clearInput();
     if(isCancelled){
-        console.log("event cancelled");
+        // console.log("event cancelled");
     }
 }
 export function clearInput(){

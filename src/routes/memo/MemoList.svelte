@@ -4,18 +4,21 @@
     import {afterUpdate, beforeUpdate, createEventDispatcher} from "svelte";
 
     export let memos = [];
+    export let todoList = [];
+
     let listDivHeight=0;
     let listDiv;
     let autoScroll = true;
     let prevListLength= memos.length;
 
-    beforeUpdate(() => {
-        if (listDivHeight) {
-            console.log(listDivHeight);
-        }
-    });
+    // beforeUpdate(() => {
+    //     if (listDivHeight) {
+    //         // console.log(listDivHeight);
+    //     }
+    // });
+
     afterUpdate(() => {
-        console.log(listDivHeight);
+        // console.log(listDivHeight);
         if (autoScroll) {
             listDiv.scrollTo(0, listDiv.scrollHeight);
         }
@@ -23,7 +26,7 @@
     });
 
     $:{
-        console.log(memos.length, prevListLength);
+        // console.log(memos.length, prevListLength);
         autoScroll = memos.length > prevListLength ;
         prevListLength = memos.length;
     }
@@ -40,12 +43,10 @@
             id,
         });
     }
+
     // saved memo list --> todo list
-    let savedList = [];
     let showTodo = false;
-    function addToSavedList(id){
-        savedList = [...savedList, memos.find(memo => memo.id === id)];
-    }
+
 </script>
 
 <!-- Saved memo "Todo" list-->
@@ -53,12 +54,12 @@
     <Heading
             tag="h2"
             customSize="text-lg font-semibold"
-            class="text-lg font-semibold text-gray-900 dark:text-white">Show/Hide Saved Memo</Heading>
+            class="text-lg font-semibold text-gray-900 dark:text-white">Show/Hide Todo List</Heading>
 </Checkbox>
 {#if showTodo}
     <div class="border-2 ml-8 mr-8">
         <List tag="ul" class="space-y-1">
-            {#each savedList as todo (todo.id)}
+            {#each todoList as todo (todo.id)}
                 <Li class="p-2 m-2">{todo.title}</Li>
             {/each}
         </List>
@@ -77,7 +78,6 @@
                 <span slot="icon" on:click={()=>handleToggle(id)}>
     <!--           save값이 true일땐 아이콘을 꽉찬 북마크으로 설정한다. -->
                     {#if save}
-                        {@const savedMemo = addToSavedList(id)}
                         <Icon icon="material-symbols:bookmark-rounded" width="22"/>
                     {:else}
                         <Icon icon="material-symbols:bookmark-outline-rounded" width="22"/>
