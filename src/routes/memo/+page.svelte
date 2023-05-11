@@ -89,8 +89,10 @@
         todoList = [...todoList, todo];
     }
     function removeTodoList(todo){
-        todoList = todoList.filter(todo => todo.id !== todo.id);
+        console.log(todo.id);
+        todoList = todoList.filter(toodo => toodo.id !== todo.id);
     }
+    // $: console.log(todoList);
 </script>
 
 <!--목표: memoList는 memo를 보여주고, memoAdd는 memo를 추가하는 역할을 한다.-->
@@ -105,6 +107,6 @@
 
 <MemoList
         {memos}
-        bind:todoList
+        {todoList}
         on:removeMemo={handlerRemoveMemo}
         on:toggleSave={handlerToggleSave}/>
