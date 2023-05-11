@@ -9,6 +9,7 @@ import {createEventDispatcher,onDestroy, onMount, beforeUpdate, afterUpdate} fro
 let inputText = "";
 let isSave = true;
 let isAsk = false;
+let currentTime = new Date().toLocaleTimeString('en-US', { timeStyle:'short' });
 
 // onMount(() => {
 //     console.log('Mounted');
@@ -46,6 +47,7 @@ function handleAddMemo(){
         title : inputText,
         save:isSave,
         ask:isAsk,
+        date:currentTime,
     };
     // 공백이 있을경우 추가 안함
     const hasOnlySpace = memo.title.trim()==="";

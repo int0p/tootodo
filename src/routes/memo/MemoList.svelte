@@ -1,5 +1,5 @@
 <script>
-    import {Alert, Blockquote, Button, Checkbox, Hr, ToolbarButton, List, Li, Heading, } from "flowbite-svelte";
+    import {Alert, Blockquote, Button, Checkbox, Hr, ToolbarButton, List, Li, Heading, P} from "flowbite-svelte";
     import Icon from "@iconify/svelte";
     import {afterUpdate, beforeUpdate, createEventDispatcher} from "svelte";
 
@@ -70,8 +70,9 @@
 
 <!-- memo list-->
 <div  bind:this={listDiv} bind:offsetHeight={listDivHeight} style="max-height: 648px; overflow:auto;">
-    {#each memos as {title,ask,save,id} (id)}
-        <div class="flex justify-end m-3" >
+    {#each memos as {title,ask,save,id,date} (id)}
+        <div class="flex justify-end m-3 " >
+            <P class="text-xs mt-8 mr-2">{date}</P>
             <!--        message display-->
             <Alert color ={ ask ? "green" : "yellow"} >
                 <!-- ask값이 true일땐 gpt와의 대화 모드가 되므로 대화창의 색을 초록으로 바꾼다. -->
