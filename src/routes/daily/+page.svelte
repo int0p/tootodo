@@ -33,4 +33,5 @@
         <TimeRecord class="w-1/2"/>
         <MemoRecord class="w-1/2"/>
     </div>
+
 </div>
