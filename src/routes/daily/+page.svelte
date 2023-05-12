@@ -3,8 +3,9 @@
         Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell,
         Button, Hr, Heading, Accordion, AccordionItem, Toggle,
     } from 'flowbite-svelte';
-    import TimeRecord from 'src/routes/daily/TimeRecord.svelte';
-    import MemoRecord from 'src/routes/daily/MemoRecord.svelte';
+    // import TimeRecord from  'src/routes/daily/timeRecord.svelte';
+    import TenRecord from './timeRecord.svelte';
+    import MemoRecord from './memoRecord.svelte';
 
     // Date
     let currentDate = new Date();
@@ -30,7 +31,7 @@
 
 <!--    Record -->
     <div class = "flex">
-        <TimeRecord class="w-1/2"/>
+        <TenRecord class="w-1/2"/>
         <MemoRecord class="w-1/2"/>
     </div>
 

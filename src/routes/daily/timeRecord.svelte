@@ -6,6 +6,7 @@
     const columns =[10,20,30,40,50,60];
     const rows = Array(24).fill(0).map((_,i)=>(i+startTime_1)%12+1);
     let table = Array.from(Array(rows.length), () => Array(columns.length).fill(false));
+    // console.log(table);
 
     table[1][1] = true;
     table[1][2] = true;
