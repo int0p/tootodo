@@ -21,7 +21,7 @@
 <!--        time Record -->
 <div class="w-full">
     <Table striped={true}  >
-        <TableHead class ="border-b-2 border-gray-300">
+        <TableHead class ="border-b-2 border-gray-300 text-center">
             <TableHeadCell></TableHeadCell>
             {#each Array(6) as _,index}
                 <TableBodyCell class ="border-l-2 border-gray-200" >{columns[index]}</TableBodyCell>
@@ -32,7 +32,7 @@
             {#each Array(24) as _,index }
                 <TableBodyRow>
                     {@const rowIdx = index}
-                    <TableBodyCell>{rows[rowIdx]}</TableBodyCell>
+                    <TableBodyCell class="text-center">{rows[rowIdx]}</TableBodyCell>
                     {#each Array(6) as _,index}
                         {#if table[rowIdx][index] === true }
                             <TableBodyCell class ="bg-purple-100 border-l-2 border-gray-200" ></TableBodyCell>
