@@ -2,7 +2,6 @@
     import MemoAdd from "./MemoAdd.svelte";
     import MemoList from "./MemoList.svelte";
     import {Textarea, Alert, ToolbarButton, Checkbox, Hr, Blockquote} from 'flowbite-svelte'
-    import Icon from '@iconify/svelte';
     import {v4 as uuid} from "uuid";
 
     export let memos = [

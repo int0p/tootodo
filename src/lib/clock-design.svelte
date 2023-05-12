@@ -1,6 +1,13 @@
 
 <script>
+    ///////////////// icon  //////////////////
     import Icon from '@iconify/svelte';
+    import playCircleOutlineRounded from '@iconify/icons-material-symbols/play-circle-outline-rounded';
+    import stopCircleOutlineRounded from '@iconify/icons-material-symbols/stop-circle-outline-rounded';
+    import pauseCircleRounded from '@iconify/icons-material-symbols/pause-circle-rounded';
+    import timerReset from '@iconify/icons-lucide/timer-reset';
+    import repeatRounded from '@iconify/icons-material-symbols/repeat-rounded';
+
     ///////////////// var //////////////////
     // svg setting
     // circle
@@ -107,15 +114,15 @@
 <!--        >{currentTime}</text>-->
 
         <g transform="translate(50,50)" >
-            <Icon icon="bi:play-circle" width="30"/>
+            <Icon icon={playCircleOutlineRounded} width="30"/>
         </g>
 
         <g transform="translate(5,110)" >
-            <Icon icon="lucide:timer-reset" />
+            <Icon icon={timerReset} />
         </g>
 
         <g transform="translate(110,110)" >
-            <Icon icon="tabler:repeat" />
+            <Icon icon={repeatRounded} />
         </g>
 
         {#each lines as line}

@@ -1,6 +1,10 @@
 <script>
     import {Alert, Blockquote, Button, Checkbox, Hr, ToolbarButton, List, Li, Heading, P} from "flowbite-svelte";
     import Icon from "@iconify/svelte";
+    import bookmarkRounded from '@iconify/icons-material-symbols/bookmark-rounded';
+    import bookmarkOutlineRounded from '@iconify/icons-material-symbols/bookmark-outline-rounded';
+    import deleteOutlineRounded from '@iconify/icons-material-symbols/delete-outline-rounded';
+
     import {afterUpdate, beforeUpdate, createEventDispatcher} from "svelte";
     import {slide} from "svelte/transition";
 
@@ -80,9 +84,9 @@
                 <!--           save값이 true일땐 아이콘을 꽉찬 북마크으로 설정한다. -->
                 <span slot="icon" on:click={()=>handleToggle(id)}>
                     {#if save}
-                        <Icon icon="material-symbols:bookmark-rounded" width="22"/>
+                        <Icon icon={bookmarkRounded} width="22"/>
                     {:else}
-                        <Icon icon="material-symbols:bookmark-outline-rounded" width="22"/>
+                        <Icon icon={bookmarkOutlineRounded} width="22"/>
                     {/if}
                 </span>
                 {title}
@@ -91,7 +95,7 @@
             <!--       delete button -->
             <ToolbarButton type="submit"  color="gray" class="rounded-full"
                            on:click={()=>handleRemoveMemo(id)}>
-                <Icon icon="material-symbols:delete-outline-rounded" width="22"/>
+                <Icon icon={deleteOutlineRounded} width="22"/>
                 <span class="sr-only">Delete message</span>
             </ToolbarButton>
         </div>

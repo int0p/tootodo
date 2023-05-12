@@ -2,6 +2,11 @@
 
 <script>
 import Icon from "@iconify/svelte";
+import messageQuestion from '@iconify/icons-mdi/message-question';
+import messageQuestionOutline from '@iconify/icons-mdi/message-question-outline';
+import bookmarkAddRounded from '@iconify/icons-material-symbols/bookmark-add-rounded';
+import bookmarkAddOutlineRounded from '@iconify/icons-material-symbols/bookmark-add-outline-rounded';
+
 import {Alert, Textarea, ToolbarButton, Input} from "flowbite-svelte";
 import {v4 as uuid} from "uuid";
 import {createEventDispatcher,onDestroy, onMount, beforeUpdate, afterUpdate} from "svelte";
@@ -78,9 +83,9 @@ export function clearInput(){
                 on:click={()=>{isAsk=!isAsk;}}>
 
                 {#if isAsk}
-                    <Icon icon="mdi:message-question" width="28"/>
+                    <Icon icon={messageQuestion} width="28"/>
                 {:else }
-                    <Icon icon="mdi:message-question-outline" width="28"/>
+                    <Icon icon={messageQuestionOutline} width="28"/>
                 {/if}
 
                 <span class="sr-only">Ask GPT</span>
@@ -90,9 +95,9 @@ export function clearInput(){
                 on:click={()=>{isSave=!isSave;}}>
 
                 {#if isSave}
-                    <Icon icon="material-symbols:bookmark-add-rounded" width="28"/>
+                    <Icon icon={bookmarkAddRounded} width="28"/>
                 {:else }
-                    <Icon icon="material-symbols:bookmark-add-outline-rounded" width="28"/>
+                    <Icon icon={bookmarkAddOutlineRounded} width="28"/>
                 {/if}
 
                 <span class="sr-only">Store</span>
