@@ -12,14 +12,14 @@
     {#if showSidebar}
         <Sidebar class="w-2/3"/>
         <Checkbox custom bind:checked={showSidebar}>
-            <div class="h-full mt-8 ml-4 p-4 rounded-lg border-2 border-blue-400 cursor-pointer
+            <div class="h-full mt-8 ml-4 p-4 rounded-lg border-2 border-blue-300 cursor-pointer
             peer-checked:border-blue-200
             "/>
         </Checkbox>
         <slot/>
     {:else}
         <Checkbox custom bind:checked={showSidebar}>
-            <div class="h-full mt-8 ml-4 p-4 rounded-lg border-2 border-blue-400 cursor-pointer
+            <div class="h-full mt-8 ml-4 p-4 rounded-lg border-2 border-blue-300 cursor-pointer
             peer-checked:border-blue-200
             "/>
         </Checkbox>
