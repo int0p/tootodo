@@ -7,6 +7,7 @@
 </script>
 
 <!--use Timer as sidebar-->
+<!--TODO: Checkbox를 div포함시켜 함수화 할 수 있을까?-->
 <div class="flex w-full">
     {#if showSidebar}
         <Sidebar class="w-2/3"/>
