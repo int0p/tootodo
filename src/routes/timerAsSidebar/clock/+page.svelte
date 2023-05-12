@@ -10,7 +10,7 @@
         Tabs, TabItem, PaginationItem, Indicator
     } from 'flowbite-svelte';
 
-    import Timer from '$lib/pomodoro.svelte';
+    import Timer from '$lib/components/pomodoro.svelte';
     // export let data;
 </script>
 

@@ -114,7 +114,6 @@
 <!--TODO: memoList와 memoAdd를 합치거나, 다른 방식으로 나누어야함.-->
 
 <MemoAdd
-        {memos}
         bind:this={memoList}
          on:addMemo={handlerAddMemo}/>
 

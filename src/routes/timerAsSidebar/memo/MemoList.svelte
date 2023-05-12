@@ -78,6 +78,7 @@
     {#each memos as {title,ask,save,id,date} (id)}
         <div class="flex justify-end m-3 " >
             <P class="text-xs mt-8 mr-2">{date}</P>
+
             <!--        message display-->
             <!-- ask값이 true일땐 gpt와의 대화 모드가 되므로 대화창의 색을 초록으로 바꾼다. -->
             <Alert color ={ ask ? "green" : "yellow"} >
@@ -92,12 +93,13 @@
                 {title}
             </Alert>
 
-            <!--       delete button -->
-            <ToolbarButton type="submit"  color="gray" class="rounded-full"
-                           on:click={()=>handleRemoveMemo(id)}>
-                <Icon icon={deleteOutlineRounded} width="22"/>
-                <span class="sr-only">Delete message</span>
-            </ToolbarButton>
+            <!--      todo:  delete button -> 꾹 누르면 삭제기능 추가-->
+            <!--            <ToolbarButton type="submit"  color="gray" class="rounded-full"-->
+            <!--                           on:click={()=>handleRemoveMemo(id)}>-->
+            <!--                <Icon icon={deleteOutlineRounded} width="22"/>-->
+            <!--                <span class="sr-only">Delete message</span>-->
+            <!--            </ToolbarButton>-->
+
         </div>
     {/each}
 </div>
