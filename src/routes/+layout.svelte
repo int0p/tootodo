@@ -27,7 +27,7 @@
             "> <Icon icon={tableMoveColumnAfterRtl} class="h-full text-lg"/>
                 </div>
             </Checkbox>
-            <slot {showSidebar} class="w-full h-full"/>
+            <slot class="w-full h-full"/>
         </div>
     {:else}
         <Checkbox custom bind:checked={showSidebar}>
@@ -36,7 +36,7 @@
             "> <Icon icon= {tableMoveColumnAfterLtr} class="h-full text-lg"/>
             </div>
         </Checkbox>
-        <slot {showSidebar} class="w-full h-full"/>
+        <slot class="w-full h-full"/>
     {/if}
 </div>
 
