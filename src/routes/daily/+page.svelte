@@ -3,8 +3,8 @@
         Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell,
         Button, Hr, Heading, Accordion, AccordionItem, Toggle,
     } from 'flowbite-svelte';
-    import TimeRecord from './TimeRecord.svelte';
-    import MemoRecord from './MemoRecord.svelte';
+    import TimeRecord from 'src/routes/daily/TimeRecord.svelte';
+    import MemoRecord from 'src/routes/daily/MemoRecord.svelte';
 
     // Date
     let currentDate = new Date();
