@@ -32,7 +32,7 @@
     <div class = "flex">
         <div>
             <Table striped={true}>
-                <TableHead>
+                <TableHead >
                     <TableHeadCell></TableHeadCell>
                     <TableHeadCell>10</TableHeadCell>
                     <TableHeadCell>20</TableHeadCell>
@@ -45,13 +45,14 @@
                 <TableBody class="divide-y">
                     {#each Array(24) as _,index }
                         <TableBodyRow>
-                            <TableBodyCell>{index}</TableBodyCell>
-                            <TableBodyCell>|</TableBodyCell>
-                            <TableBodyCell>|</TableBodyCell>
-                            <TableBodyCell>|</TableBodyCell>
-                            <TableBodyCell>|</TableBodyCell>
-                            <TableBodyCell>|</TableBodyCell>
-                            <TableBodyCell>|</TableBodyCell>
+                            {@const time = (index+8)%12+1}
+                            <TableBodyCell>{time}</TableBodyCell>
+                            <TableBodyCell></TableBodyCell>
+                            <TableBodyCell></TableBodyCell>
+                            <TableBodyCell></TableBodyCell>
+                            <TableBodyCell></TableBodyCell>
+                            <TableBodyCell></TableBodyCell>
+                            <TableBodyCell></TableBodyCell>
                         </TableBodyRow>
                     {/each}
                 </TableBody>
