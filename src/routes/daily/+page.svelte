@@ -1,7 +1,7 @@
 <script>
     import {
         Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell,
-        Button, Hr,
+        Button, Hr, Heading,
     } from 'flowbite-svelte';
 
     let currentDate = new Date();
