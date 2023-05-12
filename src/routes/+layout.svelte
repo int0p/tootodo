@@ -1,12 +1,28 @@
 <script>
 	import '../app.scss';
 	import '../app.postcss';
-    import Timer from "./timer/+page.svelte";
-    import Daily from "./daily/+page.svelte";
+    import Sidebar from "./timerAsSidebar/+page.svelte";
+    import {Checkbox} from "flowbite-svelte";
+    let showSidebar = true;
 </script>
 
 <!--use Timer as sidebar-->
 <div class="flex w-full">
-    <Timer class="w-2/3"/>
-    <slot class="w-1/3"/>
+    {#if showSidebar}
+        <Sidebar class="w-2/3"/>
+        <Checkbox custom bind:checked={showSidebar}>
+            <div class="h-full mt-8 ml-4 p-4 rounded-lg border-2 border-blue-400 cursor-pointer
+            peer-checked:border-blue-200
+            "/>
+        </Checkbox>
+        <slot/>
+    {:else}
+        <Checkbox custom bind:checked={showSidebar}>
+            <div class="h-full mt-8 ml-4 p-4 rounded-lg border-2 border-blue-400 cursor-pointer
+            peer-checked:border-blue-200
+            "/>
+        </Checkbox>
+        <slot class="w-full"/>
+    {/if}
 </div>
+

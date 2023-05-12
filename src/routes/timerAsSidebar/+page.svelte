@@ -1,9 +1,10 @@
 <script>
     import Timer from "./clock/+page.svelte";
     import Memo from "./memo/+page.svelte";
-    import {Navbar, NavBrand, NavLi, NavUl, NavHamburger, Heading, ButtonGroup,Button} from 'flowbite-svelte';
+    import {Navbar, NavBrand, NavLi, NavUl, NavHamburger, Heading, ButtonGroup, Button, Toggle} from 'flowbite-svelte';
     import Icon from '@iconify/svelte';
     import { goto, beforeNavigate, afterNavigate } from '$app/navigation';
+
 </script>
 
 <div class="flex-col w-2/3"  >
