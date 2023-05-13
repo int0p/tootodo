@@ -76,7 +76,7 @@
 <!-- memo list-->
 <div  bind:this={listDiv} bind:offsetHeight={listDivHeight} style="max-height: 648px; overflow:auto;">
     {#each memos as {title,ask,save,id,date} (id)}
-        <div class="flex justify-end m-3 " >
+        <div class="flex justify-end mb-3 " >
             <P class="text-xs mt-8 mr-2">{date}</P>
 
             <!--        message display-->
@@ -94,11 +94,11 @@
             </Alert>
 
             <!--      todo:  delete button -> 꾹 누르면 삭제기능 추가-->
-            <!--            <ToolbarButton type="submit"  color="gray" class="rounded-full"-->
-            <!--                           on:click={()=>handleRemoveMemo(id)}>-->
-            <!--                <Icon icon={deleteOutlineRounded} width="22"/>-->
-            <!--                <span class="sr-only">Delete message</span>-->
-            <!--            </ToolbarButton>-->
+            <ToolbarButton type="submit"  color="gray" class="rounded-full"
+                           on:click={()=>handleRemoveMemo(id)}>
+                <Icon icon={deleteOutlineRounded} width="22"/>
+                <span class="sr-only">Delete message</span>
+            </ToolbarButton>
 
         </div>
     {/each}

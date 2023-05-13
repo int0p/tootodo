@@ -31,8 +31,8 @@
 
 <!--    Record -->
     <div class = "flex">
-        <TenRecord class="w-1/2"/>
-        <MemoRecord class="w-1/2"/>
+        <TenRecord class="w-2/5"/>
+        <MemoRecord class="w-3/5"/>
     </div>
 
 </div>
