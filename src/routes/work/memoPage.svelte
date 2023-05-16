@@ -14,7 +14,7 @@
 </script>
 
 <div class="w-full h-full flex-col justify-between content-stretch ">
-  <Breadcrumb aria-label="Solid background breadcrumb example" class="bg-gray-50 py-3 px-5 dark:bg-gray-900 mb-2 w-full">
+  <Breadcrumb aria-label="Solid background breadcrumb example" class="bg-gray-50 py-3 px-5 dark:bg-gray-900 mb-2">
     <BreadcrumbItem href="/" home>
       <svelte:fragment slot="icon">
         <svg
@@ -38,7 +38,7 @@
       Flowbite Svelte</BreadcrumbItem>
   </Breadcrumb>
 
-  <Timeline class="w-full h-4/5 overflow:scroll" >
+  <Timeline class="" >
     <TimelineItem title="" date="February 2022">
       <List tag="ul" class="mt-4 mb-2 space-y-4" list="none">
         {#each Array(7) as _}
@@ -84,7 +84,7 @@
     </TimelineItem>
   </Timeline>
 
-  <form class="w-full fixed bottom-0">
+  <form class="fixed bottom-0">
     <label for="chat" class="sr-only">Your message</label>
     <Alert color="dark" class="px-3 py-2">
       <svelte:fragment slot="icon">

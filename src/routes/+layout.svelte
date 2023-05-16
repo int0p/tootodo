@@ -19,13 +19,13 @@
 <!--use Timer as sidebar-->
 <div class="flex w-full h-screen">
     {#if showSidebar}
-        <div transition:slide|local="{{delay: 100, duration: 2000, easing: quintOut, axis: 'x'}}" class="flex">
-            <TimerSidebar class="w-[100px] h-full"/>
+        <div transition:slide|local="{{delay: 100, duration: 1000, easing: quintOut, axis: 'x'}}" class="flex h-screen">
+            <TimerSidebar class="w-1/3 h-screen float-left top-0 left-0"/>
             <Navbar bind:showSidebar/>
-            <slot class="w-auto h-full"/>
+            <slot class="w-2/3 h-full"/>
         </div>
     {:else}
-        <div class="w-full flex">
+        <div class="flex">
             <Navbar bind:showSidebar/>
             <slot class="w-full h-full"/>
         </div>

@@ -20,7 +20,7 @@
 <!--<Heading tag="h2" class="m-8 text-center"> Work Page </Heading>-->
 <!--        <div class="mb-1 text-base font-medium text-indigo-700 dark:text-indigo-400">Indigo</div>-->
 
-<div class="flex-col h-screen overflow-auto" >
+<div class="flex-col h-screen " >
 
   <Navbar let:hidden let:toggle>
     <NavBrand href="">
@@ -48,7 +48,7 @@
 <!-- body -->
   <div class="flex h-full">
 
-    <div class="w-2/5 ml-4 mr-4 flex-col h-full overflow-hidden">
+    <div class="ml-4 mr-4 flex-col h-full ">
 <!--    project list-->
       <Tabs>
         <TabItem open title="Profile">
@@ -69,7 +69,7 @@
 
     </div>
 
-    <div class="w-3/5 h-full ">
+    <div class="h-full ">
       <MemoPage/>
     </div>
   </div>
