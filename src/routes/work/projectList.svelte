@@ -12,9 +12,9 @@ let steps = [
 const style_tapItem = "text-sm text-gray-500 dark:text-gray-400 h-[80px] max-h-[80px] overflow-y-auto";
 </script>
 
-<div class="float-left top-0 left-0 w-4/12 ml-4 mr-4 flex-col h-full">
+<div class="float-left top-0 left-0 w-4/12 ml-4 mr-4 flex-col h-full ">
     <!--    project list-->
-    <Tabs class="w-full ">
+    <Tabs class="w-full flex-nowrap overflow-x-hidden ">
         <Button pill  size="xs">+</Button>
         {#each Array(5) as _, index}
             <TabItem open title="Proj{index}">
@@ -28,10 +28,10 @@ const style_tapItem = "text-sm text-gray-500 dark:text-gray-400 h-[80px] max-h-[
     </Tabs>
 
     <!--    step -->
-    <div class="my-4 w-full">
+    <div class="my-4 w-full ">
         <StepIndicator {currentStep} {steps} hideLabel/>
     </div>
 
 <!--    project info -->
-    <ProjectDetail class="w-full "/>
+    <ProjectDetail />
 </div>
