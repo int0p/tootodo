@@ -122,4 +122,6 @@
         {memos}
         {todoList}
         on:removeMemo={handlerRemoveMemo}
-        on:toggleSave={handlerToggleSave}/>
+        on:toggleSave={handlerToggleSave}
+        class="h-2/3"
+/>

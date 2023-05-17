@@ -54,7 +54,8 @@
 
 </script>
 
-<div bind:offsetHeight={listDivHeight} style="max-height: 680px; max-width: 600px; overflow:auto;">
+<div bind:offsetHeight={listDivHeight}
+     class="max-h-[700px] w-[610px] overflow-y-auto">
     <!-- Saved memo "Todo" list-->
     <div class="sticky top-0 bg-white/90">
         <Checkbox bind:checked={showTodo} class="w-full p-4" >
@@ -92,7 +93,8 @@
                             <Icon icon={bookmarkOutlineRounded} width="22"/>
                         {/if}
                     </span>
-                    {title}
+                    <span class="break-words"> {title} </span>
+
                 </Alert>
 
                 <!--      todo:  delete button -> 꾹 누르면 삭제기능 추가-->

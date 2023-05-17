@@ -72,7 +72,6 @@ export function clearInput(){
     isSave = true;
     isAsk = false;
 }
-
 </script>
 
 <form on:submit|preventDefault={handleAddMemo}>

@@ -13,7 +13,7 @@
 
 </script>
 
-<div class="flex-col ml-4">
+<div class="flex-col ml-4 " >
     <Timer class=""/>
     <Memo class=""/>
 </div>

@@ -14,15 +14,15 @@
 <!--use Timer as sidebar-->
 <div class="flex w-full h-screen clear-both">
     {#if showSidebar}
-        <div transition:slide|local="{{delay: 100, duration: 1000, easing: quintOut, axis: 'x'}}" class="flex w-full h-screen">
-            <TimerSidebar class="w-[615px] h-screen float-left top-0 left-0"/>
+        <div transition:slide|local="{{delay: 0, duration: 1000, easing: quintOut, axis: 'x'}}" class="flex w-full h-screen">
+            <TimerSidebar class="w-[615px] h-screen float-left top-0 left-0" style="max-width:615px;"/>
             <Navbar bind:showSidebar class="w-[80px] absolute"/>
-            <slot class="h-screen float-right top-0 right-0"/>
+            <slot class="w-[calc(100%-615px)] overflow-y-hidden h-screen float-right top-0 right-0"/>
         </div>
     {:else}
         <div class="flex">
             <Navbar bind:showSidebar/>
-            <slot class="w-full h-screen"/>
+            <slot class="w-full h-screen "/>
         </div>
     {/if}
 </div>

@@ -19,7 +19,7 @@
 </script>
 
 <!--        time Record -->
-<div class="w-full">
+<div class="w-full mr-4">
     <Table striped={true}  >
         <TableHead class ="border-b-2 border-gray-300 text-center">
             <TableHeadCell></TableHeadCell>
