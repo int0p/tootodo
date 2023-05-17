@@ -54,52 +54,55 @@
 
 </script>
 
-<!-- Saved memo "Todo" list-->
-<Checkbox bind:checked={showTodo} class="w-full p-4" >
-    <Heading
-            tag="h2"
-            customSize="text-lg font-semibold"
-            class="text-lg font-semibold text-gray-900 dark:text-white">Show/Hide Todo List</Heading>
-</Checkbox>
-{#if showTodo}
-    <div in:slide out:slide class="border-2 ml-8 mr-8">
-        <List tag="ul" class="space-y-1">
-            {#each todoList as todo (todo.id)}
-                <Li class="p-2 m-2">{todo.title}</Li>
-            {/each}
-        </List>
+<div bind:offsetHeight={listDivHeight} style="max-height: 680px; max-width: 600px; overflow:auto;">
+    <!-- Saved memo "Todo" list-->
+    <div class="sticky top-0 bg-white/90">
+        <Checkbox bind:checked={showTodo} class="w-full p-4" >
+            <Heading
+                    tag="h2"
+                    customSize="text-lg font-semibold"
+                    class="text-lg font-semibold text-gray-900 dark:text-white">Show/Hide Todo List</Heading>
+        </Checkbox>
+        {#if showTodo}
+            <div in:slide out:slide class="border-2 ml-8 mr-8">
+                <List tag="ul" class="space-y-1">
+                    {#each todoList as todo (todo.id)}
+                        <Li class="p-2 m-2 break-words">{todo.title}</Li>
+                    {/each}
+                </List>
+            </div>
+            <Hr/>
+        {/if}
     </div>
-    <Hr/>
-{/if}
 
+    <!-- memo list-->
+    <div  bind:this={listDiv} >
+        {#each memos as {title,ask,save,id,date} (id)}
+            <div class="flex justify-end mb-3 " >
+                <P class="text-xs mt-8 mr-2">{date}</P>
 
-<!-- memo list-->
-<div  bind:this={listDiv} bind:offsetHeight={listDivHeight} style="max-height: 648px; overflow:auto;">
-    {#each memos as {title,ask,save,id,date} (id)}
-        <div class="flex justify-end mb-3 " >
-            <P class="text-xs mt-8 mr-2">{date}</P>
+                <!--        message display-->
+                <!-- ask값이 true일땐 gpt와의 대화 모드가 되므로 대화창의 색을 초록으로 바꾼다. -->
+                <Alert color ={ ask ? "green" : "yellow"} >
+                    <!--           save값이 true일땐 아이콘을 꽉찬 북마크으로 설정한다. -->
+                    <span slot="icon" on:click={()=>handleToggle(id)}>
+                        {#if save}
+                            <Icon icon={bookmarkRounded} width="22"/>
+                        {:else}
+                            <Icon icon={bookmarkOutlineRounded} width="22"/>
+                        {/if}
+                    </span>
+                    {title}
+                </Alert>
 
-            <!--        message display-->
-            <!-- ask값이 true일땐 gpt와의 대화 모드가 되므로 대화창의 색을 초록으로 바꾼다. -->
-            <Alert color ={ ask ? "green" : "yellow"} >
-                <!--           save값이 true일땐 아이콘을 꽉찬 북마크으로 설정한다. -->
-                <span slot="icon" on:click={()=>handleToggle(id)}>
-                    {#if save}
-                        <Icon icon={bookmarkRounded} width="22"/>
-                    {:else}
-                        <Icon icon={bookmarkOutlineRounded} width="22"/>
-                    {/if}
-                </span>
-                {title}
-            </Alert>
+                <!--      todo:  delete button -> 꾹 누르면 삭제기능 추가-->
+                <ToolbarButton type="submit"  color="gray" class="rounded-full"
+                               on:click={()=>handleRemoveMemo(id)}>
+                    <Icon icon={deleteOutlineRounded} width="22"/>
+                    <span class="sr-only">Delete message</span>
+                </ToolbarButton>
 
-            <!--      todo:  delete button -> 꾹 누르면 삭제기능 추가-->
-            <ToolbarButton type="submit"  color="gray" class="rounded-full"
-                           on:click={()=>handleRemoveMemo(id)}>
-                <Icon icon={deleteOutlineRounded} width="22"/>
-                <span class="sr-only">Delete message</span>
-            </ToolbarButton>
-
-        </div>
-    {/each}
+            </div>
+        {/each}
+    </div>
 </div>
