@@ -24,8 +24,8 @@
 
 <!--        projects-->
     <div class = "flex clear-both h-[calc(100%-100px)]">
-        <ProjectList class="float-left top-0 left-0 "/> <!--    h: 100%-80px; w:900px -->
-        <WorkDetail class="float-right top-0 right-0 "/>
+        <ProjectList class="float-left top-0 left-0 w-5/12"/>
+        <WorkDetail class="float-right top-0 right-0 w-7/12"/>
     </div>
 </div>
 

@@ -55,7 +55,7 @@
 </script>
 
 <div bind:offsetHeight={listDivHeight}
-     class="max-h-[700px] w-[610px] overflow-y-auto">
+     class="max-h-[690px] w-[610px] overflow-y-auto">
     <!-- Saved memo "Todo" list-->
     <div class="sticky top-0 bg-white/90">
         <Checkbox bind:checked={showTodo} class="w-full p-4" >

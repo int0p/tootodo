@@ -3,13 +3,14 @@
 </script>
 
 <!--        MEMO-->
-<div class="flex-col justify-center items-center align float-right bottom-0 right-0 relative h-full">
-    <Heading tag="h4" class="m-4">Memo</Heading>
+<div class="flex-col justify-center items-center float-right bottom-0 right-0 relative h-full w-[calc(100%-280px)]">
 
-    <div >
-        {#each Array(4) as _}
+    <Heading tag="h4" class="m-4 relative">Memo</Heading>
+
+    <div class="ml-4 max-h-[calc(100%-100px)] overflow-y-auto overflow-x-hidden" >
+        {#each Array(9) as _}
             <Card img="https://images.unsplash.com/photo-1610534440162-e0e68fbdeca3?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=4800"
-                  href="" class="m-3" size="lg" horizontal reverse={false}>
+                  href="" class="mb-4 mr-2" size="lg" horizontal reverse={false}>
                 <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Todo</h5>
                 <p class="mb-3 text-sm font-normal text-gray-700 dark:text-gray-400 leading-tight">
                     Description
@@ -19,7 +20,7 @@
     </div>
 
     <!--  Memo setting-->
-    <div class="flex justify-around border-t-2 ">
+    <div class="flex justify-around border-t-2 absolute w-full bottom-0 right-0 bg-white mb-2">
         <!--          new document-->
         <svg class="mt-2 w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path clip-rule="evenodd" fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V8z"></path>

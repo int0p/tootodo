@@ -7,58 +7,50 @@ import {
     SidebarDropdownWrapper,
     SidebarGroup,
     SidebarItem,
-    SidebarWrapper
+    SidebarWrapper,Tabs, TabItem,
 } from "flowbite-svelte";
 import Icon from "@iconify/svelte";
+import starRounded from '@iconify/icons-material-symbols/star-rounded';
 
 let spanClass = 'flex-1 ml-3 whitespace-nowrap';
 $: activeUrl = '/dashboard'
 </script>
 
-<div class="float-left bottom-0 left-0 relative h-full">
-    <Sidebar >
-        <SidebarWrapper >
-<!--            working list-->
-            <SidebarGroup>
-                <SidebarItem label="Dashboard" href='/dashboard' active={activeUrl === '/dashboard'}>
-                    <svelte:fragment slot="icon">
-                        <Icon icon={checkboxBlankOutline} width="22" />
-                    </svelte:fragment>
-                </SidebarItem>
-                <SidebarDropdownWrapper label="E-commerce">
-                    <svelte:fragment slot="icon">
-                        <Icon icon={checkboxBlankOutline} width="22" />
-                    </svelte:fragment>
-                    <SidebarDropdownItem label="Products" />
-                    <SidebarDropdownItem label="Billing" />
-                    <SidebarDropdownItem label="Invoice" />
-                </SidebarDropdownWrapper>
+<div class="float-left bottom-0 left-0 h-full w-[280px] relative">
+    <Tabs style="none" defaultClass="flex rounded-lg divide-x divide-gray-200 shadow dark:divide-gray-700 w-full">
+        <!--            working list-->
+        <TabItem open >
+            <span slot="title">Working</span>
+            <SidebarGroup class="h-[calc(100%-100px)] overflow-y-auto absolute bottom-5 left-0 w-full bg-gray-50">
+                {#each Array(5) as _, index}
+                    <SidebarDropdownWrapper label="Work - {index}" isOpen="{true}">
+                        <svelte:fragment slot="icon">
+                            <Icon icon={checkboxBlankOutline} width="22" />
+                        </svelte:fragment>
+                        <SidebarDropdownItem label="Products" />
+                        <SidebarDropdownItem label="Billing" />
+                        <SidebarDropdownItem label="Invoice" />
+                    </SidebarDropdownWrapper>
+                {/each}
                 <SidebarItem label="Kanban" {spanClass}>
                     <svelte:fragment slot="icon">
                         <Icon icon={checkboxBlankOutline} width="22" />
                     </svelte:fragment>
                     <svelte:fragment slot="subtext">
-            <span
-                    class="inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300"
-            >Pro</span
-            >
+                        <span
+                                class="inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300"
+                        >+</span
+                        >
                     </svelte:fragment>
                 </SidebarItem>
-                <SidebarItem label="Inbox" {spanClass}>
-                    <svelte:fragment slot="icon">
-                        <Icon icon={checkboxBlankOutline} width="22" />
-                    </svelte:fragment>
-                    <svelte:fragment slot="subtext">
-            <span
-                    class="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200"
-            >3</span
-            >
-                    </svelte:fragment>
-                </SidebarItem>
-            </SidebarGroup>
 
-            <!--      done list-->
-            <SidebarGroup border>
+            </SidebarGroup>
+        </TabItem>
+
+        <!--      done list-->
+        <TabItem >
+            <span slot="title">Done</span>
+            <SidebarGroup >
                 <SidebarItem label="Users">
                     <svelte:fragment slot="icon">
                         <Icon icon={checkboxMarkedOutline} width="22"/>
@@ -75,6 +67,13 @@ $: activeUrl = '/dashboard'
                     </svelte:fragment>
                 </SidebarItem>
             </SidebarGroup>
-        </SidebarWrapper>
-    </Sidebar>
+        </TabItem>
+
+        <!--      highlight-->
+        <TabItem >
+            <span slot="title"><Icon icon={starRounded} width = "22"/></span>
+            <SidebarGroup >
+            </SidebarGroup>
+        </TabItem>
+    </Tabs>
 </div>
