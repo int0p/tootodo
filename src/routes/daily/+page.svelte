@@ -14,25 +14,28 @@
 
 </script>
 
-<div class="flex-col m-4 w-full h-full">
-<!--    Title: today -->
-    <Hr class="my-4 mx-auto md:my-8 w-full " height="h-1">{month}월 {day}일</Hr>
+<div class="flex-col m-4 h-full w-full"> <!--    얘의 width가 full일 때 section모드에서 전체화면에 존재.  -->
+<!--    date-->
+    <div class="flex-col h-[150px] w-full">
+        <!--        today-->
+        <Hr class="my-4 mx-auto md:my-8 " height="h-1">{month}월 {day}일</Hr>
 
-<!--    week -->
-    <div class="w-full flex gap-2 mb-4 justify-center items-stretch">
-        <Button outline color="dark" size="xl" >{day}, Mon</Button>
-        <Button outline color="dark" size="xl" >{day}, Tue</Button>
-        <Button outline color="dark" size="xl" >{day}, Wed</Button>
-        <Button outline color="dark" size="xl" >{day}, Thu</Button>
-        <Button outline color="dark" size="xl" >{day}, Fri</Button>
-        <Button outline color="blue" size="xl">{day}, Sat</Button>
-        <Button outline color="red" size="xl">{day}, Sun</Button>
+        <!--    week -->
+        <div class="flex gap-2 mb-4 justify-center items-stretch">
+            <Button outline color="dark" size="lg" >{day}, Mon</Button>
+            <Button outline color="dark" size="xl" >{day+1}, Tue</Button>
+            <Button outline color="dark" size="xl" >{day+2}, Wed</Button>
+            <Button outline color="dark" size="xl" >{day+3}, Thu</Button>
+            <Button outline color="dark" size="xl" >{day+4}, Fri</Button>
+            <Button outline color="blue" size="xl">{day+5}, Sat</Button>
+            <Button outline color="red" size="xl">{day+6}, Sun</Button>
+        </div>
     </div>
 
 <!--    Record -->
-    <div class = "flex w-full">
-        <TimeRecord class="w-2/5 float-left top-0 left-0"/>
-        <MemoRecord class="w-3/5 float-right top-0 right-0"/>
+    <div class = "flex clear-both w-[calc(100%-2rem)]">
+        <TimeRecord class="float-left top-0 left-0 w-[500px]"/>
+        <MemoRecord class="float-right top-0 right-0 w-[calc(100%-500px)]"/>
     </div>
 
 </div>

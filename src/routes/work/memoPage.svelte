@@ -13,7 +13,7 @@
   } from 'flowbite-svelte';
 </script>
 
-<div class="w-full h-full flex-col justify-between content-stretch ">
+<div class="w-full h-[calc(100%-80px)] flex-col justify-between content-stretch ">
   <Breadcrumb aria-label="Solid background breadcrumb example" class="bg-gray-50 py-3 px-5 dark:bg-gray-900 mb-2">
     <BreadcrumbItem href="/" home>
       <svelte:fragment slot="icon">
