@@ -20,8 +20,8 @@
             <slot class="w-[calc(100%-615px)] overflow-y-hidden h-screen float-right top-0 right-0"/>
         </div>
     {:else}
-        <div class="flex w-full"> <!-- 얘가 full이어야 가로 화면에 꽉참 -->
-            <Navbar bind:showSidebar class="w-[80px] absolute"/>
+        <div class="flex w-full h-screen"> <!-- 얘가 full이어야 가로 화면에 꽉참 -->
+            <Navbar bind:showSidebar class=""/>
             <slot class="w-[calc(100%-2rem)] h-screen"/>
         </div>
     {/if}

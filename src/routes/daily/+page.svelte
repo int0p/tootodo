@@ -14,7 +14,7 @@
 
 </script>
 
-<div class="flex-col m-4 h-full w-full"> <!--    얘의 width가 full일 때 section모드에서 전체화면에 존재.  -->
+<div class="flex-col m-4 h-full w-[calc(100%-100px)]"> <!--    얘의 width가 full일 때 section모드에서 전체화면에 존재.  -->
 <!--    date-->
     <div class="flex-col h-[150px] w-full">
         <!--        today-->
@@ -34,8 +34,8 @@
 
 <!--    Record -->
     <div class = "flex clear-both w-[calc(100%-2rem)]">
-        <TimeRecord class="float-left top-0 left-0 w-[500px]"/>
-        <MemoRecord class="float-right top-0 right-0 w-[calc(100%-500px)]"/>
+        <TimeRecord class="float-left top-0 left-0 "/>
+        <MemoRecord class="float-right top-0 right-0 "/>
     </div>
 
 </div>

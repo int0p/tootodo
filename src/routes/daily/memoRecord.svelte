@@ -7,7 +7,7 @@
     const resetRecord = () => {items = [true,false,true]};
 </script>
 
-<div class="w-full flex-col" >
+<div class="w-[calc(100%-500px)] flex-col" >
     <div class="flex justify-end m-2 space-x-1">
         <Button size="lg"  gradient color="blue" on:click={openRecordALL}></Button>
         <Button size="lg"  gradient color="green" on:click={resetRecord}></Button>
