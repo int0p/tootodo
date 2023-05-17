@@ -14,14 +14,16 @@ import starRounded from '@iconify/icons-material-symbols/star-rounded';
 
 let spanClass = 'flex-1 ml-3 whitespace-nowrap';
 $: activeUrl = '/dashboard'
+
+let style_sidebarGrp = "h-[calc(100%-100px)] overflow-y-auto absolute bottom-5 left-0 w-full bg-gray-50";
 </script>
 
 <div class="float-left bottom-0 left-0 h-full w-[280px] relative">
-    <Tabs style="none" defaultClass="flex rounded-lg divide-x divide-gray-200 shadow dark:divide-gray-700 w-full">
+    <Tabs style="none" defaultClass="flex justify-center items-center rounded-lg divide-x divide-gray-200 shadow dark:divide-gray-700 w-full">
         <!--            working list-->
         <TabItem open >
             <span slot="title">Working</span>
-            <SidebarGroup class="h-[calc(100%-100px)] overflow-y-auto absolute bottom-5 left-0 w-full bg-gray-50">
+            <SidebarGroup class={style_sidebarGrp}>
                 {#each Array(5) as _, index}
                     <SidebarDropdownWrapper label="Work - {index}" isOpen="{true}">
                         <svelte:fragment slot="icon">
@@ -50,7 +52,7 @@ $: activeUrl = '/dashboard'
         <!--      done list-->
         <TabItem >
             <span slot="title">Done</span>
-            <SidebarGroup >
+            <SidebarGroup class={style_sidebarGrp} >
                 <SidebarItem label="Users">
                     <svelte:fragment slot="icon">
                         <Icon icon={checkboxMarkedOutline} width="22"/>
@@ -72,7 +74,7 @@ $: activeUrl = '/dashboard'
         <!--      highlight-->
         <TabItem >
             <span slot="title"><Icon icon={starRounded} width = "22"/></span>
-            <SidebarGroup >
+            <SidebarGroup class={style_sidebarGrp}>
             </SidebarGroup>
         </TabItem>
     </Tabs>
