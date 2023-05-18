@@ -3,17 +3,18 @@
     import WorkList from "./listWork.svelte";
 
     let fullMemo = false;
-
 </script>
 
-{#if fullMemo}
-    <div class="flex h-[calc(100vh-290px)] w-[calc(100%+210px)] overflow-x-hidden">
-        <WorkList bind:fullMemo/>
-        <MemoList {fullMemo}/>
-    </div>
-{:else}
-    <div class="flex h-[calc(100vh-290px)] w-full overflow-x-hidden ">
-        <WorkList bind:fullMemo/>
-        <MemoList {fullMemo}/>
-    </div>
-{/if}
+<div class="flex h-[calc(100vh-290px)] overflow-x-hidden" class:fullWidth={fullMemo} class:fitWidth={!fullMemo}>
+    <WorkList bind:fullMemo/>
+    <MemoList {fullMemo}/>
+</div>
+
+<style>
+    .fullWidth {
+        width: calc(100% + 210px);
+    }
+    .fitWidth {
+        width: 100%;
+    }
+</style>

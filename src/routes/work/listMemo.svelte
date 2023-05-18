@@ -15,7 +15,7 @@
 </script>
 
 <!--        MEMO-->
-<div class="flex-col justify-center items-center float-right bottom-0 right-0 relative h-full" class:fullSize={fullMemo}>
+<div class="flex-col justify-center items-center float-right bottom-0 right-0 relative h-full" class:fullWidth={fullMemo}>
     <Heading tag="h4" class="m-4 ">Memo</Heading>
 
     <div class="ml-4 max-h-[calc(100%-100px)] overflow-y-auto overflow-x-hidden w-full relative" >
@@ -56,7 +56,7 @@
 </div>
 
 <style>
-    .fullSize {
+    .fullWidth {
         transform: translateX(-210px);
         z-index: 1;
         background-color: white;
