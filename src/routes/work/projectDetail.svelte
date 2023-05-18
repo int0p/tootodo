@@ -1,13 +1,19 @@
 <script>
+    import MemoList from "./listMemo.svelte";
+    import WorkList from "./listWork.svelte";
 
-  import MemoList from "./ListMemo.svelte";
-  import WorkList from "./ListWork.svelte";
+    let fullMemo = false;
 
-  let toggleMemo = true;
 </script>
 
-<div class="flex h-[calc(100vh-290px)] w-full overflow-x-hidden ">
-  <WorkList/>
-<!--  TODO: media size에 따라 memo와 work를 한방에 보일지, 사이드 바 느낌으로 보일지 결정.-->
-  <MemoList/>
-</div>
+{#if fullMemo}
+    <div class="flex h-[calc(100vh-290px)] w-[calc(100%+210px)] overflow-x-hidden">
+        <WorkList bind:fullMemo/>
+        <MemoList {fullMemo}/>
+    </div>
+{:else}
+    <div class="flex h-[calc(100vh-290px)] w-full overflow-x-hidden ">
+        <WorkList bind:fullMemo/>
+        <MemoList {fullMemo}/>
+    </div>
+{/if}

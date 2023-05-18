@@ -67,6 +67,13 @@
             ask:false,
             date: "2:10 PM",
         },
+        {
+            id : uuid(),
+            title : "5/18 daily, work 1차 레이아웃 구현",
+            save:true,
+            ask:false,
+            date: "2:10 PM",
+        },
     ];
     let memoList;
     export let todoList = [];
@@ -115,7 +122,6 @@
 <MemoAdd
         bind:this={memoList}
          on:addMemo={handlerAddMemo}/>
-
 
 <MemoList
         {memos}

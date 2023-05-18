@@ -8,8 +8,11 @@ import {
     SidebarItem, Tabs, TabItem, Button,
 } from "flowbite-svelte";
 import Icon from "@iconify/svelte";
-import starRounded from '@iconify/icons-material-symbols/star-rounded';
+import arrowBackIosRounded from '@iconify/icons-material-symbols/arrow-back-ios-rounded';
+import arrowForwardIosRounded from '@iconify/icons-material-symbols/arrow-forward-ios-rounded';
 
+import starRounded from '@iconify/icons-material-symbols/star-rounded';
+export let fullMemo;
 let spanClass = 'flex-1 ml-3 whitespace-nowrap';
 $: activeUrl = '/dashboard'
 
@@ -18,7 +21,7 @@ let style_tabItem = "relative h-[40px] -top-2.5";
 // todo tabitem내의 버튼 크기 줄이는 방법 알아야함 ㅠ
 </script>
 
-<div class="float-left bottom-0 left-0 h-full w-[290px] relative">
+<div class="float-left bottom-0 left-0 h-full w-[280px] relative" class:filpList={fullMemo}>
     <Tabs defaultClass="w-full flex h-[40px] justify-center items-center rounded-lg divide-x divide-gray-100 shadow ">
         <!--            working list-->
         <TabItem open class={style_tabItem}>
@@ -77,11 +80,16 @@ let style_tabItem = "relative h-[40px] -top-2.5";
             <SidebarGroup class={style_sidebarGrp}>
             </SidebarGroup>
         </TabItem>
+
+        <Button gradient color="greenToBlue" class="w-12 h-7 text-9xl"
+            on:click={()=>{fullMemo=!fullMemo}}>
+            <Icon icon={arrowBackIosRounded} width="30" />
+        </Button>
     </Tabs>
 </div>
 
 <style>
-    * button{
-        padding:0;
+    .filpList {
+        transform: rotateY(180deg);
     }
 </style>

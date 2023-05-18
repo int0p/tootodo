@@ -13,7 +13,7 @@ let status = "blue"; //not started, ongoing, done, all
 const style_tapItem = "text-sm text-gray-500 dark:text-gray-400 h-[60px] max-h-[60px] overflow-y-auto";
 </script>
 
-<div class="float-left top-0 left-0 w-5/12 ml-4 mr-2 flex-col h-full overflow-x-auto">
+<div class="float-left top-0 left-0 w-5/12 ml-4 mr-2 flex-col h-full ">
     <!--    project list-->
     <Tabs class="w-full flex-nowrap overflow-x-hidden ">
         <Button pill  class="h-8 w-4 self-end mb-1" color={status}>+</Button>

@@ -3,12 +3,8 @@
     import  Clock from '../clock.svelte';
     import ClockDesign from "./clock-design.svelte"
 
-    import { Alert,
-        Heading, P, A, Mark, Secondary, Span,
+    import {
         Button,Badge,
-        Hr,
-        Toolbar, ToolbarButton,
-        Pagination, PaginationItem,
     } from 'flowbite-svelte';
 
     let timeLeft = 1500; // 25 minutes in seconds
