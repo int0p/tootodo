@@ -13,7 +13,7 @@ import starRounded from '@iconify/icons-material-symbols/star-rounded';
 let spanClass = 'flex-1 ml-3 whitespace-nowrap';
 $: activeUrl = '/dashboard'
 
-let style_sidebarGrp = "h-[calc(100%-75px)] overflow-y-auto absolute bottom-2 left-0 w-full bg-gray-50";
+let style_sidebarGrp = "h-[calc(100%-70px)] overflow-y-auto absolute bottom-2 left-0 w-full bg-gray-50";
 let style_tabItem = "relative h-[40px] -top-2.5";
 // todo tabitem내의 버튼 크기 줄이는 방법 알아야함 ㅠ
 </script>
