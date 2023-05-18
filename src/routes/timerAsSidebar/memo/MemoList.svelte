@@ -54,8 +54,8 @@
 
 </script>
 
-<div bind:offsetHeight={listDivHeight}
-     class="max-h-[690px] w-[610px] overflow-y-auto">
+<div bind:offsetHeight={listDivHeight} bind:this={listDiv}
+     class="max-h-[calc(100%-680px)] w-[610px] overflow-y-auto">
     <!-- Saved memo "Todo" list-->
     <div class="sticky top-0 bg-white/90">
         <Checkbox bind:checked={showTodo} class="w-full p-4" >
@@ -77,7 +77,7 @@
     </div>
 
     <!-- memo list-->
-    <div  bind:this={listDiv} >
+    <div   >
         {#each memos as {title,ask,save,id,date} (id)}
             <div class="flex justify-end mb-3 " >
                 <P class="text-xs mt-8 mr-2">{date}</P>

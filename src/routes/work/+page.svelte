@@ -10,7 +10,7 @@
     <Status /> <!--    h: 80px -->
 
 <!--        projects-->
-    <div class = "flex clear-both h-[calc(100%-100px)]">
+    <div class = "flex clear-both h-[calc(100%-100px)] ">
         <ProjectList />
         <WorkDetail />
     </div>

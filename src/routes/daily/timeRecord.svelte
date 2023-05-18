@@ -19,7 +19,7 @@
 </script>
 
 <!--        time Record -->
-<div class="w-[500px] mr-4 max-h-[1210px] overflow-y-auto">
+<div class="w-[500px] mr-4 h-full overflow-y-auto float-left top-0 left-0 ">
     <Table striped={true}  >
         <TableHead class ="border-b-2 border-gray-300 text-center">
             <TableHeadCell></TableHeadCell>
