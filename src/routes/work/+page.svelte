@@ -1,17 +1,4 @@
 <script>
-    import {
-        Heading, Badge, ButtonGroup, Toggle,
-        BottomNav, BottomNavHeader, BottomNavHeaderItem, BottomNavItem, Tooltip,
-        Navbar, NavBrand, NavLi, NavUl, NavHamburger, Input,
-        Tabs, TabItem,
-        StepIndicator,
-        Sidebar, SidebarGroup, SidebarItem, SidebarWrapper, SidebarDropdownItem, SidebarDropdownWrapper,
-        Card,
-        Breadcrumb, BreadcrumbItem,
-        Timeline, TimelineItem, Button,
-        Textarea, Alert, ToolbarButton,
-        List, Li, Span, Hr,
-    } from 'flowbite-svelte';
 
     import WorkDetail from "./workDetail.svelte";
     import Status from "./status.svelte";

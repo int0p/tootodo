@@ -4,7 +4,7 @@ import lapTimer from "@iconify/icons-radix-icons/lap-timer.js";
 import folderCopy from "@iconify/icons-material-symbols/folder-copy.js";
 import chartPie from "@iconify/icons-uim/chart-pie.js";
 import settingFilled from "@iconify/icons-ant-design/setting-filled.js";
-import {Button, ButtonGroup, Checkbox, Heading, Navbar, NavBrand, NavHamburger, NavLi, NavUl} from "flowbite-svelte";
+import {Button, Checkbox, } from "flowbite-svelte";
 import Icon from "@iconify/svelte";
 import tableMoveColumnAfterRtl from "@iconify/icons-ooui/table-move-column-after-rtl.js";
 import tableMoveColumnAfterLtr from "@iconify/icons-ooui/table-move-column-after-ltr.js";

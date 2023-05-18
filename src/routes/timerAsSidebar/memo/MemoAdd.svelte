@@ -7,9 +7,9 @@ import messageQuestionOutline from '@iconify/icons-mdi/message-question-outline'
 import bookmarkAddRounded from '@iconify/icons-material-symbols/bookmark-add-rounded';
 import bookmarkAddOutlineRounded from '@iconify/icons-material-symbols/bookmark-add-outline-rounded';
 
-import {Alert, Textarea, ToolbarButton, Input} from "flowbite-svelte";
+import {Alert, Textarea, ToolbarButton} from "flowbite-svelte";
 import {v4 as uuid} from "uuid";
-import {createEventDispatcher,onDestroy, onMount, beforeUpdate, afterUpdate} from "svelte";
+import {createEventDispatcher} from "svelte";
 
 let inputText = "";
 let isSave = true;

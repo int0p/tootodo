@@ -5,7 +5,7 @@
     import bookmarkOutlineRounded from '@iconify/icons-material-symbols/bookmark-outline-rounded';
     import deleteOutlineRounded from '@iconify/icons-material-symbols/delete-outline-rounded';
 
-    import {afterUpdate, beforeUpdate, createEventDispatcher} from "svelte";
+    import {afterUpdate, createEventDispatcher} from "svelte";
     import {slide} from "svelte/transition";
 
     export let memos = [];

@@ -1,5 +1,5 @@
 <script>
-    import {Heading,Listgroup,Avatar} from "flowbite-svelte";
+    import {Heading,} from "flowbite-svelte";
     import Card from "$lib/components/card.svelte";
     let list =[
         // { img: { src: "/images/profile-picture-1.webp", alt: "Neil Sims",},

@@ -1,5 +1,5 @@
 <script>
-    import {Button, Input, Navbar, ButtonGroup, NavHamburger, NavLi, NavUl, Toggle, Search} from "flowbite-svelte";
+    import {Button, ButtonGroup, Toggle, Search} from "flowbite-svelte";
 </script>
 
 <div class="w-full flex justify-around items-center h-[80px]">

@@ -3,7 +3,7 @@
         Breadcrumb, BreadcrumbItem,
         Timeline, TimelineItem, Checkbox,
         Textarea, Alert, ToolbarButton,
-        List, Li, Span,
+        List, Li,
     } from 'flowbite-svelte';
 
 </script>

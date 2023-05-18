@@ -1,13 +1,9 @@
 <script>
     import {
-        Alert,
-        Heading, P, A, Mark, Secondary, Span,
         Button, ButtonGroup,
         Hr,
-        Toolbar, ToolbarButton,
-        Input, Label, Helper,
+        Input,
         Chevron, Dropdown, DropdownItem,
-        Tabs, TabItem, PaginationItem, Indicator
     } from 'flowbite-svelte';
 
     import Timer from '$lib/components/pomodoro.svelte';

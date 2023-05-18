@@ -2,12 +2,10 @@
 import checkboxBlankOutline from "@iconify/icons-mdi/checkbox-blank-outline.js";
 import checkboxMarkedOutline from "@iconify/icons-mdi/checkbox-marked-outline.js";
 import {
-    Sidebar,
     SidebarDropdownItem,
     SidebarDropdownWrapper,
     SidebarGroup,
-    SidebarItem,
-    SidebarWrapper,Tabs, TabItem,
+    SidebarItem, Tabs, TabItem, Button,
 } from "flowbite-svelte";
 import Icon from "@iconify/svelte";
 import starRounded from '@iconify/icons-material-symbols/star-rounded';
@@ -15,13 +13,15 @@ import starRounded from '@iconify/icons-material-symbols/star-rounded';
 let spanClass = 'flex-1 ml-3 whitespace-nowrap';
 $: activeUrl = '/dashboard'
 
-let style_sidebarGrp = "h-[calc(100%-100px)] overflow-y-auto absolute bottom-5 left-0 w-full bg-gray-50";
+let style_sidebarGrp = "h-[calc(100%-75px)] overflow-y-auto absolute bottom-2 left-0 w-full bg-gray-50";
+let style_tabItem = "relative h-[40px] -top-2.5";
+// todo tabitem내의 버튼 크기 줄이는 방법 알아야함 ㅠ
 </script>
 
-<div class="float-left bottom-0 left-0 h-full w-[280px] relative">
-    <Tabs style="none" defaultClass="flex justify-center items-center rounded-lg divide-x divide-gray-200 shadow dark:divide-gray-700 w-full">
+<div class="float-left bottom-0 left-0 h-full w-[290px] relative">
+    <Tabs defaultClass="w-full flex h-[40px] justify-center items-center rounded-lg divide-x divide-gray-100 shadow ">
         <!--            working list-->
-        <TabItem open >
+        <TabItem open class={style_tabItem}>
             <span slot="title">Working</span>
             <SidebarGroup class={style_sidebarGrp}>
                 {#each Array(5) as _, index}
@@ -50,7 +50,7 @@ let style_sidebarGrp = "h-[calc(100%-100px)] overflow-y-auto absolute bottom-5 l
         </TabItem>
 
         <!--      done list-->
-        <TabItem >
+        <TabItem class={style_tabItem} >
             <span slot="title">Done</span>
             <SidebarGroup class={style_sidebarGrp} >
                 <SidebarItem label="Users">
@@ -72,10 +72,16 @@ let style_sidebarGrp = "h-[calc(100%-100px)] overflow-y-auto absolute bottom-5 l
         </TabItem>
 
         <!--      highlight-->
-        <TabItem >
+        <TabItem class={style_tabItem}>
             <span slot="title"><Icon icon={starRounded} width = "22"/></span>
             <SidebarGroup class={style_sidebarGrp}>
             </SidebarGroup>
         </TabItem>
     </Tabs>
 </div>
+
+<style>
+    * button{
+        padding:0;
+    }
+</style>

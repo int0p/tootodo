@@ -1,9 +1,7 @@
 <script>
     import {
-        Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell,
-        Button, Hr, Heading, Accordion, AccordionItem, Toggle,
+        Button, Hr,
     } from 'flowbite-svelte';
-    // import TimeRecord from  'src/routes/daily/timeRecord.svelte';
     import TimeRecord from './timeRecord.svelte';
     import MemoRecord from './memoRecord.svelte';
 
@@ -22,13 +20,13 @@
 
         <!--    week -->
         <div class="flex gap-2 mb-4 justify-center items-stretch">
-            <Button outline color="dark" size="lg" >{day}, Mon</Button>
-            <Button outline color="dark" size="xl" >{day+1}, Tue</Button>
-            <Button outline color="dark" size="xl" >{day+2}, Wed</Button>
-            <Button outline color="dark" size="xl" >{day+3}, Thu</Button>
-            <Button outline color="dark" size="xl" >{day+4}, Fri</Button>
-            <Button outline color="blue" size="xl">{day+5}, Sat</Button>
-            <Button outline color="red" size="xl">{day+6}, Sun</Button>
+            <Button outline color="dark" size="md" >{day}, Mon</Button>
+            <Button outline color="dark" size="md" >{day+1}, Tue</Button>
+            <Button outline color="dark" size="md" >{day+2}, Wed</Button>
+            <Button outline color="dark" size="md" >{day+3}, Thu</Button>
+            <Button outline color="dark" size="md" >{day+4}, Fri</Button>
+            <Button outline color="blue" size="md">{day+5}, Sat</Button>
+            <Button outline color="red" size="md">{day+6}, Sun</Button>
         </div>
     </div>
 
