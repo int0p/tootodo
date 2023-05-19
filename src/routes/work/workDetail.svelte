@@ -32,8 +32,8 @@
             </svelte:fragment>
             Flowbite Svelte</BreadcrumbItem>
     </Breadcrumb>
-    <div class=" max-h-[calc(100%-100px)] overflow-y-auto p-4" >
 
+    <div class=" max-h-[calc(100%-100px)] overflow-y-auto p-2" >
         <Timeline >
             <TimelineItem title="" date="February 2022">
                 <List tag="ul" class="mt-4 mb-2 space-y-4" list="none">
