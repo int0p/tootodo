@@ -24,6 +24,12 @@
             date: "3:11 PM",
         },{
             id : uuid(),
+            title : "토글 타이머! 메모를 적는것에 집중하고 싶을 경우 타이머를 가려보세요.",
+            save:true,
+            ask:false,
+            date: "3:11 PM",
+        },{
+            id : uuid(),
             title : "사이드바! [타이머]를 가려 각 페이지를 전체 화면에서 볼 수 있습니다.",
             save:false,
             ask:false,
@@ -126,6 +132,7 @@
     ];
     let memoList;
     export let todoList = [];
+    export let showTimer;
 
     // handler. TODO: add는 memo전체 받고 remove와 toggle은 id만 받아서 코드가 헷갈림.
     function handlerAddMemo(e){
@@ -167,15 +174,29 @@
 <!--목표: memoList는 memo를 보여주고, memoAdd는 memo를 추가하는 역할을 한다.-->
 <!--현실: memoList에 메모의 북마크를 토글하거나 삭제하는 기능이 있다.-->
 <!--TODO: memoList와 memoAdd를 합치거나, 다른 방식으로 나누어야함.-->
+{#if !showTimer}
+    <MemoAdd
+            bind:this={memoList}
+             on:addMemo={handlerAddMemo}/>
 
-<MemoAdd
-        bind:this={memoList}
-         on:addMemo={handlerAddMemo}/>
-
-<MemoList
-        {memos}
-        {todoList}
-        on:removeMemo={handlerRemoveMemo}
-        on:toggleSave={handlerToggleSave}
-        class="h-2/3"
-/>
+    <MemoList
+            {memos}
+            {todoList}
+            bind:showTimer
+            on:removeMemo={handlerRemoveMemo}
+            on:toggleSave={handlerToggleSave}
+            class="h-2/3"
+    />
+{:else}
+    <MemoList
+            {memos}
+            {todoList}
+            bind:showTimer
+            on:removeMemo={handlerRemoveMemo}
+            on:toggleSave={handlerToggleSave}
+            class="h-2/3"
+    />
+    <MemoAdd
+            bind:this={memoList}
+            on:addMemo={handlerAddMemo}/>
+{/if}

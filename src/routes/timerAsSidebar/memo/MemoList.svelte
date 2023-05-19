@@ -51,11 +51,15 @@
 
     // saved memo list --> todo list
     let showTodo = false;
+   export let showTimer;
+
 
 </script>
 
 <div bind:offsetHeight={listDivHeight} bind:this={listDiv}
-     class="max-h-[calc(100%-680px)] w-[610px] overflow-y-auto">
+     class="w-[610px] overflow-y-auto"
+     class:fullHeight={showTimer}
+     class:fitHeight={!showTimer}>
     <!-- Saved memo "Todo" list-->
     <div class="sticky top-0 bg-white/90">
         <Checkbox bind:checked={showTodo} class="w-full p-4" >
@@ -108,3 +112,12 @@
         {/each}
     </div>
 </div>
+
+<style>
+    .fullHeight{
+        height: calc(100% - 160px);
+    }
+    .fitHeight{
+        height: calc(100% - 680px);
+    }
+</style>
