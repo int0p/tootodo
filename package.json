@@ -21,6 +21,7 @@
 		"@iconify/icons-mingcute": "^1.2.5",
 		"@iconify/icons-ooui": "^1.2.19",
 		"@iconify/icons-radix-icons": "^1.2.8",
+		"@iconify/icons-solar": "^1.2.0",
 		"@iconify/icons-uim": "^1.2.4",
 		"@iconify/svelte": "^3.1.3",
 		"@sveltejs/adapter-auto": "^2.0.0",

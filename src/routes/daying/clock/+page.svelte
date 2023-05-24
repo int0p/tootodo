@@ -3,7 +3,7 @@
         Button, ButtonGroup,
         Hr,
         Input,
-        Chevron, Dropdown, DropdownItem,
+        Chevron, Dropdown, DropdownItem, Heading,
     } from 'flowbite-svelte';
 
     // import PomoTimer from '$lib/components/pomodoro.svelte';
@@ -15,7 +15,8 @@
 <div class="pr-8 pl-8 pb-4 w-full">
     <!-- 타이머 -->
     <div class="timer-container ">
-        <Hr  width="w-full mb-4" height="h-1"> Too -> do
+        <Hr  width="w-full mb-4" height="h-1">
+            <div class="text-xl font-semibold text-gray-900 dark:text-white px-6">Too -> do</div>
         </Hr>
         <div class="flex w-full">
             <PomoTimer/>
