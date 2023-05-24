@@ -2,7 +2,7 @@
 	import '../app.scss';
 	import '../app.postcss';
     import Navbar from "$lib/components/sideNavbar.svelte";
-    import TimerSidebar from "./timerAsSidebar/+page.svelte";
+    import TimerSidebar from "./daying/+page.svelte";
 
     import { slide } from 'svelte/transition';
     import { quintOut } from 'svelte/easing';

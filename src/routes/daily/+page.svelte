@@ -2,8 +2,8 @@
     import {
         Button, Hr,ButtonGroup,
     } from 'flowbite-svelte';
-    import TimeRecord from './timeRecord.svelte';
-    import MemoRecord from './memoRecord.svelte';
+    import TimeRecord from './tenMTable.svelte';
+    import MemoRecord from './todo.svelte';
 
     // Date
     let currentDate = new Date();

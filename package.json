@@ -53,5 +53,8 @@
 		"svelte-chartjs": "^3.1.2",
 		"svelte-kit": "^1.2.0",
 		"uuid": "^9.0.0"
-	}
+	},
+	"main": "index.js",
+	"repository": "https://github.com/int0p/tootodo.git",
+	"license": "MIT"
 }
