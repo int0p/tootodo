@@ -12,19 +12,12 @@
 
 </script>
 
-<div class="pr-8 pl-8 pb-4">
+<div class="pr-8 pl-8 pb-4 w-full">
     <!-- 타이머 -->
     <div class="timer-container ">
-        <Hr class="my-4 mx-auto md:my-10 " width="w-full" height="h-1">
-            <div class = "flex">
-                <ButtonGroup class="space-x-px">
-                    <Button color="blue">Work</Button>
-                    <Button outline color="blue">Break</Button>
-                </ButtonGroup>
-            </div>
+        <Hr  width="w-full mb-4" height="h-1"> Too -> do
         </Hr>
-        <div class="flex">
-            <CurrentClock />
+        <div class="flex w-full">
             <PomoTimer/>
         </div>
     </div>

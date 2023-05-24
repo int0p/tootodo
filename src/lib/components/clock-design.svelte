@@ -25,7 +25,6 @@
     let lines = [];
 
     // time
-    let currentTime = new Date().toLocaleTimeString('en-US', { timeStyle:'short' });
 
     ///////////////// code //////////////////
     for (let i = 0; i < 60; i += 1) {
@@ -84,7 +83,7 @@
 </script>
 
 
-<div class="clock">
+<div class="">
     <svg viewBox="0 0 {vw} {vh}">
         <circle {cx} {cy} {r} stroke="black" fill="transparent"  />
 
@@ -99,21 +98,6 @@
 
 <!--        <circle {cx} {cy} r="1" stroke="black" fill="transparent" />-->
 
-<!--        <text-->
-<!--                x="25"-->
-<!--                y = "80"-->
-<!--                font-size="8"-->
-<!--        >{currentTime}</text>-->
-<!--        <text-->
-<!--                x="64"-->
-<!--                y = "80"-->
-<!--                font-size="8"-->
-<!--        > - </text>-->
-<!--        <text-->
-<!--                x="73"-->
-<!--                y = "80"-->
-<!--                font-size="8"-->
-<!--        >{currentTime}</text>-->
 
         <g transform="translate(50,50)" >
             <Icon icon={playCircle} width="30"/>
@@ -145,14 +129,4 @@
     </svg>
 </div>
 
-<style>
-.clock {
-        color: rgb(50, 50, 50);
-        width: 20rem;
-        height: 20rem;
-        padding: 10px;
-        border-radius: 20%;
-        border: 15px solid rgb(55, 55, 55);
-        box-shadow: inset 0 0 3px 3px rgba(50, 50, 50, 0.3), inset 0 0 1px 2px rgba(50, 50, 50, 0.2);
-    }
-</style>
+

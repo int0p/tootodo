@@ -26,7 +26,7 @@ export let showSidebar;
 
     <div>
         <Button class="border-b-2 mb-2" outline color="alternative" on:click={()=>goto('/daily')} ><Icon icon={lapTimer} width="24"/></Button>
-        <Button class="border-b-2 mb-2" outline color="alternative" on:click={()=>goto('/work')}><Icon icon={folderCopy}  width="24"/></Button>
+        <Button class="border-b-2 mb-2" outline color="alternative" on:click={()=>goto('/projects')}><Icon icon={folderCopy}  width="24"/></Button>
         <Button class="border-b-2 mb-2" outline color="alternative" on:click={()=>goto('/statistics')}><Icon icon={chartPie} width="24" /></Button>
         <Button class="border-b-2 mb-2" outline color="alternative" on:click={()=>goto('/setting')}><Icon icon={settingFilled} width="24" /></Button>
     </div>

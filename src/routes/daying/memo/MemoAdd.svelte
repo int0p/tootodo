@@ -16,9 +16,6 @@ let inputText = "";
 let isSave = true;
 let isAsk = false;
 
-const hours = $currentTime.hours;
-const minutes = $currentTime.minutes;
-const seconds = $currentTime.seconds;
 
 //// add memo in parent page
 const dispatch = createEventDispatcher();
@@ -29,7 +26,7 @@ function handleAddMemo(){
         title : inputText,
         save:isSave,
         ask:isAsk,
-        date:`${hours}:${minutes}`,
+        date:$currentTime.shortTime,
     };
     // 공백이 있을경우 추가 안함
     const hasOnlySpace = memo.title.trim()==="";
@@ -51,7 +48,7 @@ export function clearInput(){
 }
 </script>
 
-<form on:submit|preventDefault={handleAddMemo}>
+<form on:submit|preventDefault={handleAddMemo} >
     <label for="chat" class="sr-only">Your message</label>
     <Alert color="dark" class="px-3 py-2">
         <svelte:fragment slot="icon">
