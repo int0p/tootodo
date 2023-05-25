@@ -34,7 +34,7 @@
                     {@const rowIdx = index}
                     <TableBodyCell class="text-center">{rows[rowIdx]}</TableBodyCell>
                     {#each Array(6) as _,index}
-                        {#if table[rowIdx][index] === true }
+                        {#if table[rowIdx][index]}
                             <TableBodyCell class ="bg-purple-100 border-l-2 border-gray-200" ></TableBodyCell>
                         {:else}
                             <TableBodyCell class ="border-l-2 border-gray-200" ></TableBodyCell>

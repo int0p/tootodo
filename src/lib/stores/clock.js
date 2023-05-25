@@ -4,7 +4,7 @@ import { readable, derived } from 'svelte/store'
 export const current = readable(new Date(), set => {
     const interval = setInterval(() => {
         set(new Date());
-    }, 900);
+    }, 1000);
 
     return () => clearInterval(interval);
 });

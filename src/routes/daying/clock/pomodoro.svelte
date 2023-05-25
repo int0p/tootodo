@@ -60,14 +60,14 @@
             <Badge large color="pink" class="w-[130px] ml-5">{Math.floor(timeLeft / 60)}:{('0' + (timeLeft % 60)).slice(-2)}</Badge>
             <div class="flex-col w-[200px]">
                 <p><span class="text-pink-800">session:</span> work </p>
-                <p><span class="text-pink-800">goal:</span> {nowString} - {nowString} </p>
+<!--                <p><span class="text-pink-800">goal:</span> {nowString} - {nowString} </p>-->
             </div>
         </div>
     </div>
 
-    <div class="flex-col timeController w-[110px] h-[340px] ">
+    <div class="flex-col timeController w-[110px] h-[324px] ">
         {#each Array(6) as _ ,i}
-            <div class="flex mb-3 border-2 rounded-lg shadow p-1 w-full">
+            <div class="flex mb-3 border-0 rounded-lg shadow-md p-1 w-full">
                 <Badge large >-</Badge>
                 <Heading tag="h5" class="pr-2 pl-2">{ (i+1) * 10}</Heading>
                 <Badge color="red" large >+</Badge>

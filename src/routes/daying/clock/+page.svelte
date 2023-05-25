@@ -9,12 +9,14 @@
     // import PomoTimer from '$lib/components/pomodoro.svelte';
     import CurrentClock from "./clock.svelte";
     import PomoTimer from "./pomodoro.svelte";
+    import CjsPomo from "./pomo-chartjs.svelte";
 
 </script>
 
 <div class="pr-8 pl-8 pb-4 w-full">
     <!-- 타이머 -->
-    <div class="timer-container ">
+    <div class="flex-col justify-center items-center">
+        <CjsPomo/>
         <Hr  width="w-full mb-4" height="h-1">
             <div class="text-xl font-semibold text-gray-900 dark:text-white px-6">Too -> do</div>
         </Hr>
@@ -24,14 +26,6 @@
     </div>
 </div>
 
-<style lang="scss">
-  .timer-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-</style>
 
 
 
