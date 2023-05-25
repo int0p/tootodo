@@ -9,7 +9,7 @@
     import {slide} from "svelte/transition";
 
     export let memos = [];
-    export let todoList = [];
+    // export let todoList = [];
 
     let listDivHeight=0;
     let listDiv;

@@ -107,22 +107,3 @@
         </div>
     </div>
 </Popover>
-
-<!--<div class="sticky top-0 bg-white/90">-->
-<!--    <Checkbox bind:checked={showTodo} class="w-full p-4" >-->
-<!--        <Heading-->
-<!--                tag="h2"-->
-<!--                customSize="text-lg font-semibold"-->
-<!--                class="text-lg font-semibold text-gray-900 dark:text-white">Show/Hide Todo List</Heading>-->
-<!--    </Checkbox>-->
-<!--    {#if showTodo}-->
-<!--        <div in:slide out:slide class="border-2 ml-8 mr-8">-->
-<!--            <List tag="ul" class="space-y-1">-->
-<!--                {#each todoList as todo (todo.id)}-->
-<!--                    <Li class="p-2 m-2 break-words">{todo.title}</Li>-->
-<!--                {/each}-->
-<!--            </List>-->
-<!--        </div>-->
-<!--        <Hr/>-->
-<!--    {/if}-->
-<!--</div>-->
