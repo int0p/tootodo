@@ -181,7 +181,6 @@
 
     <MemoList
             {memos}
-            {todoList}
             bind:showTimer
             on:removeMemo={handlerRemoveMemo}
             on:toggleSave={handlerToggleSave}
@@ -190,7 +189,6 @@
 {:else}
     <MemoList
             {memos}
-            {todoList}
             bind:showTimer
             on:removeMemo={handlerRemoveMemo}
             on:toggleSave={handlerToggleSave}
