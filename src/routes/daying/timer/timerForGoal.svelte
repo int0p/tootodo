@@ -1,5 +1,5 @@
 <script>
-    import { onMount,afterUpdate } from 'svelte';
+    import { onMount,afterUpdate,tick } from 'svelte';
     import Icon from '@iconify/svelte';
     import timerReset from '@iconify/icons-lucide/timer-reset';
     import { Toolbar, ToolbarButton, ToolbarGroup,Input, Label } from 'flowbite-svelte';
@@ -67,28 +67,17 @@
             const textY = top + height / 2;
             // console.log(width);
             ctx.save();
+
+            // text remain time
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.font = '1.8rem "Helvetica Neue", Helvetica, Arial, sans-serif';
             ctx.fillStyle = '#000';
-
-            let textRemain = timeDisplay;
+            let textRemain = getFriendlyTime(timeLeft);
             ctx.fillText(textRemain, textX, textY);
             ctx.restore();
 
-            if (timeSet <= 0){
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.font = '1.3rem "Helvetica Neue", Helvetica, Arial, sans-serif';
-                ctx.fillStyle = '#000';
-                const text = "!! time < 0";
-                ctx.fillText(text, textX, textY+30);
-            }
-            ctx.restore();
-
-            if (!timeLeft){
-
-            }
+            // text timer state
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.font = '1.2rem "Helvetica Neue", Helvetica, Arial, sans-serif';
@@ -99,26 +88,84 @@
         }
     };
     ////////////////////////////// timer setting //////////////////////////////
-    export let timeSet; //분 단위 외부 입력
-    $: timeDone = 0;
-    $: timeLeft = timeSet * 60;
+    // let session = 'projects';
 
-    let defaultTime;
+    // let timer = null;
+
+    // function startTimer() {
+    //     timer = setInterval(() => {
+    //         timeLeft--;
+    //         if (timeLeft === 0) {
+    //             clearInterval(timer);
+    //             if (session === 'projects') {
+    //                 session = 'break';
+    //                 timeLeft = 300; // 5 minutes in seconds
+    //             } else {
+    //                 session = 'projects';
+    //                 timeLeft = 1500; // 25 minutes in seconds
+    //             }
+    //         }
+    //     }, 1000);
+    // }
+
+    // function stopTimer() {
+    //     clearInterval(timer);
+    //     timer = null;
+    // }
+
+    //bring context api (70. combining context & stores to make our context reactive)
+    import {getContext} from "svelte";
+    import timeSetKey from './key.js';
+    const timeSetStore = getContext(timeSetKey);
+    const defaultTime = $timeSetStore.values.default;
+    $: timeLeft = $timeSetStore.values.working * 60; //외부로부터 목표시간이 변경될 때마다 timeLeft 업데이트.
+
+    let timeDone = 0;
+    let timeLeft = 0;
+    let timerState = "ready?";
+    let clear = null;
+
+    let isRunning = false; //멈춤/재생 아이콘 표시용
+
     onMount(()=>{
-        defaultTime = timeSet;
+        resetTimer();
     })
 
-    let timeDisplay;
-    let timerState = "ready?";
-
     afterUpdate(() => {
-        if(timeSet <= 0){
-            // timeDisplay= '-'+getFriendlyTime(Math.abs(timeLeft));
-            timeSet = defaultTime;
-            return resetTimer();
+        if(timeLeft < 0){ //목표시간이 음수일 경우 타이머 초기화
+            resetTimer();
         }
-        else timeDisplay = getFriendlyTime(timeLeft);
     });
+    function resetTimer() {
+        stopTimer();
+        timerState = "ready?"
+        timeDone = 0;
+        timeLeft = defaultTime;
+        $timeSetStore.values.working = defaultTime;
+        data.datasets[0].data = [0, timeLeft];
+    }
+    function startTimer() {
+        isRunning = true;
+        clear = setInterval(()=>{
+            timeDone ++;
+            timeLeft --;
+            data.datasets[0].data = [timeDone, timeLeft];
+            if(timeLeft <= 0){
+                stopTimer();
+            }
+        }, 50);
+        timerState = "working~";
+    }
+    function stopTimer(){
+        isRunning = false;
+        if(timeLeft === 0){
+            timerState = "Done!";
+        }else{
+            timerState = "-stopped-";
+        }
+        clearInterval(clear);
+        clearTimeout(clear);
+    }
 
     function getFriendlyTime(time){
         const hours = (Math.floor(time / 3600)).toString().padStart(2, '0');
@@ -126,52 +173,6 @@
         const seconds = (Math.floor(time % 60)).toString().padStart(2, '0');
         return `${hours}:${minutes}:${seconds}`
     }
-
-    function updateCountDown(){
-        // console.log(timeLeft)
-        timeDone ++;
-        timeLeft --;
-        // $:console.log(hours, minutes, seconds);
-        data.datasets[0].data = [timeDone, timeLeft];
-
-        if(timeLeft <= 0){
-            stopTimer();
-        }
-    }
-
-    let startDisable = false;
-    let stopDisable = true;
-    let clear;
-
-    function startTimer() {
-        startDisable= true;
-        clear = setInterval(updateCountDown, 50);
-        timerState = "working~";
-        if(timeLeft <= 0){
-            resetTimer();
-        }
-    }
-    function stopTimer(){
-        if(timeLeft <= 0){
-            timerState = "Done!";
-        }else{
-            timerState = "-stopped-";
-        }
-        startDisable = false;
-        stopDisable = true;
-        clearInterval(clear);
-        clearTimeout(clear);
-    }
-
-    function resetTimer() {
-        stopTimer();
-        timerState = "ready?"
-        timeDone = 0;
-        timeLeft = defaultTime *60;
-        timeDisplay = getFriendlyTime(timeLeft);
-        data.datasets[0].data = [0, defaultTime];
-    }
-
 
 </script>
 
@@ -183,10 +184,10 @@
     <div class="flex absolute left-4 bottom-0 shadow-sm ">
         <Toolbar>
             <ToolbarButton  on:click={resetTimer}><Icon icon={skipForwardFill} hFlip={true} /></ToolbarButton>
-            {#if startDisable}
-                <ToolbarButton on:click={stopTimer} disable={stopDisable}><Icon icon={pauseFill} /></ToolbarButton>
+            {#if isRunning}
+                <ToolbarButton on:click={stopTimer} ><Icon icon={pauseFill} /></ToolbarButton>
             {:else}
-                <ToolbarButton on:click={startTimer} disabled={startDisable}><Icon icon={playFill} /></ToolbarButton>
+                <ToolbarButton on:click={startTimer} ><Icon icon={playFill} /></ToolbarButton>
             {/if}
             <ToolbarButton on:click={resetTimer}><Icon icon={skipForwardFill} /></ToolbarButton>
         </Toolbar>

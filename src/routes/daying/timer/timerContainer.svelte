@@ -12,44 +12,20 @@
         Button,Badge,Heading,
     } from 'flowbite-svelte';
 
-    let session = 'projects';
 
-    let timer = null;
-
-    // function startTimer() {
-    //     timer = setInterval(() => {
-    //         timeLeft--;
-    //         if (timeLeft === 0) {
-    //             clearInterval(timer);
-    //             if (session === 'projects') {
-    //                 session = 'break';
-    //                 timeLeft = 300; // 5 minutes in seconds
-    //             } else {
-    //                 session = 'projects';
-    //                 timeLeft = 1500; // 25 minutes in seconds
-    //             }
-    //         }
-    //     }, 1000);
-    // }
-
-    // function stopTimer() {
-    //     clearInterval(timer);
-    //     timer = null;
-    // }
 
 
     import CurrentClock from "./currentTime.svelte";
 
     import {currentTime} from '$lib/stores/clock.js';
     $:nowString = $currentTime.fullTime;
-    export let timeSet;
 </script>
 
 <div class="flex w-full items-center justify-center relative h-full">
 
     <div class="align-col w-[400px]">
         <div class="clock flex relative">
-            <TimerGoal {timeSet}/>
+            <TimerGoal />
             <CurrentClock/>
             <ClockDesign />
         </div>
@@ -70,13 +46,6 @@
     justify-content: center;
     align-items: center;
   }
-  .timeController{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: stretch;
-  }
-
     .clock {
         color: rgb(50, 50, 50);
         width: 360px;
