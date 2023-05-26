@@ -86,13 +86,14 @@
             ctx.restore();
 
             if (!timeLeft){
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.font = '1.3rem "Helvetica Neue", Helvetica, Arial, sans-serif';
-                ctx.fillStyle = '#000';
-                const text = 'Done!';
-                ctx.fillText(text, textX, textY+30);
+
             }
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.font = '1.2rem "Helvetica Neue", Helvetica, Arial, sans-serif';
+            ctx.fillStyle = '#000';
+            const text = timerState;
+            ctx.fillText(text, textX, textY+30);
             ctx.restore();
         }
     };
@@ -101,12 +102,19 @@
     $: timeDone = 0;
     $: timeLeft = timeSet * 60;
 
+    let defaultTime;
+    onMount(()=>{
+        defaultTime = timeSet;
+    })
+
     let timeDisplay;
-    let msg;
+    let timerState = "ready?";
 
     afterUpdate(() => {
         if(timeSet <= 0){
-            timeDisplay= '-'+getFriendlyTime(Math.abs(timeLeft))
+            // timeDisplay= '-'+getFriendlyTime(Math.abs(timeLeft));
+            timeSet = defaultTime;
+            return resetTimer();
         }
         else timeDisplay = getFriendlyTime(timeLeft);
     });
@@ -137,11 +145,17 @@
     function startTimer() {
         startDisable= true;
         clear = setInterval(updateCountDown, 50);
+        timerState = "working~";
         if(timeLeft <= 0){
             resetTimer();
         }
     }
     function stopTimer(){
+        if(timeLeft <= 0){
+            timerState = "Done!";
+        }else{
+            timerState = "-stopped-";
+        }
         startDisable = false;
         stopDisable = true;
         clearInterval(clear);
@@ -150,10 +164,11 @@
 
     function resetTimer() {
         stopTimer();
+        timerState = "ready?"
         timeDone = 0;
-        timeLeft = timeSet *60;
-        getFriendlyTime(timeLeft);
-        data.datasets[0].data = [0, timeSet];
+        timeLeft = defaultTime *60;
+        timeDisplay = getFriendlyTime(timeLeft);
+        data.datasets[0].data = [0, defaultTime];
     }
 
 
