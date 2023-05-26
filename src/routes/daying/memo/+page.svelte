@@ -184,7 +184,6 @@
             bind:showTimer
             on:removeMemo={handlerRemoveMemo}
             on:toggleSave={handlerToggleSave}
-            class="h-2/3"
     />
 {:else}
     <MemoList
@@ -192,7 +191,6 @@
             bind:showTimer
             on:removeMemo={handlerRemoveMemo}
             on:toggleSave={handlerToggleSave}
-            class="h-2/3"
     />
     <MemoAdd
             bind:this={memoList}

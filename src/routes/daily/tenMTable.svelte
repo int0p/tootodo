@@ -19,25 +19,25 @@
 </script>
 
 <!--        time Record -->
-<div class="w-[500px] mr-4 h-full overflow-y-auto float-left top-0 left-0 !p-1">
+<div class="w-[450px] mr-4 h-full overflow-y-auto float-left top-0 left-0 pl-4 pt-2 ">
     <Table striped={true}  >
-        <TableHead class ="border-b-2 border-gray-300 text-center !p-1">
+        <TableHead class ="border-b-2 border-gray-300 text-center ">
             <TableHeadCell></TableHeadCell>
             {#each Array(6) as _,index}
-                <TableBodyCell class ="border-l-2 border-gray-200" >{columns[index]}</TableBodyCell>
+                <TableBodyCell class ="border-l-2 border-gray-200  !pt-2 !pb-2"  >{columns[index]}</TableBodyCell>
             {/each}
         </TableHead>
 
-        <TableBody class="divide-y">
+        <TableBody class="divide-y ">
             {#each Array(24) as _,index }
                 <TableBodyRow>
                     {@const rowIdx = index}
-                    <TableBodyCell class="text-center">{rows[rowIdx]}</TableBodyCell>
+                    <TableBodyCell class="text-center !p-2 ">{rows[rowIdx]}</TableBodyCell>
                     {#each Array(6) as _,index}
                         {#if table[rowIdx][index]}
-                            <TableBodyCell class ="bg-purple-100 border-l-2 border-gray-200" ></TableBodyCell>
+                            <TableBodyCell class ="bg-purple-100 border-l-2 border-gray-200 " ></TableBodyCell>
                         {:else}
-                            <TableBodyCell class ="border-l-2 border-gray-200" ></TableBodyCell>
+                            <TableBodyCell class ="border-l-2 border-gray-200 " ></TableBodyCell>
                         {/if}
                     {/each}
                 </TableBodyRow>
