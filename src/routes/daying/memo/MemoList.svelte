@@ -117,6 +117,6 @@
         height: calc(100% - 160px);
     }
     .fitHeight{
-        height: calc(100% - 610px);
+        height: calc(100% - 592px);
     }
 </style>
