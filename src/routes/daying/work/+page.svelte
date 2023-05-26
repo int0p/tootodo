@@ -6,7 +6,7 @@
     import WorkSelect from "./workSelect.svelte";
 </script>
 
-<div class="pt-8 pl-4 pr-4 pb-4 m-4 mt-0 flex gap-2">
+<div class="pt-8 pl-4 pr-4 pb-4 m-4 mt-0 flex gap-2 ">
     <!-- 그룹, 세션 추가 및 선택 -->
     <WorkSelect/>
 

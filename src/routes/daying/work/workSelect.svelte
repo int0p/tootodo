@@ -50,7 +50,7 @@
 
 </script>
 
-<Label class="w-full h-[44px]">
+<Label class="w-full h-[44px] z-50">
     <Input type="text" placeholder="select work" size="lg">
         <Icon icon={searchIcon} width="28" slot="left" />
         <Icon icon={listLineDuotone} id="listIcon" width="30" slot="right" hFlip={true} />
