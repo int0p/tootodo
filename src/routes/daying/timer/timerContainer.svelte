@@ -12,10 +12,8 @@
         Button,Badge,Heading,
     } from 'flowbite-svelte';
 
-
-
-
     import CurrentClock from "./currentTime.svelte";
+    import TimerHour from "./timerForHour.svelte";
 
 </script>
 
@@ -24,8 +22,10 @@
     <div class="align-col w-[400px]">
         <div class="clock flex relative">
             <TimerGoal />
+            <TimerHour />
             <CurrentClock/>
             <ClockDesign />
+
         </div>
 
         <TimerStatus/>

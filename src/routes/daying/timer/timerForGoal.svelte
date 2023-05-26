@@ -119,13 +119,13 @@
     const timeSetStore = getContext(timeSetKey);
     const defaultTime = $timeSetStore.values.default;
     $: timeLeft = $timeSetStore.values.working * 60; //외부로부터 목표시간이 변경될 때마다 timeLeft 업데이트.
+    $: console.log(timeLeft);
 
     let timeDone = 0;
     let timeLeft = 0;
     let timerState = "ready?";
     let clear = null;
-
-    let isRunning = false; //멈춤/재생 아이콘 표시용
+    let playDisable = false;
 
     onMount(()=>{
         resetTimer();
@@ -141,23 +141,25 @@
         timerState = "ready?"
         timeDone = 0;
         timeLeft = defaultTime;
+        playDisable = false; //시간 끝난후엔 reset버튼 누르기 전까지 타이머 실행 안하도록하려구.
         $timeSetStore.values.working = defaultTime;
         data.datasets[0].data = [0, timeLeft];
     }
     function startTimer() {
-        isRunning = true;
+        $timeSetStore.values.isRunning = true;
+        timerState = "working~";
         clear = setInterval(()=>{
             timeDone ++;
             timeLeft --;
             data.datasets[0].data = [timeDone, timeLeft];
             if(timeLeft <= 0){
                 stopTimer();
+                playDisable = true;
             }
         }, 50);
-        timerState = "working~";
     }
     function stopTimer(){
-        isRunning = false;
+        $timeSetStore.values.isRunning = false;
         if(timeLeft === 0){
             timerState = "Done!";
         }else{
@@ -177,23 +179,19 @@
 </script>
 
 <div class="z-10 relative w-full flex">
-<!--    <Input let:props class="w-1/3">-->
-<!--        <div slot="left">#</div>-->
-<!--        <input bind:value = {timeSet} type="number" {...props} min="0" max="300" />-->
-<!--    </Input>-->
     <div class="flex absolute left-4 bottom-0 shadow-sm ">
         <Toolbar>
             <ToolbarButton  on:click={resetTimer}><Icon icon={skipForwardFill} hFlip={true} /></ToolbarButton>
-            {#if isRunning}
+            {#if $timeSetStore.values.isRunning}
                 <ToolbarButton on:click={stopTimer} ><Icon icon={pauseFill} /></ToolbarButton>
             {:else}
-                <ToolbarButton on:click={startTimer} ><Icon icon={playFill} /></ToolbarButton>
+                <ToolbarButton on:click={startTimer} disabled={playDisable}><Icon icon={playFill} /></ToolbarButton>
             {/if}
             <ToolbarButton on:click={resetTimer}><Icon icon={skipForwardFill} /></ToolbarButton>
         </Toolbar>
     </div>
 
-    <Doughnut {data} {options} plugins= {[plugin_pomoText]} class="absolute right-0"/>
+    <Doughnut {data} {options} plugins= {[plugin_pomoText]} class="absolute right-0 scale-[70%]"/>
 </div>
 
 
