@@ -15,6 +15,6 @@ export const currentTime = derived(current, $current => {
         const ampm = hours >= 12 ? 'PM' : 'AM';
         const fullTime = `${hours}:${minutes}:${seconds}`;
         const shortTime = `${hours}:${minutes} ${ampm}`;
-        return { hours, minutes, seconds, fullTime, shortTime };
+        return { hours, minutes, seconds, fullTime,shortTime };
     }
 );

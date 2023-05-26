@@ -17,8 +17,6 @@
 
     import CurrentClock from "./currentTime.svelte";
 
-    import {currentTime} from '$lib/stores/clock.js';
-    $:nowString = $currentTime.fullTime;
 </script>
 
 <div class="flex w-full items-center justify-center relative h-full">

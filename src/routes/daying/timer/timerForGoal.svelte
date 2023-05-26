@@ -164,7 +164,7 @@
             timerState = "-stopped-";
         }
         clearInterval(clear);
-        clearTimeout(clear);
+        // clearTimeout(clear);
     }
 
     function getFriendlyTime(time){
