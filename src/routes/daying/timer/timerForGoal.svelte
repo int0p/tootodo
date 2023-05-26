@@ -175,7 +175,7 @@
 
 </script>
 
-<div class="relative w-full flex">
+<div class="z-10 relative w-full flex">
 <!--    <Input let:props class="w-1/3">-->
 <!--        <div slot="left">#</div>-->
 <!--        <input bind:value = {timeSet} type="number" {...props} min="0" max="300" />-->
