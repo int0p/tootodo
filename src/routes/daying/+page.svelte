@@ -1,6 +1,6 @@
 <script>
 
-    import Timer from "./clock/+page.svelte";
+    import Timer from "./timer/+page.svelte";
     import Memo from "./memo/+page.svelte";
     import WorkSelect from "./work/+page.svelte";
 

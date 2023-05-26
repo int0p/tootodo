@@ -6,7 +6,7 @@
     $:fullTime=$currentTime.fullTime;
 </script>
 
-<svg viewBox='-50 -40 100 100' >
+<svg viewBox='-50 -40 100 100'  class="absolute -top-2 left-2 w-[calc(100%-230px)]">
     <circle class='clock-face' r='38'/>
 
     <!-- markers -->
@@ -51,7 +51,7 @@
     </g>
 
     <text
-            x="-32"
+            x="-36"
             y = "60"
             font-size="18"
     >{fullTime}</text>

@@ -2,12 +2,11 @@
 <script>
     ///////////////// icon  //////////////////
     import Icon from '@iconify/svelte';
-    import playCircle from '@iconify/icons-bi/play-circle';
-    import pauseCircle from '@iconify/icons-bi/pause-circle';
-    import pauseCircleFill from '@iconify/icons-bi/pause-circle-fill';
-    import stopCircle from '@iconify/icons-bi/stop-circle';
 
-    import timerReset from '@iconify/icons-lucide/timer-reset';
+    import timerSettings from '@iconify/icons-mdi/timer-settings';
+    import timerSettingsOutline from '@iconify/icons-mdi/timer-settings-outline';
+    import playCircle from '@iconify/icons-bi/play-circle';
+
     import repeatRounded from '@iconify/icons-material-symbols/repeat-rounded';
 
     ///////////////// var //////////////////
@@ -83,7 +82,7 @@
 </script>
 
 
-<div class="">
+<div class="absolute  indent-0.5 right-2.5 w-[calc(100%-130px)]">
     <svg viewBox="0 0 {vw} {vh}">
         <circle {cx} {cy} {r} stroke="black" fill="transparent"  />
 
@@ -99,16 +98,14 @@
 <!--        <circle {cx} {cy} r="1" stroke="black" fill="transparent" />-->
 
 
-        <g transform="translate(50,50)" >
-            <Icon icon={playCircle} width="30"/>
-        </g>
-
-        <g transform="translate(5,110)" >
-            <Icon icon={timerReset} />
-        </g>
+<!--        <g transform="translate(50,50)" >-->
+<!--            <Icon icon={playCircle} width="30"/>-->
+<!--        </g>-->
 
         <g transform="translate(110,110)" >
-            <Icon icon={repeatRounded} />
+            <Icon icon={timerSettings} />
+<!--            <Icon icon={timerSettingsOutline} />-->
+
         </g>
 
         {#each lines as line}

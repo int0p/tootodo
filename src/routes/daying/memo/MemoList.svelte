@@ -56,7 +56,7 @@
 </script>
 
 <div bind:offsetHeight={listDivHeight} bind:this={listDiv}
-     class="w-[610px] overflow-y-auto mt-4"
+     class="w-[590px] overflow-y-auto mt-4"
      class:fullHeight={!showTimer}
      class:fitHeight={showTimer}>
     <!-- Saved memo "Todo" list-->
@@ -117,6 +117,6 @@
         height: calc(100% - 160px);
     }
     .fitHeight{
-        height: calc(100% - 550px);
+        height: calc(100% - 600px);
     }
 </style>

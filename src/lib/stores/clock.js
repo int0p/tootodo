@@ -9,12 +9,12 @@ export const current = readable(new Date(), set => {
     return () => clearInterval(interval);
 });
 export const currentTime = derived(current, $current => {
-        const hours = $current.getHours().toString().padStart(2, '0');
-        const minutes = $current.getMinutes().toString().padStart(2, '0');
-        const seconds = $current.getSeconds().toString().padStart(2, '0');
+        let hours = ($current.getHours()%12).toString().padStart(2, '0');
+        let minutes = $current.getMinutes().toString().padStart(2, '0');
+        let seconds = $current.getSeconds().toString().padStart(2, '0');
         const ampm = hours >= 12 ? 'PM' : 'AM';
-        const fullTime = `${hours % 12}:${minutes}:${seconds}`;
-        const shortTime = `${hours % 12}:${minutes} ${ampm}`;
-        return { hours, minutes, seconds, fullTime,shortTime };
+        const fullTime = `${hours}:${minutes}:${seconds}`;
+        const shortTime = `${hours}:${minutes} ${ampm}`;
+        return { hours, minutes, seconds, fullTime, shortTime };
     }
 );
