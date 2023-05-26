@@ -45,12 +45,12 @@
                 label: 'do / Goal',
                 data: [0,1],
                 backgroundColor: [
-                    'rgba(230,38,105, 1)',
-                    'rgb(230,38,105,0.1)',
+                    'rgba(190,24,93, 1)', //bg-pink-700
+                    'rgb(157,23,77,0.1)', //bg-pink-800
                 ],
                 borderColor: [
-                    'rgba(230,38,105, 1)',
-                    'rgba(54, 162, 235, 0)',
+                    'rgba(190,24,93, 1)',
+                    'rgb(157,23,77,0.1)',
                 ],
                 borderWidth: 1,
                 cutout: '80%',
@@ -71,8 +71,18 @@
             ctx.font = '1.8rem "Helvetica Neue", Helvetica, Arial, sans-serif';
             ctx.fillStyle = '#000';
 
-            let textRemain = (hours == undefined || minutes == undefined || seconds == undefined || timeLeft <=0 ) ? '00:00:00' : timeDisplay;
+            let textRemain = timeDisplay;
             ctx.fillText(textRemain, textX, textY);
+            ctx.restore();
+
+            if (timeSet <= 0){
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.font = '1.3rem "Helvetica Neue", Helvetica, Arial, sans-serif';
+                ctx.fillStyle = '#000';
+                const text = "!! time < 0";
+                ctx.fillText(text, textX, textY+30);
+            }
             ctx.restore();
 
             if (!timeLeft){
@@ -87,23 +97,24 @@
         }
     };
     ////////////////////////////// timer setting //////////////////////////////
-    export let timeSet;
+    export let timeSet; //분 단위 외부 입력
     $: timeDone = 0;
     $: timeLeft = timeSet * 60;
 
-    let hours;
-    let minutes;
-    let seconds;
     let timeDisplay;
+    let msg;
 
     afterUpdate(() => {
-        timeDisplay = getFriendlyTime(timeLeft);
+        if(timeSet <= 0){
+            timeDisplay= '-'+getFriendlyTime(Math.abs(timeLeft))
+        }
+        else timeDisplay = getFriendlyTime(timeLeft);
     });
 
     function getFriendlyTime(time){
-        hours = (Math.floor(time / 3600)).toString().padStart(2, '0');
-        minutes = (Math.floor((time % 3600) / 60)).toString().padStart(2, '0');
-        seconds = (Math.floor(time % 60)).toString().padStart(2, '0');
+        const hours = (Math.floor(time / 3600)).toString().padStart(2, '0');
+        const minutes = (Math.floor((time % 3600) / 60)).toString().padStart(2, '0');
+        const seconds = (Math.floor(time % 60)).toString().padStart(2, '0');
         return `${hours}:${minutes}:${seconds}`
     }
 
@@ -119,13 +130,11 @@
         }
     }
 
-    let isRunning = false;
     let startDisable = false;
     let stopDisable = true;
     let clear;
 
     function startTimer() {
-        isRunning = true;
         startDisable= true;
         clear = setInterval(updateCountDown, 50);
         if(timeLeft <= 0){
@@ -133,7 +142,6 @@
         }
     }
     function stopTimer(){
-        isRunning = false;
         startDisable = false;
         stopDisable = true;
         clearInterval(clear);
@@ -147,6 +155,8 @@
         getFriendlyTime(timeLeft);
         data.datasets[0].data = [0, timeSet];
     }
+
+
 </script>
 
 <div class="z-10 relative w-full flex">
@@ -162,10 +172,8 @@
             {:else}
                 <ToolbarButton on:click={startTimer} disabled={startDisable}><Icon icon={playFill} /></ToolbarButton>
             {/if}
-            <ToolbarButton><Icon icon={skipForwardFill} /></ToolbarButton>
+            <ToolbarButton on:click={resetTimer}><Icon icon={skipForwardFill} /></ToolbarButton>
         </Toolbar>
-
-
     </div>
 
     <Doughnut {data} {options} plugins= {[plugin_pomoText]} class="absolute right-0"/>

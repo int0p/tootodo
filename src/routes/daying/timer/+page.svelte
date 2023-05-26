@@ -11,10 +11,10 @@
 <div class="pr-8 pl-8 pb-4 w-full">
     <!-- 타이머 -->
     <div class="flex-col justify-center items-center space-y-4">
-        <Hr  width="w-full mb-4" height="h-1">
+        <Hr  width="w-full m" height="h-1">
             <div class="text-xl font-semibold text-gray-900 dark:text-white px-6">Too -> do</div>
         </Hr>
-        <div class="flex w-full justify-around">
+        <div class="flex w-full justify-around relative h-[360px]">
             <TimerContainer {timeSet}/>
             <TimerSetTime bind:timeSet/>
         </div>

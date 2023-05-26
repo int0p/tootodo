@@ -5,12 +5,13 @@
     import Icon from "@iconify/svelte";
 
     export let timeSet;
+
 </script>
 
-<div class="flex-col timeController w-[120px] h-[324px] ">
+<div class="flex-col timeController w-[120px] h-full ">
     {#each Array(6) as _ ,i}
         {@const time = (i+1) * 10}
-        <div class="flex mb-3 border-0 rounded-lg shadow-md p-1 w-full">
+        <div class="flex mb-3 border-0 rounded-lg shadow-md p-1 w-full space-y-2">
             <Badge large ><button on:click={()=>timeSet -= time}>
                 <Icon icon={minimizeFill} />
             </button></Badge>
@@ -23,16 +24,10 @@
 </div>
 
 <style lang="scss">
-  .align-col{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
   .timeController{
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: stretch;
   }
 </style>
