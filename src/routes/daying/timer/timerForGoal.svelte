@@ -145,8 +145,9 @@
         $timeSetStore.values.working = defaultTime;
         data.datasets[0].data = [0, timeLeft];
     }
+    export let isRunning = false;
     function startTimer() {
-        $timeSetStore.values.isRunning = true;
+        isRunning = true;
         timerState = "working~";
         clear = setInterval(()=>{
             timeDone ++;
@@ -156,16 +157,18 @@
                 stopTimer();
                 playDisable = true;
             }
-        }, 50);
+        }, 1000);
     }
     function stopTimer(){
-        $timeSetStore.values.isRunning = false;
+        isRunning = false;
         if(timeLeft === 0){
             timerState = "Done!";
         }else{
             timerState = "-stopped-";
         }
         clearInterval(clear);
+
+        $timeSetStore.values.breaking += 1;
         // clearTimeout(clear);
     }
 
@@ -179,10 +182,11 @@
 </script>
 
 <div class="z-10 relative w-full flex">
+<!--    <pre>{JSON.stringify({timeLeft}, null,2) }</pre>-->
     <div class="flex absolute left-4 bottom-0 shadow-sm ">
         <Toolbar>
             <ToolbarButton  on:click={resetTimer}><Icon icon={skipForwardFill} hFlip={true} /></ToolbarButton>
-            {#if $timeSetStore.values.isRunning}
+            {#if isRunning}
                 <ToolbarButton on:click={stopTimer} ><Icon icon={pauseFill} /></ToolbarButton>
             {:else}
                 <ToolbarButton on:click={startTimer} disabled={playDisable}><Icon icon={playFill} /></ToolbarButton>

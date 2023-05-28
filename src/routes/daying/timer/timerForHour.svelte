@@ -71,7 +71,7 @@
     $: isRunnning = $timeSetStore.values.isRunning;
     const hours = Math.floor($timeSetStore.values.working/60); //시계 도는 횟수
     const minutes = $timeSetStore.values.working%60;
-    $: console.log(hours, minutes, isRunnning);
+    // $: console.log(hours, minutes, isRunnning);
 
     let timeDone = 0;
     // let timeTotal = 0;
