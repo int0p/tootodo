@@ -3,11 +3,7 @@
     import Icon from '@iconify/svelte';
     import timerReset from '@iconify/icons-lucide/timer-reset';
     import { Toolbar, ToolbarButton, ToolbarGroup,Input, Label } from 'flowbite-svelte';
-    import playFill from '@iconify/icons-mingcute/play-fill';
-    import stopFill from '@iconify/icons-mingcute/stop-fill';
-    import skipForwardFill from '@iconify/icons-mingcute/skip-forward-fill';
-    import deleteBackFill from '@iconify/icons-mingcute/delete-back-fill';
-    import pauseFill from '@iconify/icons-mingcute/pause-fill';
+
 
 
     ////////////////////////////// chart setting //////////////////////////////
@@ -181,19 +177,19 @@
 
 </script>
 
-<div class="z-10 relative w-full flex">
+<div class="z-10 relative w-full flex top-2">
 <!--    <pre>{JSON.stringify({timeLeft}, null,2) }</pre>-->
-    <div class="flex absolute left-4 bottom-0 shadow-sm ">
-        <Toolbar>
-            <ToolbarButton  on:click={resetTimer}><Icon icon={skipForwardFill} hFlip={true} /></ToolbarButton>
-            {#if isRunning}
-                <ToolbarButton on:click={stopTimer} ><Icon icon={pauseFill} /></ToolbarButton>
-            {:else}
-                <ToolbarButton on:click={startTimer} disabled={playDisable}><Icon icon={playFill} /></ToolbarButton>
-            {/if}
-            <ToolbarButton on:click={resetTimer}><Icon icon={skipForwardFill} /></ToolbarButton>
-        </Toolbar>
-    </div>
+<!--    <div class="flex absolute left-4 bottom-0 shadow-sm ">-->
+<!--        <Toolbar>-->
+<!--            <ToolbarButton  on:click={resetTimer}><Icon icon={skipForwardFill} hFlip={true} /></ToolbarButton>-->
+<!--            {#if isRunning}-->
+<!--                <ToolbarButton on:click={stopTimer} ><Icon icon={pauseFill} /></ToolbarButton>-->
+<!--            {:else}-->
+<!--                <ToolbarButton on:click={startTimer} disabled={playDisable}><Icon icon={playFill} /></ToolbarButton>-->
+<!--            {/if}-->
+<!--            <ToolbarButton on:click={resetTimer}><Icon icon={skipForwardFill} /></ToolbarButton>-->
+<!--        </Toolbar>-->
+<!--    </div>-->
 
     <Doughnut {data} {options} plugins= {[plugin_pomoText]} class="absolute right-0 scale-[70%]"/>
 </div>

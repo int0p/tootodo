@@ -3,11 +3,9 @@
     ///////////////// icon  //////////////////
     import Icon from '@iconify/svelte';
 
-    import timerSettings from '@iconify/icons-mdi/timer-settings';
-    import timerSettingsOutline from '@iconify/icons-mdi/timer-settings-outline';
+
     import playCircle from '@iconify/icons-bi/play-circle';
 
-    import repeatRounded from '@iconify/icons-material-symbols/repeat-rounded';
 
     ///////////////// var //////////////////
     // svg setting
@@ -82,7 +80,7 @@
 </script>
 
 
-<div class="absolute  indent-0.5 right-2.5 w-[calc(100%-130px)]">
+<div class="absolute  top-4 indent-0.5 w-[282px]">
     <svg viewBox="0 0 {vw} {vh}">
         <circle {cx} {cy} {r} stroke="black" fill="transparent"  />
 
@@ -102,11 +100,7 @@
 <!--            <Icon icon={playCircle} width="30"/>-->
 <!--        </g>-->
 
-        <g transform="translate(110,110)" >
-            <Icon icon={timerSettings} />
-<!--            <Icon icon={timerSettingsOutline} />-->
 
-        </g>
 
         {#each lines as line}
             <line

@@ -132,6 +132,8 @@
     ];
     let memoList;
     export let todoList = [];
+    $:console.log(todoList);
+
     export let showTimer;
 
     // handler. TODO: add는 memo전체 받고 remove와 toggle은 id만 받아서 코드가 헷갈림.

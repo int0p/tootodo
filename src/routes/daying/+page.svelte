@@ -9,7 +9,7 @@
 </script>
 
 <div class="flex-col ml-4 max-w-[600px] h-screen float-left top-0 left-0">
-    <WorkSelect bind:showTimer />
+<!--    <WorkSelect bind:showTimer />-->
     {#if showTimer}
         <div>
             <Timer/>

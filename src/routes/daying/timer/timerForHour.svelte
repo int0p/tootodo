@@ -110,7 +110,7 @@
     // }
 </script>
 
-<Doughnut {data} {options}  class="absolute right-2.5"/>
+<Doughnut {data} {options}  class="absolute right-2.5 top-4"/>
 
 
 

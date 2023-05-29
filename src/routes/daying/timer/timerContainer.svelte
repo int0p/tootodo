@@ -9,26 +9,33 @@
     import minimizeFill from '@iconify/icons-mingcute/minimize-fill';
 
     import {
-        Button,Badge,Heading,
+        Button, Badge, Heading, ButtonGroup,
     } from 'flowbite-svelte';
 
-    import CurrentClock from "./currentTime.svelte";
+    import CurrentClock from "$lib/components/currentTime.svelte";
     import TimerHour from "./timerForHour.svelte";
 
 </script>
 
-<div class="flex w-full items-center justify-center relative h-full">
+<div class="flex w-full items-center justify-center relative h-[380px] top-2 ">
 
-    <div class="align-col w-[400px]">
+    <div class="!m-0">
+
         <div class="clock flex relative">
             <TimerGoal />
             <TimerHour />
-            <CurrentClock/>
+<!--            <CurrentClock/>-->
             <ClockDesign />
 
+            <Badge large color="light" class="w-full h-[50px] flex justify-center absolute bottom-2 left-0">
+                <!--                <p><span class="text-pink-800 text-lg">session:</span> </p>-->
+                <ButtonGroup class="space-x-px my-1">
+                    <Button pill size="sm" color="alternative">Working</Button>
+                    <Button pill size="sm" color="alternative">Breaking</Button>
+                </ButtonGroup>
+            </Badge>
         </div>
 
-        <TimerStatus/>
 
 
     </div>
@@ -38,16 +45,11 @@
 
 
 <style lang="scss">
-  .align-col{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+
     .clock {
         color: rgb(50, 50, 50);
-        width: 360px;
-        height: 250px;
+        width: 320px;
+        height: 380px;
         padding: 10px;
         border-radius: 20%;
         border: 10px solid rgb(55, 55, 55);
@@ -55,5 +57,4 @@
         margin: 0 20px;
     }
 </style>
-
 
