@@ -34,7 +34,7 @@
     }
 </script>
 
-<div class="relative flex-col border-4 border-dashed rounded-lg p-4 ">
+<div class="relative flex-col border-4 border-dashed rounded-lg p-4  ">
 <!--        <pre>{JSON.stringify({timeLeft}, null,2) }</pre>-->
     <div class="flex justify-between">
         <div class="text-2xl font-bold">{selectedTodo}</div>

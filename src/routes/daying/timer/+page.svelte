@@ -22,12 +22,12 @@
 
 </script>
 
-<div class=" w-full flex-col justify-center items-center space-y-4 m-6 w-[540px]">
+<div class=" flex-col justify-center items-center space-y-4 m-6 w-[540px]">
     <!-- 타이머 -->
     <Hr  width="w-full" height="h-1">
         <div class="text-xl font-semibold text-gray-900 dark:text-white px-4">Too -> do</div>
     </Hr>
-    <div class="ml-4 flex justify-center relative h-[380px] w-full">
+    <div class="flex justify-center items-center relative h-[380px] w-full space-x-5">
         <TodoSelect/>
         <TimerContainer />
     </div>

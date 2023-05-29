@@ -17,7 +17,7 @@
 
 </script>
 
-<div class="flex w-full items-center justify-center relative h-[380px] top-2 ">
+<div class="flex w-[300px] items-center justify-center relative h-[380px] top-2 ">
 
     <div class="!m-0">
 
@@ -36,8 +36,6 @@
             </Badge>
         </div>
 
-
-
     </div>
 
 </div>
@@ -48,13 +46,13 @@
 
     .clock {
         color: rgb(50, 50, 50);
-        width: 320px;
+        width: 300px;
         height: 380px;
-        padding: 10px;
+        padding: 10px 0;
         border-radius: 20%;
         border: 10px solid rgb(55, 55, 55);
         box-shadow: inset 0 0 3px 3px rgba(50, 50, 50, 0.3), inset 0 0 1px 2px rgba(50, 50, 50, 0.2);
-        margin: 0 20px;
+        //margin: 20px;
     }
 </style>
 

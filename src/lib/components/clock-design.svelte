@@ -80,7 +80,7 @@
 </script>
 
 
-<div class="absolute  top-4 indent-0.5 w-[282px]">
+<div class="absolute  top-7 w-[260px] left-2.5">
     <svg viewBox="0 0 {vw} {vh}">
         <circle {cx} {cy} {r} stroke="black" fill="transparent"  />
 

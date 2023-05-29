@@ -1,10 +1,5 @@
 <script>
     import { onMount,afterUpdate,tick } from 'svelte';
-    import Icon from '@iconify/svelte';
-    import timerReset from '@iconify/icons-lucide/timer-reset';
-    import { Toolbar, ToolbarButton, ToolbarGroup,Input, Label } from 'flowbite-svelte';
-
-
 
     ////////////////////////////// chart setting //////////////////////////////
     import { Doughnut } from 'svelte-chartjs';
@@ -67,7 +62,7 @@
             // text remain time
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.font = '1.8rem "Helvetica Neue", Helvetica, Arial, sans-serif';
+            ctx.font = '2.8rem "Helvetica Neue", Helvetica, Arial, sans-serif';
             ctx.fillStyle = '#000';
             let textRemain = getFriendlyTime(timeLeft);
             ctx.fillText(textRemain, textX, textY);
@@ -76,10 +71,10 @@
             // text timer state
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.font = '1.2rem "Helvetica Neue", Helvetica, Arial, sans-serif';
+            ctx.font = '2rem "Helvetica Neue", Helvetica, Arial, sans-serif';
             ctx.fillStyle = '#000';
             const text = timerState;
-            ctx.fillText(text, textX, textY+30);
+            ctx.fillText(text, textX, textY+50);
             ctx.restore();
         }
     };
@@ -177,7 +172,7 @@
 
 </script>
 
-<div class="z-10 relative w-full flex top-2">
+<div class="relative w-full flex top-2">
 <!--    <pre>{JSON.stringify({timeLeft}, null,2) }</pre>-->
 <!--    <div class="flex absolute left-4 bottom-0 shadow-sm ">-->
 <!--        <Toolbar>-->
@@ -191,7 +186,7 @@
 <!--        </Toolbar>-->
 <!--    </div>-->
 
-    <Doughnut {data} {options} plugins= {[plugin_pomoText]} class="absolute right-0 scale-[70%]"/>
+    <Doughnut {data} {options} plugins= {[plugin_pomoText]} class="scale-[65%]"/>
 </div>
 
 
