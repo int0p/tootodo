@@ -3,18 +3,24 @@
     import minimizeFill from "@iconify/icons-mingcute/minimize-fill.js";
     import addFill from "@iconify/icons-mingcute/add-fill.js";
     import Icon from "@iconify/svelte";
-    let technology = [];
+    export let todoSelected = {id: 0, title: ""};
+    let time = 5;
     let timeSet = 0;
+    import {useLocStorage} from "$lib/stores/useLocStorage.js";
+    export let todoListStore = useLocStorage("todoList", []);
+
 </script>
 
 <div class="w-[210px] h-[380px]">
-    <Timeline class="h-[300px]" >
-        <TimelineItem title="" date="February 2022">
-            <ul class="w-48 bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-600 divide-y divide-gray-200 dark:divide-gray-600">
-                <li><Radio class="p-3" bind:group={technology} value="svelte">Svelte</Radio></li>
-                <li><Radio class="p-3" bind:group={technology} value="vue js">Vue JS</Radio></li>
-                <li><Radio class="p-3" bind:group={technology} value="react">React</Radio></li>
-                <li><Radio class="p-3" bind:group={technology} value="angular">Angular</Radio></li>
+    <Timeline class="h-full max-h-[250px] overflow-y-scroll" >
+        <TimelineItem title="" date="February 2022" >
+            <ul class="w-48 mt-1 bg-white rounded-lg border border-gray-200 divide-y divide-gray-200
+                    h-full max-h-[270px] overflow-y-scroll">
+                {#if $todoListStore}
+                    {#each $todoListStore as {title,id} (id)}
+                        <li><Radio class="p-3" bind:group={todoSelected} value={{id, title}}>{title}</Radio> </li>
+                    {/each}
+                {/if}
             </ul>
         </TimelineItem>
     </Timeline>

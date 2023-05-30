@@ -5,6 +5,7 @@
 
     import TimerContainer from "./timerContainer.svelte";
     import TodoSelect from "./todoSelect.svelte";
+    let todoSelected = ""; // {id:1, title:""}
 
     import {setContext} from "svelte";
     import {writable} from "svelte/store";
@@ -33,11 +34,11 @@
         <div class="text-xl font-semibold text-gray-900 dark:text-white px-4">Too -> do</div>
     </Hr>
     <div class="flex justify-center items-center relative h-[380px] w-full space-x-5">
-        <TodoSelect/>
+        <TodoSelect bind:todoSelected/>
         <TimerContainer />
     </div>
     <Controller/>
-    <pre>{JSON.stringify($currentWork, null,2)}</pre>
+<!--    <pre>{JSON.stringify($currentWork, null,2)}</pre>-->
 </div>
 
 
