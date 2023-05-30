@@ -54,7 +54,7 @@
 <div class="relative flex-col border-4 border-dashed rounded-lg p-4  ">
 <!--        <pre>{JSON.stringify({timeLeft}, null,2) }</pre>-->
     <div class="flex justify-between">
-        <div class="text-2xl font-bold">{selectedTodo? selectedTodo:"Select Todo" }</div>
+        <div class="text-2xl font-bold mb-1">{selectedTodo? selectedTodo:"Select Todo" }</div>
         <Icon icon={fullscreen2Line} width="30"/>
     </div>
     <div class="flex justify-between">
