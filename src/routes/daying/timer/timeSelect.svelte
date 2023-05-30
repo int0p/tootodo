@@ -2,6 +2,9 @@
     import {Hr, Timeline, TimelineItem, Radio, Heading, Badge} from "flowbite-svelte";
     import minimizeFill from '@iconify/icons-mingcute/minimize-fill';
     import addFill from '@iconify/icons-mingcute/add-fill';
+    import back2Fill from '@iconify/icons-mingcute/back-2-fill';
+    import {onMount} from "svelte";
+
 
     import Icon from '@iconify/svelte';
 
@@ -37,14 +40,19 @@
     </div>
 
     <div class="flex justify-between absolute -bottom-2 w-[210px] h-[28px] space-x-2 ">
-        <Badge small class="w-1/2 !p-0 rounded-md" >
+        <Badge color="green" small  class="w-2/12 !p-0 rounded-md " >
+            <button class="w-full text-center text-lg flex justify-center
+                            focus:ring-4 focus:ring-red-200  hover:bg-red-700 hover:text-white"
+                    on:click={()=>timeSelected = 0}>
+                <Icon icon={back2Fill} />
+            </button></Badge>
+        <Badge small class="w-5/12 !p-0 rounded-md" >
             <button class="w-full text-center text-lg flex justify-center
                             focus:ring-4  focus:ring-blue-200 hover:bg-blue-700 hover:text-white"
-                    on:click={()=>timeSelected-= timeSet}>
+                    on:click={()=>timeSelected -= timeSet}>
                 <Icon icon={minimizeFill} />
-
             </button></Badge>
-        <Badge color="red" small  class="w-1/2 !p-0 rounded-md " >
+        <Badge color="red" small  class="w-5/12 !p-0 rounded-md " >
             <button class="w-full text-center text-lg flex justify-center
                             focus:ring-4 focus:ring-red-200  hover:bg-red-700 hover:text-white"
                     on:click={()=>timeSelected+= timeSet}>

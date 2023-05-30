@@ -18,3 +18,4 @@ export const currentTime = derived(current, $current => {
         return { hours, minutes, seconds, fullTime,shortTime };
     }
 );
+
