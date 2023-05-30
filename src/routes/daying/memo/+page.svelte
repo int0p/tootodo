@@ -131,8 +131,10 @@
         // },
     ];
     let memoList;
-    export let todoList = [];
-    $:console.log(todoList);
+
+    import {useLocStorage} from "$lib/stores/useLocStorage.js";
+    let todoList = useLocStorage("todoList", []);
+    $:console.log($todoList);
 
     export let showTimer;
 
@@ -165,10 +167,10 @@
     }
     function addTodo(todo){
         if(todo.save)
-            todoList = [...todoList, todo];
+            $todoList = [...$todoList, todo];
     }
     function removeTodo(todoID){
-        todoList = todoList.filter(toodo => toodo.id !== todoID);
+        $todoList = $todoList.filter(toodo => toodo.id !== todoID);
     }
     // $: console.log(todoList);
 </script>

@@ -1,2 +1,2 @@
-const timeSetKey = Symbol();
-export default timeSetKey;
+export const defaultSetKey = Symbol();
+export const currentWorkKey = Symbol();

@@ -106,10 +106,16 @@
 
     //bring context api (70. combining context & stores to make our context reactive)
     import {getContext} from "svelte";
-    import timeSetKey from './key.js';
-    const timeSetStore = getContext(timeSetKey);
-    const defaultTime = $timeSetStore.values.default;
-    $: timeLeft = $timeSetStore.values.working * 60; //외부로부터 목표시간이 변경될 때마다 timeLeft 업데이트.
+    import {currentWorkKey, defaultSetKey} from './key.js';
+
+    const defaultSetStore = getContext(defaultSetKey);
+    const currentWorkStore = getContext(currentWorkKey);
+
+    const defaultWorkingTime = $defaultSetStore.values.working;
+    const defaultBreakingTime = $defaultSetStore.values.breaking;
+
+
+    $: timeLeft = defaultWorkingTime* 60; //외부로부터 목표시간이 변경될 때마다 timeLeft 업데이트.
     $: console.log(timeLeft);
 
     let timeDone = 0;
@@ -131,9 +137,9 @@
         stopTimer();
         timerState = "ready?"
         timeDone = 0;
-        timeLeft = defaultTime;
+        timeLeft = defaultWorkingTime;
         playDisable = false; //시간 끝난후엔 reset버튼 누르기 전까지 타이머 실행 안하도록하려구.
-        $timeSetStore.values.working = defaultTime;
+        timeLeft = defaultWorkingTime;
         data.datasets[0].data = [0, timeLeft];
     }
     export let isRunning = false;
@@ -159,7 +165,6 @@
         }
         clearInterval(clear);
 
-        $timeSetStore.values.breaking += 1;
         // clearTimeout(clear);
     }
 
