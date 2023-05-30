@@ -39,10 +39,10 @@
         </button>
     </div>
 
-    <div class="flex justify-between absolute -bottom-2 w-[210px] h-[28px] space-x-2 ">
+    <div class="flex justify-between absolute -bottom-3 w-[210px] h-[30px] space-x-2 ">
         <Badge color="green" small  class="w-2/12 !p-0 rounded-md " >
             <button class="w-full text-center text-lg flex justify-center
-                            focus:ring-4 focus:ring-red-200  hover:bg-red-700 hover:text-white"
+                            focus:ring-4 focus:ring-green-200  hover:bg-green-700 hover:text-white"
                     on:click={()=>timeSelected = 0}>
                 <Icon icon={back2Fill} />
             </button></Badge>

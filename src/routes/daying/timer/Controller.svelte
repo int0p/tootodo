@@ -49,13 +49,20 @@
     function nextTimer() {
         isRunning = false;
     }
+    //TODO: overflow가 발생하면 movingText를 적용하게 하고싶은데 어케할지 모르겠음.
+    $: isOverflow = ()=>{
+        return false;
+    }
 </script>
 
-<div class="relative flex-col border-4 border-dashed rounded-lg p-4  ">
-<!--        <pre>{JSON.stringify({timeLeft}, null,2) }</pre>-->
-    <div class="flex justify-between">
-        <div class="text-2xl font-bold mb-1">{selectedTodo? selectedTodo:"Select Todo" }</div>
-        <Icon icon={fullscreen2Line} width="30"/>
+<div class="relative w-[540px] -bottom-2 flex-col border-4 border-dashed rounded-lg p-4  ">
+    <div class="flex justify-between relative">
+        <div class="text-2xl font-bold mb-1 max-h-[32px] max-w-[430px] w-full overflow-x-scroll mr-3 relative">
+            <div class="w-screen" class:movingText={isOverflow()} >
+                {selectedTodo? selectedTodo:"Select Todo" }
+            </div>
+        </div>
+        <Icon class="absolute right-0 top-0" icon={fullscreen2Line} width="30"/>
     </div>
     <div class="flex justify-between">
         <div class="mb-1 text-lg font-medium dark:text-white">goal: <span class="text-pink-800">[{goalTime} min]</span>
@@ -87,3 +94,19 @@
         </Toolbar>
     </div>
 </div>
+
+
+<style>
+    .movingText {
+        animation: move 10s linear infinite;
+    }
+
+    @keyframes move {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+</style>
