@@ -5,8 +5,9 @@
 
     import TimerContainer from "./timerContainer.svelte";
     import TodoSelect from "./todoSelect.svelte";
+    import TimeSelect from "./timeSelect.svelte";
     let todoSelected = ""; // {id:1, title:""}
-
+    let timeSelected = 0;
     import {setContext} from "svelte";
     import {writable} from "svelte/store";
     import {defaultSetKey,currentWorkKey} from './key.js';
@@ -26,19 +27,28 @@
             isRunning:false,
         }, errors:{}});
     setContext(currentWorkKey,currentWork);
+
+    $:{
+        $currentWork.values.todo = todoSelected.title;
+        $currentWork.values.goalTime = $defaultSet.values.working + timeSelected;
+    }
 </script>
 
 <div class=" flex-col justify-center items-center space-y-4 m-6 w-[540px]">
+    <pre>{JSON.stringify($currentWork, null,2)}</pre>
+
     <!-- 타이머 -->
     <Hr  width="w-full" height="h-1">
         <div class="text-xl font-semibold text-gray-900 dark:text-white px-4">Too -> do</div>
     </Hr>
     <div class="flex justify-center items-center relative h-[380px] w-full space-x-5">
-        <TodoSelect bind:todoSelected/>
+        <div class="flex-col w-[210px] h-[380px]">
+            <TodoSelect bind:todoSelected />
+            <TimeSelect bind:timeSelected/>
+        </div>
         <TimerContainer />
     </div>
     <Controller/>
-<!--    <pre>{JSON.stringify($currentWork, null,2)}</pre>-->
 </div>
 
 
