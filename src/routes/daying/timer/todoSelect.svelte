@@ -6,8 +6,7 @@
     export let todoSelected = {id: 0, title: ""};
     let time = 5;
     let timeSet = 0;
-    import {useLocStorage} from "$lib/stores/useLocStorage.js";
-    export let todoListStore = useLocStorage("todoList", []);
+    import {todoList} from "$lib/stores/useLocStorage.js";
 
 </script>
 
@@ -16,8 +15,8 @@
         <TimelineItem title="" date="February 2022" >
             <ul class="w-48 mt-1 bg-white rounded-lg border border-gray-200 divide-y divide-gray-200
                     h-full max-h-[270px] overflow-y-scroll">
-                {#if $todoListStore}
-                    {#each $todoListStore as {title,id} (id)}
+                {#if $todoList}
+                    {#each $todoList as {title,id} (id)}
                         <li><Radio class="p-3" bind:group={todoSelected} value={{id, title}}>{title}</Radio> </li>
                     {/each}
                 {/if}

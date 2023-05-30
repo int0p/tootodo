@@ -132,8 +132,7 @@
     ];
     let memoList;
 
-    import {useLocStorage} from "$lib/stores/useLocStorage.js";
-    export let todoList = useLocStorage("todoList", []);
+    import {todoList} from "$lib/stores/useLocStorage.js";
 
     export let showTimer;
 

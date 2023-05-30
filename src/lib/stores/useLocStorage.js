@@ -3,7 +3,7 @@
 import {writable} from 'svelte/store';
 import {browser} from '$app/environment.js';
 
-export function useLocStorage(key ,initialValue){
+export function createLocStorage(key ,initialValue){
     let serialize = JSON.stringify;
     let deserialize = JSON.parse;
 
@@ -22,3 +22,5 @@ export function useLocStorage(key ,initialValue){
     //TODO: 뭘 리턴해야할지 모르겠음. 일단 undefined 리턴
     return undefined;
 }
+
+export const todoList = createLocStorage('todoList', []);
