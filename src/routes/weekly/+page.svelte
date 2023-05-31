@@ -19,12 +19,12 @@
 
         <div class="flex justify-around w-full gap-x-3 h-auto">
             {#each Array(7) as _, i}
-                <div class="flex-col w-full h-full relative gap-y-4 h-[900px]">
+                <div class="flex-col w-full relative gap-y-4 h-[900px]">
                     <Button outline color="dark" size="sm" class={style_btnWeek}>{week[i]}</Button>
                     <div class={style_btnWeek}>
                         <span class="text-pink-600 absolute left-0">{$currentTime.month}</span>{$currentTime.date}</div>
-                    <TodoList/>
                     <TimeTable/>
+                    <TodoList/>
                 </div>
             {/each}
         </div>
