@@ -16,8 +16,6 @@
     table[2][2] = true;
 
     let events = [];
-
-
 </script>
 
 <div class="w-full h-[calc(100%-420px)] overflow-y-scroll absolute top-[380px]">

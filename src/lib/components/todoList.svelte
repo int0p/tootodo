@@ -5,13 +5,16 @@
 
 </script>
 
-<Timeline class="w-full h-full max-h-[250px] overflow-y-scroll " >
+<Timeline class="w-full h-full max-h-[260px] overflow-y-scroll " >
     <TimelineItem title="" date="Todo List" >
         <ul class="mt-1 bg-white rounded-lg border border-gray-200 divide-y divide-gray-200
-                h-full max-h-[270px] overflow-y-scroll">
+                h-full max-h-[258px] overflow-y-scroll">
             {#if $todoList}
                 {#each $todoList as {title,id} (id)}
-                    <li><Radio class="p-3" bind:group={todoSelected} value={{id, title}}>{title}</Radio>
+                    <li class="max-h-[62px] overflow-y-hidden">
+                        <Radio class="p-3" bind:group={todoSelected} value={{id, title}}>
+                            <p class="whitespace-pre-wrap">{title}</p>
+                        </Radio>
                     </li>
                 {/each}
             {/if}
