@@ -12,8 +12,8 @@ import tableMoveColumnAfterLtr from "@iconify/icons-ooui/table-move-column-after
 export let showSidebar;
 
 </script>
-<div class="w-[80px] ">
-<Checkbox custom bind:checked={showSidebar} class="h-full flex-col w-[80px] mr-2 ml-2 pr-2 rounded-lg border-r-2 border-blue-100 ">
+<div class="w-[60px] ">
+<Checkbox custom bind:checked={showSidebar} class="h-full flex-col w-[60px] mr-2 ml-2 pr-2 rounded-lg border-r-2 border-blue-100 ">
 
     <Button class="mb-2 h-screen rounded-full border-b-4 border-r-2 border-l-2 border-gray-50"
             outline color="alternative" pill={true} on:click={()=>showSidebar=!showSidebar}>

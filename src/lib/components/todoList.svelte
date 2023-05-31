@@ -5,9 +5,9 @@
 
 </script>
 
-<Timeline class="h-full max-h-[250px] overflow-y-scroll " >
+<Timeline class="w-full h-full max-h-[250px] overflow-y-scroll " >
     <TimelineItem title="" date="Todo List" >
-        <ul class="w-48 mt-1 bg-white rounded-lg border border-gray-200 divide-y divide-gray-200
+        <ul class="mt-1 bg-white rounded-lg border border-gray-200 divide-y divide-gray-200
                 h-full max-h-[270px] overflow-y-scroll">
             {#if $todoList}
                 {#each $todoList as {title,id} (id)}

@@ -2,8 +2,8 @@
 
     import {Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell} from "flowbite-svelte";
 
-    const startTime_1 = 8; //0시때문에 row구할때 +1함
     const columns =[10,20,30,40,50,60];
+    const startTime_1 = 8; //0시때문에 row구할때 +1함
     const rows = Array(24).fill(0).map((_,i)=>(i+startTime_1)%12+1);
     let table = Array.from(Array(rows.length), () => Array(columns.length).fill(false));
     // console.log(table);
@@ -19,7 +19,7 @@
 </script>
 
 <!--        time Record -->
-<div class="w-[210px] h-[calc(100%-350px)] overflow-y-scroll absolute top-[300px]">
+<div class="w-full h-[calc(100%-350px)] overflow-y-scroll absolute top-[300px]">
     <table striped={true} >
         <thead class ="border-b-2 border-gray-300 text-center  ">
             <TableHeadCell></TableHeadCell>
