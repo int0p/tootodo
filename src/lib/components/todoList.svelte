@@ -1,11 +1,11 @@
 <script>
-    import {Hr, Timeline, TimelineItem, Radio, Heading, Badge} from "flowbite-svelte";
+    import {Timeline, TimelineItem, Radio, } from "flowbite-svelte";
     export let todoSelected = {id: 0, title: ""};
     import {todoList} from "$lib/stores/useLocStorage.js";
 
 </script>
 
-<Timeline class="h-full max-h-[250px] overflow-y-scroll" >
+<Timeline class="h-full max-h-[250px] overflow-y-scroll " >
     <TimelineItem title="" date="Todo List" >
         <ul class="w-48 mt-1 bg-white rounded-lg border border-gray-200 divide-y divide-gray-200
                 h-full max-h-[270px] overflow-y-scroll">

@@ -4,7 +4,7 @@
     } from 'flowbite-svelte';
 
     import TimerContainer from "./timerContainer.svelte";
-    import TodoSelect from "./todoSelect.svelte";
+    import TodoSelect from "$lib/components/todoList.svelte";
     import TimeSelect from "./timeSelect.svelte";
     let todoSelected = ""; // {id:1, title:""}
     let timeSelected = 0;

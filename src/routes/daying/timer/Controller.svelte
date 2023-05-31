@@ -49,6 +49,8 @@
     function nextTimer() {
         isRunning = false;
     }
+
+    ////////////////////  design?   ////////////////////
     //TODO: overflow가 발생하면 movingText를 적용하게 하고싶은데 어케할지 모르겠음.
     $: isOverflow = ()=>{
         return false;

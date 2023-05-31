@@ -19,20 +19,20 @@
 </script>
 
 <!--        time Record -->
-<div class="w-[450px] mr-4 h-full overflow-y-auto float-left top-0 left-0 pl-4 pt-2 ">
-    <Table striped={true}  >
-        <TableHead class ="border-b-2 border-gray-300 text-center ">
+<div class="w-[210px] h-[calc(100%-350px)] overflow-y-scroll absolute top-[300px]">
+    <table striped={true} >
+        <thead class ="border-b-2 border-gray-300 text-center  ">
             <TableHeadCell></TableHeadCell>
             {#each Array(6) as _,index}
-                <TableBodyCell class ="border-l-2 border-gray-200  !pt-2 !pb-2"  >{columns[index]}</TableBodyCell>
+                <TableBodyCell class ="border-l-2 border-gray-200  !pt-2 !pb-2 !text-black"  >{columns[index]}</TableBodyCell>
             {/each}
-        </TableHead>
+        </thead>
 
-        <TableBody class="divide-y ">
+        <tbody class="divide-y ">
             {#each Array(24) as _,index }
                 <TableBodyRow>
                     {@const rowIdx = index}
-                    <TableBodyCell class="text-center !p-2 ">{rows[rowIdx]}</TableBodyCell>
+                    <TableBodyCell class="text-center !p-2 !text-black">{rows[rowIdx]}</TableBodyCell>
                     {#each Array(6) as _,index}
                         {#if table[rowIdx][index]}
                             <TableBodyCell class ="bg-purple-100 border-l-2 border-gray-200 " ></TableBodyCell>
@@ -42,6 +42,6 @@
                     {/each}
                 </TableBodyRow>
             {/each}
-        </TableBody>
-    </Table>
+        </tbody>
+    </table>
 </div>
