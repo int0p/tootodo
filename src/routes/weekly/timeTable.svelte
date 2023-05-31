@@ -17,12 +17,7 @@
 
     let events = [];
 
-    function addEvent(day, hour) {
-        let event = prompt('Add new event:');
-        if (event) {
-            events.push({day, hour, event});
-        }
-    }
+
 </script>
 
 <div class="w-full h-[calc(100%-360px)] overflow-y-scroll absolute top-[390px]">
@@ -30,13 +25,13 @@
         <tr class="sticky top-0">
             <th class="p-1 border bg-pink-50"></th>
             {#each dayMinutes as min}
-                <td on:click={() => addEvent(min, hour)} class="text-xs sticky text-center p-1 border bg-gray-500 text-white font-semibold">
+                <td class="text-xs sticky text-center p-1 border bg-gray-500 text-white font-semibold">
                     {min}
-                    {#each events as event}
-                        {#if event.day === day && event.hour === hour}
-                            {event.event}
-                        {/if}
-                    {/each}
+                    <!--{#each events as event}-->
+                    <!--    {#if event.day === min && event.hour === 1}-->
+                    <!--        {event.event}-->
+                    <!--    {/if}-->
+                    <!--{/each}-->
                 </td>
             {/each}
         </tr>

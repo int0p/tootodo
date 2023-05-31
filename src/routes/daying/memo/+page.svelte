@@ -124,7 +124,7 @@
         // },
         // {
         //     id : uuid(),
-        //     title : "5/18 daily, projects 1차 레이아웃 구현",
+        //     title : "5/18 weekly, projects 1차 레이아웃 구현",
         //     save:true,
         //     ask:false,
         //     date: "2:10 PM",

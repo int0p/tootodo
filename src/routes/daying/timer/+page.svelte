@@ -35,7 +35,7 @@
 </script>
 
 <div class=" flex-col justify-center items-center space-y-4 m-6 w-[540px]">
-    <pre>{JSON.stringify($currentWork, null,2)}</pre>
+<!--    <pre>{JSON.stringify($currentWork, null,2)}</pre>-->
 
     <!-- 타이머 -->
     <Hr  width="w-full" height="h-1">

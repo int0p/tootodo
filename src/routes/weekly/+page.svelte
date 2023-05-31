@@ -2,14 +2,13 @@
     import {
         Button, Hr,ButtonGroup,
     } from 'flowbite-svelte';
-    import TimeRecord from './tenMTable.svelte';
-    import MemoRecord from './todo.svelte';
     import TodoList from "$lib/components/todoList.svelte";
     import TimeTable from "./timeTable.svelte"
+    import TenTable from "./tenMTable.svelte"
     // Date
     let currentDate = new Date();
-    let month = currentDate.getMonth()+1;
-    let day = currentDate.getDay();
+    import {currentTime} from "$lib/stores/clock.js";
+
     let style_btnWeek = "w-full text-center uppercase mb-2 text-lg font-bold";
     let week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -23,7 +22,7 @@
                 <div class="flex-col w-full h-full relative gap-y-4 h-[900px]">
                     <Button outline color="dark" size="sm" class={style_btnWeek}>{week[i]}</Button>
                     <div class={style_btnWeek}>
-                        <span class="text-pink-600 absolute left-0">05</span>{day}</div>
+                        <span class="text-pink-600 absolute left-0">{$currentTime.month}</span>{$currentTime.date}</div>
                     <TodoList/>
                     <TimeTable/>
                 </div>
