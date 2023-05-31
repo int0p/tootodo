@@ -1,9 +1,9 @@
 <script>
-    let week = [10,20,30,40,50,60];
     const startTime_1 = 8; //0시때문에 row구할때 +1함
+    let dayMinutes = [10,20,30,40,50,60];
     let dayHours = Array.from({length: 24}, (_, i) =>(i+startTime_1)%12+1);
 
-    let table = Array.from(Array(week.length), () => Array(dayHours.length).fill(false));
+    let table = Array.from(Array(dayMinutes.length), () => Array(dayHours.length).fill(false));
     // console.log(table);
 
     table[1][1] = true;
@@ -29,9 +29,9 @@
     <table class="w-full border-collapse">
         <tr class="sticky top-0">
             <th class="p-1 border bg-pink-50"></th>
-            {#each week as day}
-                <td on:click={() => addEvent(day, hour)} class="text-xs sticky text-center p-1 border bg-gray-500 text-white font-semibold">
-                    {day}
+            {#each dayMinutes as min}
+                <td on:click={() => addEvent(min, hour)} class="text-xs sticky text-center p-1 border bg-gray-500 text-white font-semibold">
+                    {min}
                     {#each events as event}
                         {#if event.day === day && event.hour === hour}
                             {event.event}
@@ -44,7 +44,7 @@
         {#each dayHours as hour}
             <tr class="p-1 border">
                 <th class="text-xs p-1 border bg-gray-700 text-white font-semibold">{hour}</th>
-                {#each week as day}
+                {#each dayMinutes as min}
                     <td class="p-1 border"></td>
                 {/each}
             </tr>
