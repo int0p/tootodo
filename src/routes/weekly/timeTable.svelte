@@ -20,12 +20,12 @@
 
 </script>
 
-<div class="w-full h-[calc(100%-360px)] overflow-y-scroll absolute top-[390px]">
+<div class="w-full h-[calc(100%-420px)] overflow-y-scroll absolute top-[380px]">
     <table class="w-full border-collapse">
         <tr class="sticky top-0">
-            <th class="p-1 border bg-pink-50"></th>
+            <th class="p-1 border bg-gray-100"></th>
             {#each dayMinutes as min}
-                <td class="text-xs sticky text-center p-1 border bg-gray-500 text-white font-semibold">
+                <td class="text-xs sticky text-center py-1 px-1 border bg-gray-500 text-white font-semibold">
                     {min}
                     <!--{#each events as event}-->
                     <!--    {#if event.day === min && event.hour === 1}-->
@@ -37,10 +37,10 @@
         </tr>
 
         {#each dayHours as hour}
-            <tr class="p-1 border">
-                <th class="text-xs p-1 border bg-gray-700 text-white font-semibold">{hour}</th>
+            <tr class="py-2 border">
+                <th class="text-xs py-2 border bg-gray-700 text-white font-semibold">{hour}</th>
                 {#each dayMinutes as min}
-                    <td class="p-1 border"></td>
+                    <td class="py-2 border"></td>
                 {/each}
             </tr>
         {/each}

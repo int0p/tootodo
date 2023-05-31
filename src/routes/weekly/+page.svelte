@@ -9,22 +9,28 @@
     let currentDate = new Date();
     import {currentTime} from "$lib/stores/clock.js";
 
-    let style_btnWeek = "w-full text-center uppercase mb-2 text-lg font-bold";
+    let style_btnWeek = "w-full text-center uppercase mb-2 text-lg font-bold bg-gray-100 py-2 rounded-md hover:bg-gray-200";
     let week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    $: isTodayDay = (week)=>{
+        if(week == $currentTime.day)
+            return true;
+        else return false;
+    }
 
 </script>
 
-<div class="flex m-6 h-[calc(100%-80px)] w-[calc(100%-60px)] justify-center items-center"> <!--    얘의 width가 full일 때 section모드에서 전체화면에 존재.  -->
+<div class="flex m-6 h-[calc(100vh)] w-[calc(100%-60px)] justify-center items-center"> <!--    얘의 width가 full일 때 section모드에서 전체화면에 존재.  -->
 <!--    date-->
 
-        <div class="flex justify-around w-full gap-x-3 h-auto">
+        <div class="flex justify-around w-full gap-x-3 h-full">
             {#each Array(7) as _, i}
-                <div class="flex-col w-full relative gap-y-4 h-[900px]">
-                    <Button outline color="dark" size="sm" class={style_btnWeek}>{week[i]}</Button>
-                    <div class={style_btnWeek}>
+                <div class="flex-col w-full relative gap-y-4 h-full">
+                    <button  class={style_btnWeek} class:today={isTodayDay(i)}>{week[i]}</button>
+                    <div class="w-full text-center uppercase mb-2 text-lg font-bold ">
                         <span class="text-pink-600 absolute left-0">{$currentTime.month}</span>{$currentTime.date}</div>
-                    <TimeTable/>
                     <TodoList/>
+                    <TimeTable/>
                 </div>
             {/each}
         </div>
@@ -52,7 +58,14 @@
 <!--            </div>-->
 
 <!--        </div>-->
-
-
-
 </div>
+
+<style lang="scss">
+.today{
+        background-color: #831843; //pink-900
+        color: white;
+        &:hover{
+          background-color: #be185d; //pink-700
+        }
+    }
+</style>
