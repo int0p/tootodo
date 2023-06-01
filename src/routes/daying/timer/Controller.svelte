@@ -75,7 +75,7 @@
         <div class="mb-1 text-lg font-medium dark:text-white">goal: <span class="text-pink-800">
             [{curGoalTime} min * {$defaultSetStore.values.repeat}]
         </span>
-            {#if isRunning}
+            {#if $currentWorkStore.values.state == "WORKING"}
                 {$currentWorkStore.values.startTime} -
                 {$currentWorkStore.functions.addTime($currentTime.hours,$currentTime.minutes,$currentWorkStore.values.curGoalTime)}
             {:else }
