@@ -1,4 +1,6 @@
 <script>
+    import {createEventDispatcher} from "svelte";
+
     ////////////////////   import design components   ////////////////////
 
     import {Toolbar, ToolbarButton, Progressbar} from "flowbite-svelte";
@@ -19,35 +21,38 @@
     const currentWorkStore = getContext(currentWorkKey);
 
     $: selectedTodo = $currentWorkStore.values.todo;
-    $: goalTime = $currentWorkStore.values.goalTime;
-    $:isRunning = $currentWorkStore.values.isRunning;
-
-    import {currentTime} from '$lib/stores/clock.js';
-    $:shortTime=$currentTime.shortTime;
-    let hours = 0;
-    let minutes = 0;
-    let ampm = "";
-    $:{ // calculate goal end time from (current time + goal time)
-        const newFullMinutes = $currentTime.hours*60 + $currentTime.minutes + goalTime;
-        hours = Math.floor(newFullMinutes/60);
-        minutes = Math.floor(newFullMinutes%60)
-        ampm = hours >= 12 ? 'PM' : 'AM';
-    }
-    $:goalEndTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+    $: curGoalTime = $currentWorkStore.values.curGoalTime;
 
     ////////////////////  timer control functions   ////////////////////
-    let isRunning = true;
-    function resetTimer(){
-
+    import {currentTime} from '$lib/stores/clock.js';
+    const dispatch = createEventDispatcher();
+    let isRunning = false;
+    function handleResetTimer(){
+        isRunning = false;
+        const isCancelled = dispatch("reset");
     }
-    function startTimer(){
+    function handleStartTimer(){
         isRunning = true;
+        const state = {
+            startTime: $currentTime.shortTime,
+            date: $currentTime.shortDate,
+        }
+        const isCancelled = dispatch("start", state,{
+            cancelable: true,
+        });
     }
-    function stopTimer(){
+    function handleStopTimer(){
         isRunning = false;
+        const isCancelled = dispatch("stop");
     }
-    function nextTimer() {
+    function handleNextTimer() {
         isRunning = false;
+        const state = {
+            endTime: $currentTime.shortTime,
+        }
+        const isCancelled = dispatch("next", state,{
+            cancelable: true,
+        });
     }
 
     ////////////////////  design?   ////////////////////
@@ -67,14 +72,22 @@
         <Icon class="absolute right-0 top-0" icon={fullscreen2Line} width="30"/>
     </div>
     <div class="flex justify-between">
-        <div class="mb-1 text-lg font-medium dark:text-white">goal: <span class="text-pink-800">[{goalTime} min]</span>
+        <div class="mb-1 text-lg font-medium dark:text-white">goal: <span class="text-pink-800">
+            [{curGoalTime} min * {$defaultSetStore.values.repeat}]
+        </span>
             {#if isRunning}
-                {$currentWorkStore.values.startTime} - {$currentWorkStore.values.endTime}
+                {$currentWorkStore.values.startTime} -
+                {$currentWorkStore.functions.addTime($currentTime.hours,$currentTime.minutes,$currentWorkStore.values.curGoalTime)}
             {:else }
-                {shortTime} - {goalEndTime}
+                {$currentTime.shortTime} - {$currentWorkStore.values.goalEndTime}
             {/if}
         </div>
-        <div class="mb-1 text-lg font-medium dark:text-white"> <span class="text-pink-800"> {shortTime} </span></div>
+        <div class="mb-1 text-lg font-medium dark:text-white">
+            {#if $currentWorkStore.values.state == "DONE"}
+                <span class="text-pink-800">  FINISH !</span>
+                {$currentTime.shortTime}
+            {/if}
+        </div>
     </div>
     <Progressbar progress="10" size="h-5" class="my-3 font-bold "/>
 
@@ -82,13 +95,13 @@
     <div class="w-[540px] flex justify-start">
         <Toolbar class="w-[500px] !justify-center">
 
-            <ToolbarButton  on:click={resetTimer}><Icon icon={skipForwardFill} hFlip={true} width="28" /></ToolbarButton>
+            <ToolbarButton  on:click={handleResetTimer}><Icon icon={skipForwardFill} hFlip={true} width="28" /></ToolbarButton>
             {#if isRunning}
-                <ToolbarButton on:click={stopTimer} ><Icon icon={pauseFill} width="28" /></ToolbarButton>
+                <ToolbarButton on:click={handleStopTimer} ><Icon icon={pauseFill} width="28" /></ToolbarButton>
             {:else}
-                <ToolbarButton on:click={startTimer} ><Icon icon={playFill} width="28"  /></ToolbarButton>
+                <ToolbarButton on:click={handleStartTimer} ><Icon icon={playFill} width="28"  /></ToolbarButton>
             {/if}
-            <ToolbarButton on:click={nextTimer}><Icon icon={skipForwardFill} width="28" /></ToolbarButton>
+            <ToolbarButton on:click={handleNextTimer}><Icon icon={skipForwardFill} width="28" /></ToolbarButton>
 
             <ToolbarButton class="absolute right-5" color="blue">
                 <Icon icon={settings6Line} width="26"/>

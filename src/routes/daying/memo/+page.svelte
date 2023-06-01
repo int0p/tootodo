@@ -6,7 +6,7 @@
     export let memos = [
         {
             id : uuid(),
-            title : "TOOtoDO 생일 5/3",
+            title : "Tㅇo -> DO 잉태 5/3",
             save:false,
             ask:true,
             date: "3:11 PM",
