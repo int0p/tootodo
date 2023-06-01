@@ -20,9 +20,6 @@
     const defaultTimerSetStore = getContext(defaultSetKey);
     const currentWorkStore = getContext(currentWorkKey);
 
-    $: selectedTodo = $currentWorkStore.values.todo;
-    $: curGoalTime = $currentWorkStore.values.curGoalTime;
-
     ////////////////////  timer control functions   ////////////////////
     import {currentTime} from '$lib/stores/clock.js';
     const dispatch = createEventDispatcher();
@@ -66,18 +63,18 @@
     <div class="flex justify-between relative">
         <div class="text-2xl font-bold mb-1 max-h-[32px] max-w-[430px] w-full overflow-x-scroll mr-3 relative">
             <div class="w-screen" class:movingText={isOverflow()} >
-                {selectedTodo? selectedTodo:"Select Todo" }
+                {$currentWorkStore.values.todo? $currentWorkStore.values.todo:"Select Todo" }
             </div>
         </div>
         <Icon class="absolute right-0 top-0" icon={fullscreen2Line} width="30"/>
     </div>
     <div class="flex justify-between">
         <div class="mb-1 text-lg font-medium dark:text-white">goal: <span class="text-pink-800">
-            [{curGoalTime} min * {$defaultTimerSetStore.values.repeat}]
+            [{$currentWorkStore.values.curGoalTime} min * {$defaultTimerSetStore.values.repeat}]
         </span>
             {#if $currentWorkStore.values.state == "WORKING"}
                 {$currentWorkStore.values.startTime} -
-                {$currentWorkStore.functions.addTime($currentTime.hours,$currentTime.minutes,$currentWorkStore.values.curGoalTime)}
+                {$currentWorkStore.functions.addMinutes($currentTime.hours,$currentTime.minutes,$currentWorkStore.values.curGoalTime)}
             {:else }
                 {$currentTime.shortTime} - {$currentWorkStore.values.goalEndTime}
             {/if}

@@ -1,23 +1,27 @@
 <script>
     import {
-        Hr,Checkbox, Heading, List, Li,
+        Hr,
     } from 'flowbite-svelte';
 
-    import TimerContainer from "./timerContainer.svelte";
     import TodoSelect from "$lib/components/todoList.svelte";
     import TimeSelect from "./timeSelect.svelte";
-    let todoSelected = ""; // {id:1, title:""}
-    let timeSelected = 0;
+    import TimerSession from "./timerSession.svelte"
+    import TimerGoal from "./timerForGoal.svelte";
+    import Controller from "./Controller.svelte";
     import {setContext} from "svelte";
     import {writable} from "svelte/store";
     import {defaultSetKey,currentWorkKey} from './key.js';
-    import Controller from "./Controller.svelte";
+    import {currentTime} from '$lib/stores/clock.js';
+    import TimerHour from "./timerForHour.svelte";
+    import ClockDesign from "$lib/components/clock-design.svelte";
 
 
     const defaultTimerSet = writable({values:{
             working: 50,
             breaking: 10,
             repeat: 2, //todo 마지막에 breaking없음
+
+            //todo: 얘넨 전체적인 환경설정이라 나중에 빼야함. -> setting페이지 에서 바꿀 수 있도록
             dayStartTime: "09:00",
             dayEndTime: "24:00"
         }, errors:{}});
@@ -28,31 +32,40 @@
             todo:"",                    //선택한 toodo : todoSelect에서 선택한 todo의 title을 받아옴
             curGoalTime:0,        //뽀모 하나 단위: 디폴트값에서 timeSelect에서 선택한 시간을 더함
 
-            startTime:0,            //toㅇdo 시작시간: Controller에서 재생버튼을 눌렀을 때 받아옴.
-            date: 0,                   //toㅇdo 시작날짜
-            goalEndTime:0,        //repeat시간을 포함한 목표 종료시간
+            startTime:"",            //toㅇdo 시작시간: Controller에서 재생버튼을 눌렀을 때 받아옴.
+            date: "",                   //toㅇdo 시작날짜
+            goalEndTime:"",        //repeat시간을 포함한 목표 종료시간
 
             state:"IDLE",           // IDLE, WORKING, BREAKING, DONE
+            stateBefore:"IDLE",  // 이전 state
             isRunning:false,      // 타이머가 동작중인지 여부: Controller에서 재생버튼을 눌렀을 때만 true
             repeated:0,             // 몇번의 뽀모가 지났는지.
 
-            endTime:0,              // toodo가 끝난시간.
+            endTime:"",              // toodo가 끝난시간.
+            studyTime:0,           // 실제 공부한 시간.
         },
         functions:{
-            addTime:(initHours,initMinutes, addMinutes)=>{
+            diffTime:(initHours,initMinutes, diffDate)=>{
+                const diffMinutes = stringDateToNumMinutes(diffDate);
+                const fullOriginalMinutes = initHours*60 + initMinutes;
+                return Math.abs(fullOriginalMinutes - diffMinutes);
+            },
+            addMinutes:(initHours,initMinutes, addMinutes)=>{
                 const newFullMinutes = initHours*60 + initMinutes + addMinutes;
                 let hours = Math.floor(newFullMinutes/60);
-                let minutes = Math.floor(newFullMinutes%60)
+                let minutes = Math.floor(newFullMinutes%60);
                 let ampm = hours >= 12 ? 'PM' : 'AM';
                 return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${ampm}`;
             },
-            reset:()=>{
+            resetCurrentWork:()=>{
                 $currentWork.values.todo = "";
-                $currentWork.values.curGoalTime = 0;
+                $currentWork.values.curGoalTime = $defaultTimerSet.values.working;
                 $currentWork.values.startTime = 0;
                 $currentWork.values.date = 0;
-                $currentWork.values.goalEndTime = 0;
+                const goalMinutes = $defaultTimerSet.values.repeat * ($currentWork.values.curGoalTime + $defaultTimerSet.values.breaking);
+                $currentWork.values.goalEndTime = $currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes, goalMinutes);
                 $currentWork.values.state = "IDLE";
+                $currentWork.values.stateBefore = "IDLE";
                 $currentWork.values.isRunning = false;
                 $currentWork.values.repeated = 0;
                 $currentWork.values.endTime = 0;
@@ -64,59 +77,103 @@
     });
     setContext(currentWorkKey,currentWork);
 
-    import {currentTime} from '$lib/stores/clock.js';
+
 
     $:{
-        if($currentWork.values.state == "IDLE"){
+        if ($currentWork.values.state == "IDLE") {
             $currentWork.values.todo = todoSelected.title;
             $currentWork.values.curGoalTime = $defaultTimerSet.values.working + timeSelected;
             const goalMinutes = $defaultTimerSet.values.repeat * ($currentWork.values.curGoalTime + $defaultTimerSet.values.breaking);
-            $currentWork.values.goalEndTime = $currentWork.functions.addTime($currentTime.hours,$currentTime.minutes, goalMinutes);
+            $currentWork.values.goalEndTime = $currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes, goalMinutes);
         }
+    }
+
+    ///////////////////// timer ///////////////////////
+    import Timer, {startTimer, stopTimer} from "./timer.svelte";
+    let todoSelected = ""; // {id:1, title:""}
+    let timeSelected = 0;
+    let timeLeftGoal = 0;
+    let timeDoneGoal = 0;
+    let timeLeftHour = 0;
+    let timeDoneHour = 0;
+    $:{
+        timeLeftGoal = $currentWork.values.curGoalTime;
     }
 
     function handlerStartTimer(e){
         e.preventDefault();
+        $currentWork.values.stateBefore = $currentWork.values.state;
         if($currentWork.values.state == "IDLE"){
             $currentWork.values.startTime = e.detail.startTime;
             $currentWork.values.date = e.detail.date;
         }
         $currentWork.values.isRunning = true;
         $currentWork.values.state = "WORKING";
+        startTimer($currentWork.values.state, timeLeftGoal );
     }
 
     function handlerStopTimer(e){
         e.preventDefault();
+        $currentWork.values.stateBefore = $currentWork.values.state;
         $currentWork.values.isRunning = false;
         $currentWork.values.state = "WORKING";
     }
 
     function handlerNextTimer(e) {
         e.preventDefault();
+        $currentWork.values.stateBefore = $currentWork.values.state;
         $currentWork.values.isRunning = false;
 
-        if ($currentWork.values.state == "BREAKING") {
-            $currentWork.values.state = "WORKING";
+        if ($currentWork.values.state == "BREAKING") { //Breaking 상태는 Timer 컴포넌트에 의해 알 수 있음.
             $currentWork.values.repeated += 1;
+            if($currentWork.values.repeated == $defaultTimerSet.values.repeat){ //타이머가 실제로 반복한 뽀모 수와, 목표 뽀모 수가 같다면 자동으로 DONE으로 바꿈.
+                $currentWork.values.state = "DONE";
+                $currentWork.values.endTime = e.detail.endTime;
+                $currentWork.values.studyTime = $currentWork.functions.diffTime($currentTime.hours,$currentTime.minutes, $currentWork.values.startTime);
+            }else{
+                $currentWork.values.state = "WORKING";
+            }
         } else if ($currentWork.values.state == "WORKING") {
             $currentWork.values.state = "DONE";
             $currentWork.values.endTime = e.detail.endTime;
-        }else if($currentWork.values.state == "DONE"){
+            $currentWork.values.studyTime = $currentWork.functions.diffTime($currentTime.hours,$currentTime.minutes, $currentWork.values.startTime);
+        }else {
             //todo: 상태가 done이었다면, 어느정도 시간이 지난 후에 reset해야는데 어떤 설정할지 못정하겠어서 한번 더 누르면 reset되도록..
-            $currentWork.functions.reset();
+            $currentWork.values.state = "IDLE";
+            resetPageVariables();
+            $currentWork.functions.resetCurrentWork();
+            //todo: 배열 todayStudy에 추가.
         }
     }
 
     function handlerResetTimer(e){
         e.preventDefault();
-        $currentWork.functions.reset();
+        $currentWork.values.stateBefore = $currentWork.values.state;
+        $currentWork.values.state = "IDLE";
+        resetPageVariables();
+        $currentWork.functions.resetCurrentWork();
+    }
+
+    ///////////////////// page function ///////////////////////
+    function resetPageVariables(){
+        todoSelected = "";
+        timeSelected = 0;
+        timeLeftGoal = 0;
+        timeDoneGoal = 0;
+        timeLeftHour = 0;
+        timeDoneHour = 0;
+    }
+
+    function stringDateToNumMinutes(stringDate){ //todo: 얘 currentWork.functions로 옮기고, diffTime에서 쓰게하고싶은데..ㅠ
+        const [hours, temp] = stringDate.split(":");
+        const[minutes, ampm] = temp.split(" ");
+        return Number(hours)*60 + Number(minutes);
     }
 </script>
 
 <div class=" flex-col justify-center items-center space-y-4 m-6 w-[540px]">
-<!--    <pre>{JSON.stringify($currentWork, null,2)}</pre>-->
+    <pre>{JSON.stringify($currentWork, null,2)}</pre>
 
-    <!-- 타이머 -->
     <Hr  width="w-full" height="h-1">
         <div class="text-xl font-semibold text-gray-900 dark:text-white px-4">Too -> do</div>
     </Hr>
@@ -125,7 +182,16 @@
             <TodoSelect bind:todoSelected />
             <TimeSelect bind:timeSelected/>
         </div>
-        <TimerContainer/>
+        <div class="timer relative  w-[300px] items-center justify-center h-[380px] top-2">
+<!--            <TimerGoal/>-->
+            <Timer
+                    bind:timeLeft={timeLeftGoal}
+            />
+            <TimerHour />
+            <ClockDesign />
+
+            <TimerSession/>
+        </div>
     </div>
     <Controller
             on:start = {handlerStartTimer}
@@ -136,5 +202,16 @@
 </div>
 
 
-
+<style lang="scss">
+  .timer {
+    color: rgb(50, 50, 50);
+    width: 300px;
+    height: 380px;
+    padding: 10px 0;
+    border-radius: 20%;
+    border: 10px solid rgb(55, 55, 55);
+    box-shadow: inset 0 0 3px 3px rgba(50, 50, 50, 0.3), inset 0 0 1px 2px rgba(50, 50, 50, 0.2);
+    //margin: 20px;
+  }
+</style>
 

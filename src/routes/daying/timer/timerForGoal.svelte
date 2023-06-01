@@ -1,6 +1,7 @@
 <script>
     import { onMount,afterUpdate,tick } from 'svelte';
-
+    import TimerHour from "./timerForHour.svelte";
+    import ClockDesign from "$lib/components/clock-design.svelte";
     ////////////////////////////// chart setting //////////////////////////////
     import { Doughnut } from 'svelte-chartjs';
     import {
@@ -108,66 +109,105 @@
     import {getContext} from "svelte";
     import {currentWorkKey, defaultSetKey} from './key.js';
 
-    const defaultSetStore = getContext(defaultSetKey);
+    const defaultTimerSetStore = getContext(defaultSetKey);
     const currentWorkStore = getContext(currentWorkKey);
 
-    const defaultWorkingTime = $defaultSetStore.values.working;
-    const defaultBreakingTime = $defaultSetStore.values.breaking;
-
-
-    $: timeLeft = defaultWorkingTime* 60; //외부로부터 목표시간이 변경될 때마다 timeLeft 업데이트.
-    $: console.log(timeLeft);
-
+    let clear = null;
     let timeDone = 0;
     let timeLeft = 0;
-    let timerState = "ready?";
-    let clear = null;
-    let playDisable = false;
+    $: timerState = $currentWorkStore.values.state || "ready?";
+    $: isRunning = $currentWorkStore.values.isRunning || false;
 
-    onMount(()=>{
-        resetTimer();
-    })
 
-    afterUpdate(() => {
-        if(timeLeft < 0){ //목표시간이 음수일 경우 타이머 초기화
-            resetTimer();
-        }
-    });
-    function resetTimer() {
-        stopTimer();
-        timerState = "ready?"
-        timeDone = 0;
-        timeLeft = defaultWorkingTime;
-        playDisable = false; //시간 끝난후엔 reset버튼 누르기 전까지 타이머 실행 안하도록하려구.
-        timeLeft = defaultWorkingTime;
-        data.datasets[0].data = [0, timeLeft];
+    onMount()
+    {
+        // timerOperation();
     }
-    export let isRunning = false;
-    function startTimer() {
+    function timerOperation(){
+        if(isRunning){
+            stopTimer(timerState);
+        }else{
+            startTimer(timerState);
+        }
+    }
+
+    function startTimer(state){
         isRunning = true;
-        timerState = "working~";
+        console.log("start    "+ state);
+        if(state === "WORKING"){
+            timerState = "working~";
+            timeLeft = $currentWorkStore.values.curGoalTime * 60;
+        }else if(state === "BREAKING"){
+            timeLeft = $defaultTimerSetStore.values.breaking * 60;
+        }
+
         clear = setInterval(()=>{
             timeDone ++;
             timeLeft --;
             data.datasets[0].data = [timeDone, timeLeft];
             if(timeLeft <= 0){
-                stopTimer();
-                playDisable = true;
+                stopTimer(state);
             }
         }, 1000);
-    }
-    function stopTimer(){
-        isRunning = false;
-        if(timeLeft === 0){
-            timerState = "Done!";
-        }else{
-            timerState = "-stopped-";
-        }
-        clearInterval(clear);
 
-        // clearTimeout(clear);
+    }
+    function stopTimer(state){
+
     }
 
+
+
+    // $: timeLeft = defaultWorkingTime* 60; //외부로부터 목표시간이 변경될 때마다 timeLeft 업데이트.
+    // $: console.log(timeLeft);
+    //
+
+
+    // let playDisable = false;
+    //
+    // onMount(()=>{
+    //     resetTimer();
+    // })
+    //
+    // afterUpdate(() => {
+    //     if(timeLeft < 0){ //목표시간이 음수일 경우 타이머 초기화
+    //         resetTimer();
+    //     }
+    // });
+    // function resetTimer() {
+    //     stopTimer();
+    //     timerState = "ready?"
+    //     timeDone = 0;
+    //     timeLeft = defaultWorkingTime;
+    //     playDisable = false; //시간 끝난후엔 reset버튼 누르기 전까지 타이머 실행 안하도록하려구.
+    //     timeLeft = defaultWorkingTime;
+    //     data.datasets[0].data = [0, timeLeft];
+    // }
+    // export let isRunning = false;
+    // function startTimer() {
+    //     isRunning = true;
+    //     timerState = "working~";
+    //     clear = setInterval(()=>{
+    //         timeDone ++;
+    //         timeLeft --;
+    //         data.datasets[0].data = [timeDone, timeLeft];
+    //         if(timeLeft <= 0){
+    //             stopTimer();
+    //             playDisable = true;
+    //         }
+    //     }, 1000);
+    // }
+    // function stopTimer(){
+    //     isRunning = false;
+    //     if(timeLeft === 0){
+    //         timerState = "Done!";
+    //     }else{
+    //         timerState = "-stopped-";
+    //     }
+    //     clearInterval(clear);
+    //
+    //     // clearTimeout(clear);
+    // }
+    //
     function getFriendlyTime(time){
         const hours = (Math.floor(time / 3600)).toString().padStart(2, '0');
         const minutes = (Math.floor((time % 3600) / 60)).toString().padStart(2, '0');
@@ -177,21 +217,8 @@
 
 </script>
 
-<div class="relative w-full flex top-2">
-<!--    <pre>{JSON.stringify({timeLeft}, null,2) }</pre>-->
-<!--    <div class="flex absolute left-4 bottom-0 shadow-sm ">-->
-<!--        <Toolbar>-->
-<!--            <ToolbarButton  on:click={resetTimer}><Icon icon={skipForwardFill} hFlip={true} /></ToolbarButton>-->
-<!--            {#if isRunning}-->
-<!--                <ToolbarButton on:click={stopTimer} ><Icon icon={pauseFill} /></ToolbarButton>-->
-<!--            {:else}-->
-<!--                <ToolbarButton on:click={startTimer} disabled={playDisable}><Icon icon={playFill} /></ToolbarButton>-->
-<!--            {/if}-->
-<!--            <ToolbarButton on:click={resetTimer}><Icon icon={skipForwardFill} /></ToolbarButton>-->
-<!--        </Toolbar>-->
-<!--    </div>-->
 
-    <Doughnut {data} {options} plugins= {[plugin_pomoText]} class="scale-[65%]"/>
-</div>
+<!--    <pre>{JSON.stringify({timeLeft}, null,2) }</pre>-->
+<Doughnut {data} {options} plugins= {[plugin_pomoText]} class="relative w-full flex top-2 scale-[65%]"/>
 
 

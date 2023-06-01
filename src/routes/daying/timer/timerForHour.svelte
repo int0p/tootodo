@@ -58,11 +58,6 @@
             }
         ]
     }
-
-    ////////////////////////////// timer setting //////////////////////////////
-
-    //bring context api (70. combining context & stores to make our context reactive)
-
 </script>
 
 <Doughnut {data} {options}  class="absolute top-4 scale-[91%]"/>

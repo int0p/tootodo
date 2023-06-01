@@ -1,5 +1,5 @@
 <script>
-    import {Alert, Blockquote, Button, Checkbox, Hr, ToolbarButton, List, Li, Heading, P} from "flowbite-svelte";
+    import {Alert, ToolbarButton, P} from "flowbite-svelte";
     import Icon from "@iconify/svelte";
     import bookmarkRounded from '@iconify/icons-material-symbols/bookmark-rounded';
     import bookmarkOutlineRounded from '@iconify/icons-material-symbols/bookmark-outline-rounded';

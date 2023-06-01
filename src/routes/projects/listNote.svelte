@@ -11,7 +11,6 @@
 
     ]
     export let fullMemo;
-    $: console.log(fullMemo);
 </script>
 
 <!--        MEMO-->
