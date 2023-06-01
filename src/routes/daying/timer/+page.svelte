@@ -13,13 +13,15 @@
     import {defaultSetKey,currentWorkKey} from './key.js';
     import Controller from "./Controller.svelte";
 
+
     const defaultTimerSet = writable({values:{
             working: 50,
             breaking: 10,
             repeat: 2, //todo 마지막에 breaking없음
-            startTime: "09:00",
-            endTime: "24:00"
+            dayStartTime: "09:00",
+            dayEndTime: "24:00"
         }, errors:{}});
+    //todo: default는 바뀌면 안되는데 리더블이나 컨텍스트만 쓰는걸로 바꿀까? -> 나중에 setting창에서 바꿀 수 있긴함.
     setContext(defaultSetKey,defaultTimerSet);
 
     const currentWork = writable({values:{

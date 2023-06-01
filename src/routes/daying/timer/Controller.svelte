@@ -17,7 +17,7 @@
     import {getContext} from "svelte";
     import {currentWorkKey, defaultSetKey} from './key.js';
 
-    const defaultSetStore = getContext(defaultSetKey);
+    const defaultTimerSetStore = getContext(defaultSetKey);
     const currentWorkStore = getContext(currentWorkKey);
 
     $: selectedTodo = $currentWorkStore.values.todo;
@@ -73,7 +73,7 @@
     </div>
     <div class="flex justify-between">
         <div class="mb-1 text-lg font-medium dark:text-white">goal: <span class="text-pink-800">
-            [{curGoalTime} min * {$defaultSetStore.values.repeat}]
+            [{curGoalTime} min * {$defaultTimerSetStore.values.repeat}]
         </span>
             {#if $currentWorkStore.values.state == "WORKING"}
                 {$currentWorkStore.values.startTime} -
@@ -89,8 +89,14 @@
             {/if}
         </div>
     </div>
-    <Progressbar progress="10" size="h-5" class="my-3 font-bold "/>
 
+    <div class="flex-col relative mb-6">
+        <Progressbar progress="10" size="h-5" class="my-3 font-bold "/>
+        <div class="flex justify-between absolute top-6 w-full">
+            <div class="mb-1 text-xs font-medium dark:text-white absolute left-0">{$defaultTimerSetStore.values.dayStartTime}</div>
+            <div class="mb-1 text-xs font-medium dark:text-white absolute right-0">{$defaultTimerSetStore.values.dayEndTime}</div>
+        </div>
+    </div>
 
     <div class="w-[540px] flex justify-start">
         <Toolbar class="w-[500px] !justify-center">

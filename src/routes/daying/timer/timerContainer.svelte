@@ -1,19 +1,14 @@
 <script>
-    import { onMount, onDestroy } from 'svelte';
-    import  Clock from '$lib/components/clock.svelte';
     import ClockDesign from "$lib/components/clock-design.svelte"
     import TimerGoal from "./timerForGoal.svelte";
+    import TimerHour from "./timerForHour.svelte";
+
     import TimerStatus from "./timerStatus.svelte";
-    import Icon from '@iconify/svelte';
-    import addFill from '@iconify/icons-mingcute/add-fill';
-    import minimizeFill from '@iconify/icons-mingcute/minimize-fill';
 
     import {
-        Button, Badge, Heading, ButtonGroup,
+        Button, Badge, ButtonGroup,
     } from 'flowbite-svelte';
 
-    import CurrentClock from "$lib/components/currentTime.svelte";
-    import TimerHour from "./timerForHour.svelte";
 
 </script>
 
@@ -24,7 +19,6 @@
         <div class="clock flex relative">
             <TimerGoal />
             <TimerHour />
-<!--            <CurrentClock/>-->
             <ClockDesign />
 
             <Badge large color="light" class="w-full h-[50px] flex justify-center absolute bottom-2 left-0">
