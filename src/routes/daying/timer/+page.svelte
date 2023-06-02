@@ -19,8 +19,8 @@
 
     const defaultTimerSet = writable({values:{
             working: 10,
-            breaking: 5,
-            repeat: 2, //todo 마지막에 breaking없음
+            breaking:5,
+            repeat: 2, //tod o 마지막에 breaking없음
 
             //todo: 얘넨 전체적인 환경설정이라 나중에 빼야함. -> setting페이지 에서 바꿀 수 있도록
             dayStartTime: "09:00",
@@ -81,11 +81,12 @@
 
     let todoSelected = ""; // {id:1, title:""}
     let timeSelected = 0;
-    let timeLeft = 0;
+    let timeLeft = $currentWork.values.curGoalTime *60 ;
     let timeDone = 0;
     let interval = null;
     let buttonDisable = false; //state가 DONE이 되면 재생버튼이 눌리면 안됨. (next버튼을 한번 더 눌러야 다음 work 가능함. )
 
+    // $:console.log(`timeLeft in page : ${timeLeft}`)
 
     function handlerStartTimer(e){
         if(e){
@@ -93,7 +94,7 @@
             if($currentWork.values.state == "IDLE"){
                 $currentWork.values.startTime = e.detail.startTime;
                 $currentWork.values.date = e.detail.date;
-                timeLeft = $currentWork.values.curGoalTime;
+                timeLeft = $currentWork.values.curGoalTime *60;
                 $currentWork.values.state = "WORKING";
             }
         }
@@ -102,27 +103,28 @@
         interval = setInterval(()=>{
             timeLeft --;
             timeDone ++;
-            if(timeLeft === 0){
+            if(timeLeft <= 0){
                 clearInterval(interval);
-                console.log(`repeated time: ${$currentWork.values.repeated}`);
-                if($currentWork.values.repeated !== $defaultTimerSet.values.repeat){
-                    if($currentWork.values.state != 'BREAKING') {
-                        $currentWork.values.repeated ++;
-                        $currentWork.values.state = "BREAKING";
-                        timeLeft = $defaultTimerSet.values.breaking;
-                        timeDone = 0;
-                        handlerStartTimer();
-                    }else {
-                        $currentWork.values.state = "WORKING";
-                        timeLeft = $currentWork.values.curGoalTime;
-                        timeDone = 0;
-                        handlerStartTimer();
+                if($currentWork.values.state != 'BREAKING') {
+                    $currentWork.values.repeated++;
+                    if($currentWork.values.repeated === $defaultTimerSet.values.repeat){
+                        // console.log("DONE")
+                        stateDONE($currentTime.shortTime);
+                        return;
                     }
-                }else{
-                    stateDONE($currentTime.shortTime);
+                    $currentWork.values.state = "BREAKING";
+                    timeLeft = $defaultTimerSet.values.breaking *60;
+                    timeDone = 0;
+                    handlerStartTimer();
+                }else {
+                    $currentWork.values.state = "WORKING";
+                    timeLeft = $currentWork.values.curGoalTime *60;
+                    timeDone = 0;
+                    handlerStartTimer();
                 }
             }
-        },150);
+        },50);
+        // console.log(`repeated time: ${$currentWork.values.repeated}`);
     }
 
 
@@ -153,10 +155,8 @@
             }
             else {
                 //todo: 상태가 done이었다면, 어느정도 시간이 지난 후에 reset해야는데 어떤 설정할지 못정하겠어서 한번 더 누르면 reset되도록..
-                $currentWork.values.state = "IDLE";
-                resetPageVariables();
-                $currentWork.functions.resetCurrentWork();
                 //todo: 배열 todayStudy에 추가.
+                handlerResetTimer();
             }
         }
 
@@ -202,8 +202,8 @@
             const goalMinutes = $defaultTimerSet.values.repeat * ($currentWork.values.curGoalTime + $defaultTimerSet.values.breaking);
             $currentWork.values.goalEndTime = $currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes, goalMinutes);
         }
+
     }
-    // $:console.log(`timeLeft in page : ${timeLeft}`)
 </script>
 
 <div class=" flex-col justify-center items-center space-y-4 m-6 w-[540px]">
@@ -224,6 +224,7 @@
                     {timeLeft}
                     {timeDone}
                     state = {$currentWork.values.state}
+                    pomoGoal = {$currentWork.values.curGoalTime}
                     mode = "goalTimer"
             />
             <Timer
@@ -231,6 +232,7 @@
                     {timeLeft}
                     {timeDone}
                     state = {$currentWork.values.state}
+                    pomoGoal = {$currentWork.values.curGoalTime}
                     mode = "hourTimer"
             />
             <ClockDesign />

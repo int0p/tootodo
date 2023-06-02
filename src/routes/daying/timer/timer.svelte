@@ -33,13 +33,36 @@
         ArcElement,
         CategoryScale,
     } from 'chart.js';
+    export let pomoGoal;
+    $:repeatPerHour = Math.floor(pomoGoal/60);
+    // $: console.log(repeatPerHour);
+
+
     $:{
+
         if(state === "WORKING" || state === "BREAKING"){
-            data.datasets.data = [timeDone, timeLeft];
+            if(mode === "hourTimer") {
+                timeLeft = Math.floor(timeLeft/60);
+                timeDone = Math.floor(timeDone/60) || 1;
+                if(repeatPerHour <= 0 ) {
+                    data.datasets[0].data = [timeLeft % 60, 60 - timeLeft % 60];
+                }else{
+                    data.datasets[0].data = [60-(timeDone%60),timeDone%60];
+                    if(timeDone%60 === 0) repeatPerHour--;
+                }
+                // console.log(data.datasets[0].data)
+            }
+            else{
+                data.datasets[0].data = [timeDone, timeLeft];
+            }
         }else{
-            data.datasets.data = [0,1];
+            data.datasets[0].data  = [0,1];
         }
-        console.log(data.datasets.data);
+
+        if(state === "BREAKING"){
+            repeatPerHour = Math.floor(pomoGoal/60);
+        }
+        // console.log(data.datasets[0].data );
     }
     ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
@@ -94,7 +117,7 @@
                 ctx.textBaseline = 'middle';
                 ctx.font = '3rem "Helvetica Neue", Helvetica, Arial, sans-serif';
                 ctx.fillStyle = '#000';
-                const textRemain = timeLeft ;
+                const textRemain = getFriendlyTime(timeLeft) ;
                 ctx.fillText(textRemain, textX, textY);
                 ctx.restore();
 
