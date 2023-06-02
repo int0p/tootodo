@@ -84,6 +84,8 @@
     let timeLeft = 0;
     let timeDone = 0;
     let interval = null;
+    let buttonDisable = false; //state가 DONE이 되면 재생버튼이 눌리면 안됨. (next버튼을 한번 더 눌러야 다음 work 가능함. )
+
 
     function handlerStartTimer(e){
         if(e){
@@ -92,6 +94,7 @@
                 $currentWork.values.startTime = e.detail.startTime;
                 $currentWork.values.date = e.detail.date;
                 timeLeft = $currentWork.values.curGoalTime;
+                $currentWork.values.state = "WORKING";
             }
         }
 
@@ -107,16 +110,16 @@
                         $currentWork.values.repeated ++;
                         $currentWork.values.state = "BREAKING";
                         timeLeft = $defaultTimerSet.values.breaking;
+                        timeDone = 0;
                         handlerStartTimer();
                     }else {
                         $currentWork.values.state = "WORKING";
                         timeLeft = $currentWork.values.curGoalTime;
+                        timeDone = 0;
                         handlerStartTimer();
                     }
                 }else{
-                    $currentWork.values.state = "DONE";
-                    $currentWork.values.endTime = $currentTime.shortTime;
-                    $currentWork.values.studyTime = timeDone;
+                    stateDONE($currentTime.shortTime);
                 }
             }
         },150);
@@ -140,17 +143,15 @@
                 //breaking상태였다면, breaking구간을 건너뛰고 working으로 전환.
                 if($currentWork.values.repeated == $defaultTimerSet.values.repeat){
                     //타이머가 실제로 반복한 뽀모 수와, 목표 뽀모 수가 같다면 자동으로 DONE으로 바꿈.
-                    $currentWork.values.state = "DONE";
-                    $currentWork.values.endTime = e.detail.endTime;
-                    $currentWork.values.studyTime = $currentWork.functions.diffTime($currentTime.hours,$currentTime.minutes, $currentWork.values.startTime);
+                    stateDONE(e.detail.endTime);
                 }else{
                     $currentWork.values.state = "WORKING";
                 }
-            } else if ($currentWork.values.state == "WORKING") {
-                $currentWork.values.state = "DONE";
-                $currentWork.values.endTime = e.detail.endTime;
-                $currentWork.values.studyTime = $currentWork.functions.diffTime($currentTime.hours,$currentTime.minutes, $currentWork.values.startTime);
-            }else {
+            }
+            else if ($currentWork.values.state == "WORKING") {
+                stateDONE(e.detail.endTime);
+            }
+            else {
                 //todo: 상태가 done이었다면, 어느정도 시간이 지난 후에 reset해야는데 어떤 설정할지 못정하겠어서 한번 더 누르면 reset되도록..
                 $currentWork.values.state = "IDLE";
                 resetPageVariables();
@@ -159,6 +160,12 @@
             }
         }
 
+    }
+    function stateDONE(endTime){
+        $currentWork.values.state = "DONE";
+        buttonDisable = true;
+        $currentWork.values.endTime = endTime;
+        $currentWork.values.studyTime = $currentWork.functions.diffTime($currentTime.hours,$currentTime.minutes, $currentWork.values.startTime);
     }
 
     function handlerResetTimer(e){
@@ -175,6 +182,7 @@
         timeSelected = 0;
         timeLeft = 0;
         timeDone = 0;
+        buttonDisable = false;
     }
 
     function stringDateToNumMinutes(stringDate){ //todo: 얘 currentWork.functions로 옮기고, diffTime에서 쓰게하고싶은데..ㅠ
@@ -195,7 +203,7 @@
             $currentWork.values.goalEndTime = $currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes, goalMinutes);
         }
     }
-    $:console.log(`timeLeft in page : ${timeLeft}`)
+    // $:console.log(`timeLeft in page : ${timeLeft}`)
 </script>
 
 <div class=" flex-col justify-center items-center space-y-4 m-6 w-[540px]">
@@ -231,6 +239,7 @@
         </div>
     </div>
     <Controller
+            {buttonDisable}
             on:start = {handlerStartTimer}
             on:stop = {handlerStopTimer}
             on:next = {handlerNextTimer}

@@ -24,6 +24,7 @@
     import {currentTime} from '$lib/stores/clock.js';
     const dispatch = createEventDispatcher();
     let isRunning = false;
+    export let buttonDisable;
     function handleResetTimer(){
         isRunning = false;
         const isCancelled = dispatch("reset");
@@ -100,9 +101,9 @@
 
             <ToolbarButton  on:click={handleResetTimer}><Icon icon={skipForwardFill} hFlip={true} width="28" /></ToolbarButton>
             {#if isRunning}
-                <ToolbarButton on:click={handleStopTimer} ><Icon icon={pauseFill} width="28" /></ToolbarButton>
+                <ToolbarButton on:click={handleStopTimer} disabled={buttonDisable}><Icon icon={pauseFill} width="28" /></ToolbarButton>
             {:else}
-                <ToolbarButton on:click={handleStartTimer} ><Icon icon={playFill} width="28"  /></ToolbarButton>
+                <ToolbarButton on:click={handleStartTimer} disabled={buttonDisable}><Icon icon={playFill} width="28"  /></ToolbarButton>
             {/if}
             <ToolbarButton on:click={handleNextTimer}><Icon icon={skipForwardFill} width="28" /></ToolbarButton>
 

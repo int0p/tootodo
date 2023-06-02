@@ -39,7 +39,7 @@
         }else{
             data.datasets.data = [0,1];
         }
-        // console.log(data.datasets.data);
+        console.log(data.datasets.data);
     }
     ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
