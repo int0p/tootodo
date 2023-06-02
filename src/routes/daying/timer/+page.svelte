@@ -38,7 +38,6 @@
             goalEndTime:"",        //repeat시간을 포함한 목표 종료시간
 
             state:"IDLE",           // IDLE, WORKING, BREAKING, DONE
-            stateBefore:"IDLE",  // 이전 state
             isRunning:false,      // 타이머가 동작중인지 여부: Controller에서 재생버튼을 눌렀을 때만 true
             repeated:0,             // 몇번의 뽀모가 지났는지.
 
@@ -66,7 +65,6 @@
                 const goalMinutes = $defaultTimerSet.values.repeat * ($currentWork.values.curGoalTime + $defaultTimerSet.values.breaking);
                 $currentWork.values.goalEndTime = $currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes, goalMinutes);
                 $currentWork.values.state = "IDLE";
-                $currentWork.values.stateBefore = "IDLE";
                 $currentWork.values.isRunning = false;
                 $currentWork.values.repeated = 0;
                 $currentWork.values.endTime = 0;
@@ -80,6 +78,7 @@
 
     ///////////////////// timer ///////////////////////
     import Timer from "./timer.svelte";
+    import {Doughnut} from "svelte-chartjs";
 
     let todoSelected = ""; // {id:1, title:""}
     let timeSelected = 0;
@@ -87,73 +86,79 @@
     let timeDone = 0;
     let interval = null;
 
-
     function handlerStartTimer(e){
-        e.preventDefault();
-        $currentWork.values.stateBefore = $currentWork.values.state;
-
-        if($currentWork.values.state == "IDLE"){
-            $currentWork.values.startTime = e.detail.startTime;
-            $currentWork.values.date = e.detail.date;
-            timeLeft = $currentWork.values.curGoalTime;
+        if(e){
+            e.preventDefault();
+            if($currentWork.values.state == "IDLE"){
+                $currentWork.values.startTime = e.detail.startTime;
+                $currentWork.values.date = e.detail.date;
+                timeLeft = $currentWork.values.curGoalTime;
+            }
         }
 
-        $currentWork.values.isRunning = true;
         $currentWork.values.state = "WORKING";
-
-        if($currentWork.values.state == "WORKING"){
-            interval = setInterval(()=>{
-                timeLeft --;
-                timeDone ++;
-                if(timeLeft == 0){
-                    clearInterval(interval);
+        interval = setInterval(()=>{
+            timeLeft --;
+            timeDone ++;
+            if(timeLeft === 0){
+                clearInterval(interval);
+                $currentWork.values.repeated ++;
+                console.log($currentWork.values.repeated);
+                if($currentWork.values.repeated !== $defaultTimerSet.values.repeat){
+                    $currentWork.values.state = "BREAKING";
+                    timeLeft = $defaultTimerSet.values.breaking;
+                    handlerStartTimer();
+                }else{
+                    $currentWork.values.state = "DONE";
+                    $currentWork.values.endTime = $currentTime.shortTime;
+                    $currentWork.values.studyTime = timeDone;
                 }
-            },1000);
-        }
+            }
+        },50);
     }
 
 
     function handlerStopTimer(e){
-        e.preventDefault();
-        $currentWork.values.stateBefore = $currentWork.values.state;
-
-        $currentWork.values.isRunning = false;
-        $currentWork.values.state = "WORKING";
-    }
-
-    function handlerNextTimer(e) {
-        e.preventDefault();
-        $currentWork.values.stateBefore = $currentWork.values.state;
-
-        $currentWork.values.isRunning = false;
-
-        if ($currentWork.values.state == "BREAKING") { //Breaking 상태는 Timer 컴포넌트에 의해 알 수 있음.
-            $currentWork.values.repeated += 1;
-            if($currentWork.values.repeated == $defaultTimerSet.values.repeat){ //타이머가 실제로 반복한 뽀모 수와, 목표 뽀모 수가 같다면 자동으로 DONE으로 바꿈.
-                $currentWork.values.state = "DONE";
-                $currentWork.values.endTime = e.detail.endTime;
-                $currentWork.values.studyTime = $currentWork.functions.diffTime($currentTime.hours,$currentTime.minutes, $currentWork.values.startTime);
-            }else{
-                $currentWork.values.state = "WORKING";
-            }
-        } else if ($currentWork.values.state == "WORKING") {
-            $currentWork.values.state = "DONE";
-            $currentWork.values.endTime = e.detail.endTime;
-            $currentWork.values.studyTime = $currentWork.functions.diffTime($currentTime.hours,$currentTime.minutes, $currentWork.values.startTime);
-        }else {
-            //todo: 상태가 done이었다면, 어느정도 시간이 지난 후에 reset해야는데 어떤 설정할지 못정하겠어서 한번 더 누르면 reset되도록..
-            $currentWork.values.state = "IDLE";
-            resetPageVariables();
-            $currentWork.functions.resetCurrentWork();
-            //todo: 배열 todayStudy에 추가.
+        if(e){
+            e.preventDefault();
+            clearInterval(interval);
+            $currentWork.values.state = "WORKING";
         }
     }
 
+    function handlerNextTimer(e) {
+        if(e){
+            e.preventDefault();
+            clearInterval(interval);
+
+            if ($currentWork.values.state == "BREAKING") {
+                //breaking상태였다면, breaking구간을 건너뛰고 working으로 전환.
+                if($currentWork.values.repeated == $defaultTimerSet.values.repeat){
+                    //타이머가 실제로 반복한 뽀모 수와, 목표 뽀모 수가 같다면 자동으로 DONE으로 바꿈.
+                    $currentWork.values.state = "DONE";
+                    $currentWork.values.endTime = e.detail.endTime;
+                    $currentWork.values.studyTime = $currentWork.functions.diffTime($currentTime.hours,$currentTime.minutes, $currentWork.values.startTime);
+                }else{
+                    $currentWork.values.state = "WORKING";
+                }
+            } else if ($currentWork.values.state == "WORKING") {
+                $currentWork.values.state = "DONE";
+                $currentWork.values.endTime = e.detail.endTime;
+                $currentWork.values.studyTime = $currentWork.functions.diffTime($currentTime.hours,$currentTime.minutes, $currentWork.values.startTime);
+            }else {
+                //todo: 상태가 done이었다면, 어느정도 시간이 지난 후에 reset해야는데 어떤 설정할지 못정하겠어서 한번 더 누르면 reset되도록..
+                $currentWork.values.state = "IDLE";
+                resetPageVariables();
+                $currentWork.functions.resetCurrentWork();
+                //todo: 배열 todayStudy에 추가.
+            }
+        }
+
+    }
+
     function handlerResetTimer(e){
-        e.preventDefault();
-
-        $currentWork.values.stateBefore = $currentWork.values.state;
-
+        if(e) e.preventDefault();
+        clearInterval(interval);
         $currentWork.values.state = "IDLE";
         resetPageVariables();
         $currentWork.functions.resetCurrentWork();
@@ -184,9 +189,6 @@
             const goalMinutes = $defaultTimerSet.values.repeat * ($currentWork.values.curGoalTime + $defaultTimerSet.values.breaking);
             $currentWork.values.goalEndTime = $currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes, goalMinutes);
         }
-        if($currentWork.values.isRunning == false){
-            clearInterval(interval);
-        }
     }
     $:console.log(`timeLeft in page : ${timeLeft}`)
 </script>
@@ -206,10 +208,14 @@
 <!--            <TimerGoal/>-->
             <Timer
                     classTimer = {classGoal}
+                    {timeLeft}
+                    {timeDone}
                     mode = "goalTimer"
             />
             <Timer
                     classTimer = {classHour}
+                    {timeLeft}
+                    {timeDone}
                     mode = "hourTimer"
             />
             <ClockDesign />

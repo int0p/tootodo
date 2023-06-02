@@ -3,47 +3,6 @@
 
     const elements = new Set();
 
-    // export function stopTimer(state){
-    //     //reset, next를 누르면 타이머 자체도 초기화해야함.
-    //     //stop이면 타이머 일시정지.
-    //     // console.log(timeLeft);
-    //     elements.forEach((element) => {
-    //         clearInterval(element.interval);
-    //     });
-    // }
-    // export function startTimer(state, goalTime){
-    //     if(goalTime, state){
-    //         elements.forEach((element) => {
-    //             element.timeLeft = goalTime;
-    //
-    //             element.interval = setInterval(() => {
-    //                 element.timeLeft --;
-    //                 element.timeDone++;
-    //
-    //                 if (element.timeLeft <= 0) {
-    //                     clearInterval(element.interval);
-    //                 }
-    //             }, 1000);
-    //         });
-    //     }
-    // }
-    let interval = null;
-    let timeLeft = 50;
-    let timeDone = 0;
-    export function startTimer(){
-        interval = setInterval(() => {
-            timeLeft --;
-            timeDone++;
-            console.log(timeLeft);
-            putData(timeLeft, timeDone);
-            if (timeLeft <= 0) {
-                clearInterval(interval);
-            }
-        }, 1000);
-    }
-    export function stopTimer(){
-        clearInterval(interval);
-    }
     function putData(timeLeft, timeDone){
         elements.timeLeft = timeLeft;
         elements.timeDone = timeDone;
@@ -61,13 +20,12 @@
         return () => elements.delete(timer);
     });
 
-    // $:console.log(timeLeft);
 
     let timer;
-    let stop;
-    let start;
     let state;
     let session;
+    let timeLeft;
+    let timeDone;
     export let classTimer;
     export let mode = "";
 
@@ -84,6 +42,7 @@
     } from 'chart.js';
     $:{
         data.datasets.data = [timeDone, timeLeft];
+        console.log(data.datasets.data);
     }
     ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
@@ -159,8 +118,6 @@
 <!--    <pre>{JSON.stringify({timeLeft}, null,2) }</pre>-->
 <Doughnut
         bind:this={timer}
-        bind:stop
-        bind:start
         {data} {options} plugins= {[plugin_pomoText]}
         class={classTimer}
 />
