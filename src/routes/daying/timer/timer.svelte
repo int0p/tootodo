@@ -1,41 +1,76 @@
 <script context="module">
+    ////////////////////   import stores   ////////////////////
+
     const elements = new Set();
 
-    export function stopTimer(state, timeLeft){
-        //reset, next를 누르면 타이머 자체도 초기화해야함.
-        //stop이면 타이머 일시정지.
-        // console.log(timeLeft);
-        elements.forEach((element) => {
-            clearInterval(element.interval);
-        });
+    // export function stopTimer(state){
+    //     //reset, next를 누르면 타이머 자체도 초기화해야함.
+    //     //stop이면 타이머 일시정지.
+    //     // console.log(timeLeft);
+    //     elements.forEach((element) => {
+    //         clearInterval(element.interval);
+    //     });
+    // }
+    // export function startTimer(state, goalTime){
+    //     if(goalTime, state){
+    //         elements.forEach((element) => {
+    //             element.timeLeft = goalTime;
+    //
+    //             element.interval = setInterval(() => {
+    //                 element.timeLeft --;
+    //                 element.timeDone++;
+    //
+    //                 if (element.timeLeft <= 0) {
+    //                     clearInterval(element.interval);
+    //                 }
+    //             }, 1000);
+    //         });
+    //     }
+    // }
+    let interval = null;
+    let timeLeft = 50;
+    let timeDone = 0;
+    export function startTimer(){
+        interval = setInterval(() => {
+            timeLeft --;
+            timeDone++;
+            console.log(timeLeft);
+            putData(timeLeft, timeDone);
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+            }
+        }, 1000);
     }
-    export function startTimer(state, timeLeft){
-        //session에 따라 다른 시간에 대해 동작
-        // console.log(timeLeft);
+    export function stopTimer(){
+        clearInterval(interval);
+    }
+    function putData(timeLeft, timeDone){
+        elements.timeLeft = timeLeft;
+        elements.timeDone = timeDone;
+        // console.log(elements.timeDone);
+    }
 
-        // elements.forEach((element) => {
-        //     element.interval = setInterval(() => {
-        //         element.timeLeft -= 1000;
-        //         if (element.timeLeft <= 0) {
-        //             element.timeLeft = 0;
-        //             clearInterval(element.interval);
-        //         }
-        //     }, 1000);
-        // });
-    }
 </script>
 
 <script>
     ////////////////////////////// timer setting //////////////////////////////
-    import { onMount } from 'svelte';
-    let timer;
+    import { onMount} from 'svelte';
+
     onMount(() => {
         elements.add(timer);
         return () => elements.delete(timer);
     });
-    export let timeDone;
-    export let timeLeft ;
-    $: console.log(timeLeft);
+
+    // $:console.log(timeLeft);
+
+    let timer;
+    let stop;
+    let start;
+    let state;
+    let session;
+    export let classTimer;
+    export let mode = "";
+
 
     ////////////////////////////// chart setting //////////////////////////////
     import { Doughnut } from 'svelte-chartjs';
@@ -47,7 +82,9 @@
         ArcElement,
         CategoryScale,
     } from 'chart.js';
-
+    $:{
+        data.datasets.data = [timeDone, timeLeft];
+    }
     ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
     const options = {
@@ -96,28 +133,36 @@
             ctx.save();
 
             // text remain time
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.font = '2.8rem "Helvetica Neue", Helvetica, Arial, sans-serif';
-            ctx.fillStyle = '#000';
-            let textRemain = timeLeft;
-            ctx.fillText(textRemain, textX, textY);
-            ctx.restore();
+            if(mode == "goalTimer"){
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.font = '3rem "Helvetica Neue", Helvetica, Arial, sans-serif';
+                ctx.fillStyle = '#000';
+                const textRemain = timeLeft ;
+                ctx.fillText(textRemain, textX, textY);
+                ctx.restore();
 
-            // text timer state
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.font = '2rem "Helvetica Neue", Helvetica, Arial, sans-serif';
-            ctx.fillStyle = '#000';
-            const text = "HI";
-            ctx.fillText(text, textX, textY+50);
-            ctx.restore();
+                // text timer state
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.font = '2rem "Helvetica Neue", Helvetica, Arial, sans-serif';
+                ctx.fillStyle = '#000';
+                const text = state;
+                ctx.fillText(text, textX, textY+50);
+                ctx.restore();
+            }
         }
     };
 </script>
 
 
 <!--    <pre>{JSON.stringify({timeLeft}, null,2) }</pre>-->
-<Doughnut {data} {options} plugins= {[plugin_pomoText]} class="relative w-full flex top-2 scale-[65%]"/>
+<Doughnut
+        bind:this={timer}
+        bind:stop
+        bind:start
+        {data} {options} plugins= {[plugin_pomoText]}
+        class={classTimer}
+/>
 
 

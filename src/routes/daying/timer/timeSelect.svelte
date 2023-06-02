@@ -1,9 +1,8 @@
 <script>
-    import {Hr, Timeline, TimelineItem, Radio, Heading, Badge} from "flowbite-svelte";
+    import {Hr, Heading, Badge} from "flowbite-svelte";
     import minimizeFill from '@iconify/icons-mingcute/minimize-fill';
     import addFill from '@iconify/icons-mingcute/add-fill';
     import back2Fill from '@iconify/icons-mingcute/back-2-fill';
-    import {onMount} from "svelte";
 
 
     import Icon from '@iconify/svelte';

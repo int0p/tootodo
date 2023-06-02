@@ -1,4 +1,5 @@
 <script>
+    import { tick } from 'svelte';
     import {
         Hr,
     } from 'flowbite-svelte';
@@ -77,44 +78,45 @@
     });
     setContext(currentWorkKey,currentWork);
 
-
-
-    $:{
-        if ($currentWork.values.state == "IDLE") {
-            $currentWork.values.todo = todoSelected.title;
-            $currentWork.values.curGoalTime = $defaultTimerSet.values.working + timeSelected;
-            const goalMinutes = $defaultTimerSet.values.repeat * ($currentWork.values.curGoalTime + $defaultTimerSet.values.breaking);
-            $currentWork.values.goalEndTime = $currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes, goalMinutes);
-        }
-    }
-
     ///////////////////// timer ///////////////////////
-    import Timer, {startTimer, stopTimer} from "./timer.svelte";
+    import Timer from "./timer.svelte";
+
     let todoSelected = ""; // {id:1, title:""}
     let timeSelected = 0;
-    let timeLeftGoal = 0;
-    let timeDoneGoal = 0;
-    let timeLeftHour = 0;
-    let timeDoneHour = 0;
-    $:{
-        timeLeftGoal = $currentWork.values.curGoalTime;
-    }
+    let timeLeft = 0;
+    let timeDone = 0;
+    let interval = null;
+
 
     function handlerStartTimer(e){
         e.preventDefault();
         $currentWork.values.stateBefore = $currentWork.values.state;
+
         if($currentWork.values.state == "IDLE"){
             $currentWork.values.startTime = e.detail.startTime;
             $currentWork.values.date = e.detail.date;
+            timeLeft = $currentWork.values.curGoalTime;
         }
+
         $currentWork.values.isRunning = true;
         $currentWork.values.state = "WORKING";
-        startTimer($currentWork.values.state, timeLeftGoal );
+
+        if($currentWork.values.state == "WORKING"){
+            interval = setInterval(()=>{
+                timeLeft --;
+                timeDone ++;
+                if(timeLeft == 0){
+                    clearInterval(interval);
+                }
+            },1000);
+        }
     }
+
 
     function handlerStopTimer(e){
         e.preventDefault();
         $currentWork.values.stateBefore = $currentWork.values.state;
+
         $currentWork.values.isRunning = false;
         $currentWork.values.state = "WORKING";
     }
@@ -122,6 +124,7 @@
     function handlerNextTimer(e) {
         e.preventDefault();
         $currentWork.values.stateBefore = $currentWork.values.state;
+
         $currentWork.values.isRunning = false;
 
         if ($currentWork.values.state == "BREAKING") { //Breaking 상태는 Timer 컴포넌트에 의해 알 수 있음.
@@ -148,7 +151,9 @@
 
     function handlerResetTimer(e){
         e.preventDefault();
+
         $currentWork.values.stateBefore = $currentWork.values.state;
+
         $currentWork.values.state = "IDLE";
         resetPageVariables();
         $currentWork.functions.resetCurrentWork();
@@ -158,10 +163,8 @@
     function resetPageVariables(){
         todoSelected = "";
         timeSelected = 0;
-        timeLeftGoal = 0;
-        timeDoneGoal = 0;
-        timeLeftHour = 0;
-        timeDoneHour = 0;
+        timeLeft = 0;
+        timeDone = 0;
     }
 
     function stringDateToNumMinutes(stringDate){ //todo: 얘 currentWork.functions로 옮기고, diffTime에서 쓰게하고싶은데..ㅠ
@@ -169,10 +172,27 @@
         const[minutes, ampm] = temp.split(" ");
         return Number(hours)*60 + Number(minutes);
     }
+
+    ///////////////////// timer design  ///////////////////////
+    const classGoal = "relative w-full flex top-2 scale-[65%]";
+    const classHour = "absolute top-4 scale-[91%]";
+
+    $:{
+        if ($currentWork.values.state == "IDLE") {
+            $currentWork.values.todo = todoSelected.title;
+            $currentWork.values.curGoalTime = $defaultTimerSet.values.working + timeSelected;
+            const goalMinutes = $defaultTimerSet.values.repeat * ($currentWork.values.curGoalTime + $defaultTimerSet.values.breaking);
+            $currentWork.values.goalEndTime = $currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes, goalMinutes);
+        }
+        if($currentWork.values.isRunning == false){
+            clearInterval(interval);
+        }
+    }
+    $:console.log(`timeLeft in page : ${timeLeft}`)
 </script>
 
 <div class=" flex-col justify-center items-center space-y-4 m-6 w-[540px]">
-    <pre>{JSON.stringify($currentWork, null,2)}</pre>
+<!--    <pre>{JSON.stringify($currentWork, null,2)}</pre>-->
 
     <Hr  width="w-full" height="h-1">
         <div class="text-xl font-semibold text-gray-900 dark:text-white px-4">Too -> do</div>
@@ -185,9 +205,13 @@
         <div class="timer relative  w-[300px] items-center justify-center h-[380px] top-2">
 <!--            <TimerGoal/>-->
             <Timer
-                    bind:timeLeft={timeLeftGoal}
+                    classTimer = {classGoal}
+                    mode = "goalTimer"
             />
-            <TimerHour />
+            <Timer
+                    classTimer = {classHour}
+                    mode = "hourTimer"
+            />
             <ClockDesign />
 
             <TimerSession/>
