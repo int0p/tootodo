@@ -18,8 +18,8 @@
 
 
     const defaultTimerSet = writable({values:{
-            working: 50,
-            breaking: 10,
+            working: 10,
+            breaking: 5,
             repeat: 2, //todo 마지막에 breaking없음
 
             //todo: 얘넨 전체적인 환경설정이라 나중에 빼야함. -> setting페이지 에서 바꿀 수 있도록
@@ -78,7 +78,6 @@
 
     ///////////////////// timer ///////////////////////
     import Timer from "./timer.svelte";
-    import {Doughnut} from "svelte-chartjs";
 
     let todoSelected = ""; // {id:1, title:""}
     let timeSelected = 0;
@@ -96,25 +95,31 @@
             }
         }
 
-        $currentWork.values.state = "WORKING";
+        // $currentWork.values.state = "WORKING";
         interval = setInterval(()=>{
             timeLeft --;
             timeDone ++;
             if(timeLeft === 0){
                 clearInterval(interval);
-                $currentWork.values.repeated ++;
-                console.log($currentWork.values.repeated);
+                console.log(`repeated time: ${$currentWork.values.repeated}`);
                 if($currentWork.values.repeated !== $defaultTimerSet.values.repeat){
-                    $currentWork.values.state = "BREAKING";
-                    timeLeft = $defaultTimerSet.values.breaking;
-                    handlerStartTimer();
+                    if($currentWork.values.state != 'BREAKING') {
+                        $currentWork.values.repeated ++;
+                        $currentWork.values.state = "BREAKING";
+                        timeLeft = $defaultTimerSet.values.breaking;
+                        handlerStartTimer();
+                    }else {
+                        $currentWork.values.state = "WORKING";
+                        timeLeft = $currentWork.values.curGoalTime;
+                        handlerStartTimer();
+                    }
                 }else{
                     $currentWork.values.state = "DONE";
                     $currentWork.values.endTime = $currentTime.shortTime;
                     $currentWork.values.studyTime = timeDone;
                 }
             }
-        },50);
+        },150);
     }
 
 
@@ -210,12 +215,14 @@
                     classTimer = {classGoal}
                     {timeLeft}
                     {timeDone}
+                    state = {$currentWork.values.state}
                     mode = "goalTimer"
             />
             <Timer
                     classTimer = {classHour}
                     {timeLeft}
                     {timeDone}
+                    state = {$currentWork.values.state}
                     mode = "hourTimer"
             />
             <ClockDesign />

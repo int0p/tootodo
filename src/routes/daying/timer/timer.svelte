@@ -1,31 +1,24 @@
-<script context="module">
-    ////////////////////   import stores   ////////////////////
+<!--<script context="module">-->
+<!--    ////////////////////   import stores   ////////////////////-->
+<!--    const elements = new Set();-->
 
-    const elements = new Set();
 
-    function putData(timeLeft, timeDone){
-        elements.timeLeft = timeLeft;
-        elements.timeDone = timeDone;
-        // console.log(elements.timeDone);
-    }
-
-</script>
+<!--</script>-->
 
 <script>
     ////////////////////////////// timer setting //////////////////////////////
-    import { onMount} from 'svelte';
+    import {onMount} from 'svelte';
 
-    onMount(() => {
-        elements.add(timer);
-        return () => elements.delete(timer);
-    });
-
+    // onMount(() => {
+    //     elements.add(timer);
+    //     return () => elements.delete(timer);
+    // });
 
     let timer;
-    let state;
-    let session;
-    let timeLeft;
-    let timeDone;
+    export let state;
+    let stateBefore;
+    export let timeLeft;
+    export let timeDone;
     export let classTimer;
     export let mode = "";
 
@@ -41,8 +34,12 @@
         CategoryScale,
     } from 'chart.js';
     $:{
-        data.datasets.data = [timeDone, timeLeft];
-        console.log(data.datasets.data);
+        if(state === "WORKING" || state === "BREAKING"){
+            data.datasets.data = [timeDone, timeLeft];
+        }else{
+            data.datasets.data = [0,1];
+        }
+        // console.log(data.datasets.data);
     }
     ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
@@ -112,6 +109,13 @@
             }
         }
     };
+
+    function getFriendlyTime(minutesIN){
+        const hours = (Math.floor(minutesIN / 3600)).toString().padStart(2, '0');
+        const minutes = (Math.floor((minutesIN % 3600) / 60)).toString().padStart(2, '0');
+        const seconds = (Math.floor(minutesIN % 60)).toString().padStart(2, '0');
+        return `${hours}:${minutes}:${seconds}`
+    }
 </script>
 
 
