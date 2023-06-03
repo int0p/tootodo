@@ -20,7 +20,7 @@
 
 </script>
 
-<div class="flex m-6 h-[calc(100vh)] w-[calc(100%-60px)] justify-center items-center"> <!--    얘의 width가 full일 때 section모드에서 전체화면에 존재.  -->
+<div class="flex m-6 h-full w-[calc(100%-2rem)] justify-center items-center"> <!--    얘의 width가 full일 때 section모드에서 전체화면에 존재.  -->
 <!--    date-->
 
         <div class="flex justify-around w-full gap-x-3 h-full">

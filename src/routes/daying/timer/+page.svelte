@@ -213,7 +213,7 @@
     <div class=" w-full h-2/3 flex-col  p-4 max-h-[820px]">
 
         <Hr  width="w-full" height="h-2" class="">
-            <p class="text-[1.8rem]"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
+            <p class="text-[1.7rem]"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
         </Hr>
 
         <div class="w-full flex justify-center items-center h-full space-x-4 relative mt-2">
@@ -249,16 +249,15 @@
                             state = {$currentWork.values.state}
                     />
                 </div>
-            </div>
 
-            <div class="flex-col mb-1 text-lg font-semibold absolute bottom-5 bg-white w-6/12 p-2 rounded-lg text-center right-7 opacity-80">
-                <!--{#if $currentWork.values.state == "DONE"}-->
-                <!--    <div class="flex text-[1.1vw] space-x-6">-->
-                <!--        <div class="text-pink-800 text-[1.1vw]">  FINISH ! </div>-->
-                <!--        <div> at </div>-->
-                <!--        <div>{$currentTime.shortTime}</div>-->
-                <!--    </div>-->
-                <!--{:else}-->
+                <div class="flex-col mb-1 text-lg font-semibold absolute bg-white w-11/12 p-2 rounded-lg text-center bottom-2.5 opacity-80">
+                    <!--{#if $currentWork.values.state == "DONE"}-->
+                    <!--    <div class="flex text-[1.1vw] space-x-6">-->
+                    <!--        <div class="text-pink-800 text-[1.1vw]">  FINISH ! </div>-->
+                    <!--        <div> at </div>-->
+                    <!--        <div>{$currentTime.shortTime}</div>-->
+                    <!--    </div>-->
+                    <!--{:else}-->
                     <div class="text-[1.1vw] ">
                         <span class="text-pink-800 inline-block">
                             [{$currentWork.values.curGoalTime} min * {$defaultTimerSet.values.repeat}]
@@ -276,7 +275,11 @@
                             - {$currentWork.values.goalEndTime}
                         {/if}
                     </div>
+                </div>
+
             </div>
+
+
         </div>
 
     </div>

@@ -5,7 +5,7 @@
     import ProjectList from "./projectList.svelte";
 
 </script>
-<div class="flex-col m-4 h-full w-[calc(100%-100px)]"> <!--    얘의 width가 full일 때 section모드에서 전체화면에 존재.  -->
+<div class="flex-col m-4 h-full w-[calc(100%-1rem)]"> <!--    얘의 width가 full일 때 section모드에서 전체화면에 존재.  -->
 <!--        status: ongoing, done, not started, all-->
     <Status /> <!--    h: 80px -->
 

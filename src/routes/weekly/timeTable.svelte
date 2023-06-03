@@ -18,7 +18,7 @@
     let events = [];
 </script>
 
-<div class="w-full h-[calc(100%-420px)] overflow-y-scroll absolute top-[380px]">
+<div class="w-full h-[calc(100%-380px)] overflow-y-scroll absolute top-[380px]">
     <table class="w-full border-collapse">
         <tr class="sticky top-0">
             <th class="p-1 border bg-gray-100"></th>
