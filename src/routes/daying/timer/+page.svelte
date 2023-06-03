@@ -6,7 +6,7 @@
 
     import TodoSelect from "$lib/components/todoList.svelte";
     import TimeSelect from "./timeSelect.svelte";
-    import TimerSession from "./timerSession.svelte"
+    import TimerState from "./timerStateDisplay.svelte"
     import TimerGoal from "./timerForGoal.svelte";
     import Controller from "./Controller.svelte";
     import {setContext} from "svelte";
@@ -78,6 +78,7 @@
 
     ///////////////////// timer ///////////////////////
     import Timer from "./timer.svelte";
+    import Memo from "../memo/+page.svelte";
 
     let todoSelected = ""; // {id:1, title:""}
     let timeSelected = 0;
@@ -191,10 +192,6 @@
         return Number(hours)*60 + Number(minutes);
     }
 
-    ///////////////////// timer design  ///////////////////////
-    const classGoal = "relative w-full flex top-2 scale-[65%]";
-    const classHour = "absolute top-4 scale-[91%]";
-
     $:{
         if ($currentWork.values.state == "IDLE") {
             $currentWork.values.todo = todoSelected.title;
@@ -202,44 +199,92 @@
             const goalMinutes = $defaultTimerSet.values.repeat * ($currentWork.values.curGoalTime + $defaultTimerSet.values.breaking);
             $currentWork.values.goalEndTime = $currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes, goalMinutes);
         }
-
     }
+    ///////////////////// timer design  ///////////////////////
+    const classGoal = "absolute w-[calc(100%-3rem)]  scale-[60%] ";
+    const classHour = "absolute w-[calc(100%-3rem)]  scale-[94%]";
+    const classClock = "relative w-[calc(100%-3rem)]  indent-0.5";
+
 </script>
 
-<div class=" flex-col justify-center items-center space-y-4 m-6 w-[540px]">
+<div class=" flex-col h-full w-full relative border-4 border-dashed rounded-lg">
 <!--    <pre>{JSON.stringify($currentWork, null,2)}</pre>-->
 
-    <Hr  width="w-full" height="h-1">
-        <div class="text-xl font-semibold text-gray-900 dark:text-white px-4">Too -> do</div>
-    </Hr>
-    <div class="flex justify-center items-center relative h-[380px] w-full space-x-5">
-        <div class="flex-col w-[210px] h-[380px]">
-            <TodoSelect bind:todoSelected />
-            <TimeSelect bind:timeSelected/>
-        </div>
-        <div class="timer relative  w-[300px] items-center justify-center h-[380px] top-2">
-<!--            <TimerGoal/>-->
-            <Timer
-                    classTimer = {classGoal}
-                    {timeLeft}
-                    {timeDone}
-                    state = {$currentWork.values.state}
-                    pomoGoal = {$currentWork.values.curGoalTime}
-                    mode = "goalTimer"
-            />
-            <Timer
-                    classTimer = {classHour}
-                    {timeLeft}
-                    {timeDone}
-                    state = {$currentWork.values.state}
-                    pomoGoal = {$currentWork.values.curGoalTime}
-                    mode = "hourTimer"
-            />
-            <ClockDesign />
+    <div class=" w-full h-2/3 flex-col  p-4 max-h-[820px]">
 
-            <TimerSession/>
+        <Hr  width="w-full" height="h-2" class="">
+            <p class="text-[1.8rem]"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
+        </Hr>
+
+        <div class="w-full flex justify-center items-center h-full space-x-4 relative mt-2">
+            <div class="flex-col w-2/5 h-full relative m-2">
+                <TodoSelect bind:todoSelected />
+                <TimeSelect bind:timeSelected/>
+            </div>
+
+            <div class="relative timerBox w-3/5 flex justify-center items-center h-[calc(100%-2rem)]">
+                <Timer
+                        designTimer = {classGoal}
+                        {timeLeft}
+                        {timeDone}
+                        state = {$currentWork.values.state}
+                        pomoGoal = {$currentWork.values.curGoalTime}
+                        mode = "goalTimer"
+                />
+                <Timer
+                        designTimer = {classHour}
+                        {timeLeft}
+                        {timeDone}
+                        state = {$currentWork.values.state}
+                        pomoGoal = {$currentWork.values.curGoalTime}
+                        mode = "hourTimer"
+                />
+                <ClockDesign
+                        designTimer={classClock}
+                />
+
+                <div class="h-[18%] w-1/2 absolute indent-0.5">
+                    <TimerState
+                            {timeLeft}
+                            state = {$currentWork.values.state}
+                    />
+                </div>
+            </div>
+
+            <div class="flex-col mb-1 text-lg font-semibold absolute bottom-5 bg-white w-6/12 p-2 rounded-lg text-center right-7 opacity-80">
+                <!--{#if $currentWork.values.state == "DONE"}-->
+                <!--    <div class="flex text-[1.1vw] space-x-6">-->
+                <!--        <div class="text-pink-800 text-[1.1vw]">  FINISH ! </div>-->
+                <!--        <div> at </div>-->
+                <!--        <div>{$currentTime.shortTime}</div>-->
+                <!--    </div>-->
+                <!--{:else}-->
+                    <div class="text-[1.1vw] ">
+                        <span class="text-pink-800 inline-block">
+                            [{$currentWork.values.curGoalTime} min * {$defaultTimerSet.values.repeat}]
+                        </span>
+
+                        {#if $currentWork.values.state == "WORKING"}
+                            <div class="bg-white inline-block rounded-md px-2">
+                                {$currentWork.values.startTime}
+                            </div>
+                            - {$currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes,$currentWork.values.curGoalTime)}
+                        {:else }
+                            <div class="bg-white inline-block rounded-md px-2">
+                                {$currentTime.shortTime}
+                            </div>
+                            - {$currentWork.values.goalEndTime}
+                        {/if}
+                    </div>
+            </div>
         </div>
+
     </div>
+
+    <div class="h-1/3">
+        <Memo/>
+    </div>
+
     <Controller
             {buttonDisable}
             on:start = {handlerStartTimer}
@@ -251,15 +296,10 @@
 
 
 <style lang="scss">
-  .timer {
-    color: rgb(50, 50, 50);
-    width: 300px;
-    height: 380px;
-    padding: 10px 0;
+  .timerBox {
     border-radius: 20%;
-    border: 10px solid rgb(55, 55, 55);
+    border: 14px solid rgb(55, 55, 55);
     box-shadow: inset 0 0 3px 3px rgba(50, 50, 50, 0.3), inset 0 0 1px 2px rgba(50, 50, 50, 0.2);
-    //margin: 20px;
   }
 </style>
 

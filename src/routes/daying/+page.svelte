@@ -2,18 +2,18 @@
 
     import Timer from "./timer/+page.svelte";
     import Memo from "./memo/+page.svelte";
-    import WorkSelect from "./work/+page.svelte";
 
     let showTimer = true;
 
 </script>
 
-<div class="flex-col ml-4 max-w-[600px] h-screen float-left top-0 left-0">
-<!--    <WorkSelect bind:showTimer />-->
-    {#if showTimer}
-        <div>
-            <Timer/>
-        </div>
-    {/if}
-    <Memo {showTimer} />
-</div>
+<div class="flex w-full h-full justify-center items-start space-x-4 my-6">
+    <div class="flex-col h-full w-1/2 max-w-[1100px] ">
+        <Timer/>
+    </div>
+    <div class=" w-1/5 h-full flex-col border-4 border-dashed rounded-lg p-4">
+<!--        <Memo/>-->
+    </div>
+
+    </div>
+

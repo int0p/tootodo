@@ -58,25 +58,35 @@
 <!--목표: memoList는 memo를 보여주고, memoAdd는 memo를 추가하는 역할을 한다.-->
 <!--현실: memoList에 메모의 북마크를 토글하거나 삭제하는 기능이 있다.-->
 <!--TODO: memoList와 memoAdd를 합치거나, 다른 방식으로 나누어야함.-->
-{#if showTimer}
-    <MemoAdd
-            bind:this={memoList}
-             on:addMemo={handlerAddMemo}/>
-
-    <MemoList
-            {memos}
-            bind:showTimer
-            on:removeMemo={handlerRemoveMemo}
-            on:toggleSave={handlerToggleSave}
-    />
-{:else}
-    <MemoList
-            {memos}
-            bind:showTimer
-            on:removeMemo={handlerRemoveMemo}
-            on:toggleSave={handlerToggleSave}
-    />
+<div class="w-full h-full p-4">
     <MemoAdd
             bind:this={memoList}
             on:addMemo={handlerAddMemo}/>
-{/if}
+    <MemoList
+            {memos}
+            on:removeMemo={handlerRemoveMemo}
+            on:toggleSave={handlerToggleSave}
+    />
+</div>
+<!--{#if showTimer}-->
+<!--    <MemoAdd-->
+<!--            bind:this={memoList}-->
+<!--             on:addMemo={handlerAddMemo}/>-->
+
+<!--    <MemoList-->
+<!--            {memos}-->
+<!--            bind:showTimer-->
+<!--            on:removeMemo={handlerRemoveMemo}-->
+<!--            on:toggleSave={handlerToggleSave}-->
+<!--    />-->
+<!--{:else}-->
+<!--    <MemoList-->
+<!--            {memos}-->
+<!--            bind:showTimer-->
+<!--            on:removeMemo={handlerRemoveMemo}-->
+<!--            on:toggleSave={handlerToggleSave}-->
+<!--    />-->
+<!--    <MemoAdd-->
+<!--            bind:this={memoList}-->
+<!--            on:addMemo={handlerAddMemo}/>-->
+<!--{/if}-->

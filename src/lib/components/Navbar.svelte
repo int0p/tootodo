@@ -1,13 +1,12 @@
 <script>
 import {goto} from "$app/navigation";
+import {onMount} from "svelte";
+import {page} from "$app/stores";
 import lapTimer from "@iconify/icons-radix-icons/lap-timer.js";
 import folderCopy from "@iconify/icons-material-symbols/folder-copy.js";
 import chartPie from "@iconify/icons-uim/chart-pie.js";
 import settingFilled from "@iconify/icons-ant-design/setting-filled.js";
-import {Button, Checkbox, } from "flowbite-svelte";
 import Icon from "@iconify/svelte";
-import tableMoveColumnAfterRtl from "@iconify/icons-ooui/table-move-column-after-rtl.js";
-import tableMoveColumnAfterLtr from "@iconify/icons-ooui/table-move-column-after-ltr.js";
 import { BottomNav, BottomNavItem,BottomNavHeaderItem,Tooltip,BottomNavHeader  } from "flowbite-svelte"
 
 export let showSidebar;
@@ -18,9 +17,11 @@ const buttonClass="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:tex
 
 <BottomNav position="absolute" navType="group" innerDiv="grid-cols-5">
     <BottomNavHeader slot="header">
-        <BottomNavHeaderItem itemName="New" />
-        <BottomNavHeaderItem itemName="Popular" active={true}/>
-        <BottomNavHeaderItem itemName="Following" />
+        {#if $page.url.pathname !== '/'}
+            <BottomNavHeaderItem itemName="New" />
+            <BottomNavHeaderItem itemName="Popular" active={true}/>
+            <BottomNavHeaderItem itemName="Following" />
+        {/if}
     </BottomNavHeader>
     <BottomNavItem btnName="Settings" id="group-settings" on:click={()=>goto('/setting')}>
         <Icon icon={settingFilled} width="24" class={buttonClass}/>

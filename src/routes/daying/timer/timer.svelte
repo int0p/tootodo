@@ -19,7 +19,7 @@
     let stateBefore;
     export let timeLeft;
     export let timeDone;
-    export let classTimer;
+    export let designTimer;
     export let mode = "";
 
 
@@ -97,41 +97,41 @@
                     'rgb(157,23,77,0.1)',
                 ],
                 borderWidth: 1,
-                cutout: '80%',
+                cutout: '10%',
             }
         ]
     }
 
-    const plugin_pomoText = {
-        id: 'pomoText',
-        beforeDraw(chart, args, options) {
-            const { ctx, chartArea: { left, top, width, height } } = chart;
-            const textX = left + width / 2;
-            const textY = top + height / 2;
-            // console.log(width);
-            ctx.save();
-
-            // text remain time
-            if(mode == "goalTimer"){
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.font = '3rem "Helvetica Neue", Helvetica, Arial, sans-serif';
-                ctx.fillStyle = '#000';
-                const textRemain = getFriendlyTime(timeLeft) ;
-                ctx.fillText(textRemain, textX, textY);
-                ctx.restore();
-
-                // text timer state
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.font = '2rem "Helvetica Neue", Helvetica, Arial, sans-serif';
-                ctx.fillStyle = '#000';
-                const text = state;
-                ctx.fillText(text, textX, textY+50);
-                ctx.restore();
-            }
-        }
-    };
+    // const plugin_pomoText = {
+    //     id: 'pomoText',
+    //     beforeDraw(chart, args, options) {
+    //         const { ctx, chartArea: { left, top, width, height } } = chart;
+    //         const textX = left + width / 2;
+    //         const textY = top + height / 2;
+    //         // console.log(width);
+    //         ctx.save();
+    //
+    //         // text remain time
+    //         if(mode == "goalTimer"){
+    //             ctx.textAlign = 'center';
+    //             ctx.textBaseline = 'middle';
+    //             ctx.font = '4rem "Helvetica Neue", Helvetica, Arial, sans-serif';
+    //             ctx.fillStyle = '#000';
+    //             const textRemain = getFriendlyTime(timeLeft) ;
+    //             ctx.fillText(textRemain, textX, textY);
+    //             ctx.restore();
+    //
+    //             // text timer state
+    //             ctx.textAlign = 'center';
+    //             ctx.textBaseline = 'middle';
+    //             ctx.font = '2rem "Helvetica Neue", Helvetica, Arial, sans-serif';
+    //             ctx.fillStyle = '#000';
+    //             const text = state;
+    //             ctx.fillText(text, textX, textY+50);
+    //             ctx.restore();
+    //         }
+    //     }
+    // };
 
     function getFriendlyTime(minutesIN){
         const hours = (Math.floor(minutesIN / 3600)).toString().padStart(2, '0');
@@ -145,8 +145,8 @@
 <!--    <pre>{JSON.stringify({timeLeft}, null,2) }</pre>-->
 <Doughnut
         bind:this={timer}
-        {data} {options} plugins= {[plugin_pomoText]}
-        class={classTimer}
+        {data} {options}
+        class={designTimer}
 />
 
 

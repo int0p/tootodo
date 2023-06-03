@@ -51,17 +51,17 @@
 
     // saved memo list --> todo list
     let showTodo = false;
-   export let showTimer;
+   export let showTimer = true;
 
 </script>
 
 <div bind:offsetHeight={listDivHeight} bind:this={listDiv}
-     class="w-[590px] overflow-y-auto mt-4"
+     class="w-full h-2/3 overflow-y-auto mt-3 "
      class:fullHeight={!showTimer}
      class:fitHeight={showTimer}>
 
     <!-- memo list-->
-    <div  class="" >
+    <div  class="w-full" >
         {#each memos as {title,ask,save,id,date} (id)}
             <div class="flex justify-end items-end mb-3" >
                 <P class="text-xs mt-8 mr-2">{date}</P>
@@ -98,6 +98,6 @@
         height: calc(100% - 160px);
     }
     .fitHeight{
-        height: calc(100% - 780px);
+        height: calc(100% - 144px);
     }
 </style>

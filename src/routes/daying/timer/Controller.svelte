@@ -60,44 +60,28 @@
     }
 </script>
 
-<div class="relative w-[540px] -bottom-2 flex-col border-4 border-dashed rounded-lg p-4  ">
-    <div class="flex justify-between relative">
-        <div class="text-2xl font-bold mb-1 max-h-[32px] max-w-[430px] w-full overflow-x-scroll mr-3 relative">
-            <div class="w-screen" class:movingText={isOverflow()} >
-                {$currentWorkStore.values.todo? $currentWorkStore.values.todo:"Select Todo" }
-            </div>
-        </div>
-        <Icon class="absolute right-0 top-0" icon={fullscreen2Line} width="30"/>
-    </div>
-    <div class="flex justify-between">
-        <div class="mb-1 text-lg font-medium dark:text-white">goal: <span class="text-pink-800">
-            [{$currentWorkStore.values.curGoalTime} min * {$defaultTimerSetStore.values.repeat}]
-        </span>
-            {#if $currentWorkStore.values.state == "WORKING"}
-                {$currentWorkStore.values.startTime} -
-                {$currentWorkStore.functions.addMinutes($currentTime.hours,$currentTime.minutes,$currentWorkStore.values.curGoalTime)}
-            {:else }
-                {$currentTime.shortTime} - {$currentWorkStore.values.goalEndTime}
-            {/if}
-        </div>
-        <div class="mb-1 text-lg font-medium dark:text-white">
-            {#if $currentWorkStore.values.state == "DONE"}
-                <span class="text-pink-800">  FINISH !</span>
-                {$currentTime.shortTime}
-            {/if}
-        </div>
-    </div>
+<div class="w-full h-[60px] flex-col p-4 absolute right-0.5 bottom-8  ">
 
-    <div class="flex-col relative mb-6">
-        <Progressbar progress="10" size="h-5" class="my-3 font-bold "/>
-        <div class="flex justify-between absolute top-6 w-full">
-            <div class="mb-1 text-xs font-medium dark:text-white absolute left-0">{$defaultTimerSetStore.values.dayStartTime}</div>
-            <div class="mb-1 text-xs font-medium dark:text-white absolute right-0">{$defaultTimerSetStore.values.dayEndTime}</div>
-        </div>
-    </div>
 
-    <div class="w-[540px] flex justify-start">
-        <Toolbar class="w-[500px] !justify-center">
+<!--    <div class="flex justify-between  w-full">-->
+<!--        <div class="mb-1 text-lg font-medium dark:text-white">-->
+<!--            {#if $currentWorkStore.values.state == "DONE"}-->
+<!--                <span class="text-pink-800">  FINISH !</span>-->
+<!--                {$currentTime.shortTime}-->
+<!--            {/if}-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="flex-col relative mb-8  w-full">-->
+<!--        <Progressbar progress="10" size="h-5" class="my-3 font-bold "/>-->
+<!--        <div class="flex justify-between absolute top-6 w-full">-->
+<!--            <div class="mb-1 text-xs font-medium dark:text-white absolute left-0">{$defaultTimerSetStore.values.dayStartTime}</div>-->
+<!--            <div class="mb-1 text-xs font-medium dark:text-white absolute right-0">{$defaultTimerSetStore.values.dayEndTime}</div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <div class="w-full flex justify-start">
+        <Toolbar class="w-full !justify-center relative">
 
             <ToolbarButton  on:click={handleResetTimer}><Icon icon={skipForwardFill} hFlip={true} width="28" /></ToolbarButton>
             {#if isRunning}

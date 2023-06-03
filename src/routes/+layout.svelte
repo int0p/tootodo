@@ -1,7 +1,7 @@
 <script>
 	import '../app.scss';
 	import '../app.postcss';
-    import Navbar from "$lib/components/sideNavbar.svelte";
+    import Navbar from "$lib/components/Navbar.svelte";
     import TimerSidebar from "./daying/+page.svelte";
 
     import { slide } from 'svelte/transition';
@@ -10,11 +10,12 @@
     // let showSidebar = true;
     // $:console.log(showSidebar);
 </script>
-    <slot/>
+<div class="flex-col h-screen">
+    <div class="max-w-[calc(100%-2rem)] h-[calc(100%-120px)] m-auto">
+        <slot />
+    </div>
     <Navbar/>
-
-
-
+</div>
 
 
 <!--use Timer as sidebar-->

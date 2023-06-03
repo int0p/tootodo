@@ -76,11 +76,11 @@
         }
         return { x, y};
     }
-
+    export let designTimer;
 </script>
 
 
-<div class="absolute  top-7 w-[260px] left-2.5">
+<div class={designTimer}>
     <svg viewBox="0 0 {vw} {vh}">
         <circle {cx} {cy} {r} stroke="black" fill="transparent"  />
 
