@@ -38,7 +38,6 @@
             goalEndTime:"",        //repeat시간을 포함한 목표 종료시간
 
             state:"IDLE",           // IDLE, WORKING, BREAKING, DONE
-            isRunning:false,      // 타이머가 동작중인지 여부: Controller에서 재생버튼을 눌렀을 때만 true
             repeated:0,             // 몇번의 뽀모가 지났는지.
 
             endTime:"",              // toodo가 끝난시간.
@@ -65,7 +64,6 @@
                 const goalMinutes = $defaultTimerSet.values.repeat * ($currentWork.values.curGoalTime + $defaultTimerSet.values.breaking);
                 $currentWork.values.goalEndTime = $currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes, goalMinutes);
                 $currentWork.values.state = "IDLE";
-                $currentWork.values.isRunning = false;
                 $currentWork.values.repeated = 0;
                 $currentWork.values.endTime = 0;
             }
@@ -84,12 +82,14 @@
     let timeSelected = 0;
     let timeLeft = $currentWork.values.curGoalTime *60 ;
     let timeDone = 0;
+    let isRunning = false;
     let interval = null;
     let buttonDisable = false; //state가 DONE이 되면 재생버튼이 눌리면 안됨. (next버튼을 한번 더 눌러야 다음 work 가능함. )
 
     // $:console.log(`timeLeft in page : ${timeLeft}`)
 
     function handlerStartTimer(e){
+        isRunning = true;
         if(e){
             e.preventDefault();
             if($currentWork.values.state == "IDLE"){
@@ -132,33 +132,35 @@
     function handlerStopTimer(e){
         if(e){
             e.preventDefault();
-            clearInterval(interval);
-            $currentWork.values.state = "WORKING";
         }
+        isRunning = false;
+        clearInterval(interval);
+        $currentWork.values.state = "WORKING";
     }
 
     function handlerNextTimer(e) {
         if(e){
             e.preventDefault();
-            clearInterval(interval);
+        }
+        clearInterval(interval);
+        isRunning = false;
 
-            if ($currentWork.values.state == "BREAKING") {
-                //breaking상태였다면, breaking구간을 건너뛰고 working으로 전환.
-                if($currentWork.values.repeated == $defaultTimerSet.values.repeat){
-                    //타이머가 실제로 반복한 뽀모 수와, 목표 뽀모 수가 같다면 자동으로 DONE으로 바꿈.
-                    stateDONE(e.detail.endTime);
-                }else{
-                    $currentWork.values.state = "WORKING";
-                }
-            }
-            else if ($currentWork.values.state == "WORKING") {
+        if ($currentWork.values.state == "BREAKING") {
+            //breaking상태였다면, breaking구간을 건너뛰고 working으로 전환.
+            if($currentWork.values.repeated == $defaultTimerSet.values.repeat){
+                //타이머가 실제로 반복한 뽀모 수와, 목표 뽀모 수가 같다면 자동으로 DONE으로 바꿈.
                 stateDONE(e.detail.endTime);
+            }else{
+                $currentWork.values.state = "WORKING";
             }
-            else {
-                //todo: 상태가 done이었다면, 어느정도 시간이 지난 후에 reset해야는데 어떤 설정할지 못정하겠어서 한번 더 누르면 reset되도록..
-                //todo: 배열 todayStudy에 추가.
-                handlerResetTimer();
-            }
+        }
+        else if ($currentWork.values.state == "WORKING") {
+            stateDONE(e.detail.endTime);
+        }
+        else {
+            //todo: 상태가 done이었다면, 어느정도 시간이 지난 후에 reset해야는데 어떤 설정할지 못정하겠어서 한번 더 누르면 reset되도록..
+            //todo: 배열 todayStudy에 추가.
+            handlerResetTimer();
         }
 
     }
@@ -172,6 +174,8 @@
     function handlerResetTimer(e){
         if(e) e.preventDefault();
         clearInterval(interval);
+        isRunning = false;
+
         $currentWork.values.state = "IDLE";
         resetPageVariables();
         $currentWork.functions.resetCurrentWork();
@@ -183,6 +187,7 @@
         timeSelected = 0;
         timeLeft = 0;
         timeDone = 0;
+        isRunning = false;
         buttonDisable = false;
     }
 
@@ -190,6 +195,14 @@
         const [hours, temp] = stringDate.split(":");
         const[minutes, ampm] = temp.split(" ");
         return Number(hours)*60 + Number(minutes);
+    }
+
+    function controlInTimer(){
+        if( $currentWork.values.state === "WORKING"|| $currentWork.values.state === "BREAKING"){
+            console.log(isRunning)
+            if(isRunning) handlerStopTimer();
+            else handlerStartTimer();
+        }
     }
 
     $:{
@@ -247,6 +260,7 @@
                     <TimerState
                             {timeLeft}
                             state = {$currentWork.values.state}
+                            {controlInTimer}
                     />
                 </div>
 
@@ -276,10 +290,7 @@
                         {/if}
                     </div>
                 </div>
-
             </div>
-
-
         </div>
 
     </div>
@@ -290,6 +301,7 @@
 
     <Controller
             {buttonDisable}
+            {isRunning}
             on:start = {handlerStartTimer}
             on:stop = {handlerStopTimer}
             on:next = {handlerNextTimer}

@@ -8,9 +8,12 @@
         const seconds = (Math.floor(minutesIN % 60)).toString().padStart(2, '0');
         return `${hours}:${minutes}:${seconds}`
     }
+    export let controlInTimer;
 </script>
 
-<Button color="dark" class=" !rounded-2xl border-white border-4 w-full h-full flex-col py-2 space-y-1 divide-y-2">
+<Button color="dark" class=" !rounded-2xl border-white border-4 w-full h-full flex-col py-2 space-y-1 divide-y-2"
+        on:click={controlInTimer}
+>
     <div class="text-center text-pink-100 w-full font-digital">{getFriendlyTime(timeLeft)}</div>
     <div class="text-center w-full font-digital mt-1"> {state}</div>
 </Button>

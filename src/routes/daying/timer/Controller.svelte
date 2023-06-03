@@ -23,14 +23,13 @@
     ////////////////////  timer control functions   ////////////////////
     import {currentTime} from '$lib/stores/clock.js';
     const dispatch = createEventDispatcher();
-    let isRunning = false;
+    export let isRunning;
     export let buttonDisable;
     function handleResetTimer(){
         isRunning = false;
         const isCancelled = dispatch("reset");
     }
     function handleStartTimer(){
-        isRunning = true;
         const state = {
             startTime: $currentTime.shortTime,
             date: $currentTime.shortDate,
@@ -40,11 +39,9 @@
         });
     }
     function handleStopTimer(){
-        isRunning = false;
         const isCancelled = dispatch("stop");
     }
     function handleNextTimer() {
-        isRunning = false;
         const state = {
             endTime: $currentTime.shortTime,
         }
