@@ -18,7 +18,7 @@
     <div class="flex-col h-full w-1/2 max-w-[1100px] ">
         <Timer/>
     </div>
-    <div class=" w-1/5 h-full flex-col border-4 border-dashed rounded-lg p-4">
+    <div class=" w-1/5 h-full flex-col border-4 border-double rounded-lg p-4">
         <div class="flex-col w-full relative gap-y-4 h-full ">
             <button  class={style_btnWeek_Color} >{week[$currentTime.day]}</button>
             <div class="w-full text-center uppercase mb-2 text-lg font-bold ">

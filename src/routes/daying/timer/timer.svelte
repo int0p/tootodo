@@ -33,24 +33,30 @@
         ArcElement,
         CategoryScale,
     } from 'chart.js';
-    export let pomoGoal;
-    $:repeatPerHour = Math.floor(pomoGoal/60);
+    // export let pomoGoal;
+    // $:repeatPerHour = Math.floor(pomoGoal/60);
     // $: console.log(repeatPerHour);
 
 
     $:{
+        if(mode === "goalTimer"){
+            data.datasets[0].cutout = "90%";
+        }
 
         if(state === "WORKING" || state === "BREAKING"){
             if(mode === "hourTimer") {
                 timeLeft = Math.floor(timeLeft/60);
                 timeDone = Math.floor(timeDone/60) || 1;
-                if(repeatPerHour <= 0 ) {
-                    data.datasets[0].data = [timeLeft % 60, 60 - timeLeft % 60];
-                }else{
-                    data.datasets[0].data = [60-(timeDone%60),timeDone%60];
-                    if(timeDone%60 === 0) repeatPerHour--;
-                }
-                // console.log(data.datasets[0].data)
+                data.datasets[0].data = [timeLeft % 60, 60 - timeLeft % 60];
+                // if(repeatPerHour <= 0 ) { //만일 주어진 시간이 130분이라면, 60, 60, 10분 진행하고싶을 경우. (현재 코드는 10, 60, 60순으로 진행함)
+                //     data.datasets[0].data = [timeLeft % 60, 60 - timeLeft % 60];
+                // }else{
+                //     data.datasets[0].data = [60-(timeDone%60),timeDone%60];
+                //     if(timeDone%60 === 0) {
+                //         repeatPerHour--;
+                //         if(state === "BREAKING") repeatPerHour = Math.floor(pomoGoal/60);
+                //     }
+                // }
             }
             else{
                 data.datasets[0].data = [timeDone, timeLeft];
@@ -58,11 +64,7 @@
         }else{
             data.datasets[0].data  = [0,1];
         }
-
-        if(state === "BREAKING"){
-            repeatPerHour = Math.floor(pomoGoal/60);
-        }
-        // console.log(data.datasets[0].data );
+        // console.log(repeatPerHour);
     }
     ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
@@ -97,7 +99,7 @@
                     'rgb(157,23,77,0.1)',
                 ],
                 borderWidth: 1,
-                cutout: '10%',
+                cutout: "10%",
             }
         ]
     }

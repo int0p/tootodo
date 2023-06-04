@@ -24,7 +24,7 @@
     import {currentTime} from '$lib/stores/clock.js';
     const dispatch = createEventDispatcher();
     export let isRunning;
-    export let buttonDisable;
+    export let state;
     function handleResetTimer(){
         isRunning = false;
         const isCancelled = dispatch("reset");
@@ -55,19 +55,17 @@
     $: isOverflow = ()=>{
         return false;
     }
+    ////////////////////  button disable   ////////////////////
+    let nextButtonDisable = true;
+    $:{
+        if(state === "IDLE")
+            nextButtonDisable = true
+        else
+            nextButtonDisable = false
+    }
 </script>
 
-<div class="w-full h-[60px] flex-col p-4 absolute right-0.5 bottom-8  ">
-
-
-<!--    <div class="flex justify-between  w-full">-->
-<!--        <div class="mb-1 text-lg font-medium dark:text-white">-->
-<!--            {#if $currentWorkStore.values.state == "DONE"}-->
-<!--                <span class="text-pink-800">  FINISH !</span>-->
-<!--                {$currentTime.shortTime}-->
-<!--            {/if}-->
-<!--        </div>-->
-<!--    </div>-->
+<div class="w-full h-[60px] flex-col p-4  ">
 
 <!--    <div class="flex-col relative mb-8  w-full">-->
 <!--        <Progressbar progress="10" size="h-5" class="my-3 font-bold "/>-->
@@ -82,11 +80,11 @@
 
             <ToolbarButton  on:click={handleResetTimer}><Icon icon={skipForwardFill} hFlip={true} width="28" /></ToolbarButton>
             {#if isRunning}
-                <ToolbarButton on:click={handleStopTimer} disabled={buttonDisable}><Icon icon={pauseFill} width="28" /></ToolbarButton>
+                <ToolbarButton on:click={handleStopTimer} ><Icon icon={pauseFill} width="28" /></ToolbarButton>
             {:else}
-                <ToolbarButton on:click={handleStartTimer} disabled={buttonDisable}><Icon icon={playFill} width="28"  /></ToolbarButton>
+                <ToolbarButton on:click={handleStartTimer} ><Icon icon={playFill} width="28"  /></ToolbarButton>
             {/if}
-            <ToolbarButton on:click={handleNextTimer}><Icon icon={skipForwardFill} width="28" /></ToolbarButton>
+            <ToolbarButton on:click={handleNextTimer} disabled={nextButtonDisable}><Icon icon={skipForwardFill} width="28" /></ToolbarButton>
 
             <ToolbarButton class="absolute right-5" color="blue">
                 <Icon icon={settings6Line} width="26"/>

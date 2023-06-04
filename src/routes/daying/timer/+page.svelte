@@ -15,11 +15,13 @@
     import {currentTime} from '$lib/stores/clock.js';
     import TimerHour from "./timerForHour.svelte";
     import ClockDesign from "$lib/components/clock-design.svelte";
+    import { Button, Modal } from 'flowbite-svelte'
+    let clickOutsideModal = false;
 
 
     const defaultTimerSet = writable({values:{
-            working: 10,
-            breaking:5,
+            working: 5,
+            breaking:2,
             repeat: 2, //tod o 마지막에 breaking없음
 
             //todo: 얘넨 전체적인 환경설정이라 나중에 빼야함. -> setting페이지 에서 바꿀 수 있도록
@@ -84,7 +86,6 @@
     let timeDone = 0;
     let isRunning = false;
     let interval = null;
-    let buttonDisable = false; //state가 DONE이 되면 재생버튼이 눌리면 안됨. (next버튼을 한번 더 눌러야 다음 work 가능함. )
 
     // $:console.log(`timeLeft in page : ${timeLeft}`)
 
@@ -152,23 +153,23 @@
                 stateDONE(e.detail.endTime);
             }else{
                 $currentWork.values.state = "WORKING";
+                timeLeft = $currentWork.values.curGoalTime *60;
+                handlerStartTimer();
             }
         }
-        else if ($currentWork.values.state == "WORKING") {
-            stateDONE(e.detail.endTime);
-        }
         else {
+            stateDONE(e.detail.endTime);
             //todo: 상태가 done이었다면, 어느정도 시간이 지난 후에 reset해야는데 어떤 설정할지 못정하겠어서 한번 더 누르면 reset되도록..
-            //todo: 배열 todayStudy에 추가.
-            handlerResetTimer();
         }
 
     }
     function stateDONE(endTime){
-        $currentWork.values.state = "DONE";
-        buttonDisable = true;
+        clickOutsideModal = true; //끝났음을 알리는 model등장!
+        // $currentWork.values.state = "DONE";
         $currentWork.values.endTime = endTime;
         $currentWork.values.studyTime = $currentWork.functions.diffTime($currentTime.hours,$currentTime.minutes, $currentWork.values.startTime);
+        //todo: 배열 todayStudy에 추가.
+        handlerResetTimer();
     }
 
     function handlerResetTimer(e){
@@ -188,7 +189,6 @@
         timeLeft = 0;
         timeDone = 0;
         isRunning = false;
-        buttonDisable = false;
     }
 
     function stringDateToNumMinutes(stringDate){ //todo: 얘 currentWork.functions로 옮기고, diffTime에서 쓰게하고싶은데..ㅠ
@@ -199,7 +199,6 @@
 
     function controlInTimer(){
         if( $currentWork.values.state === "WORKING"|| $currentWork.values.state === "BREAKING"){
-            console.log(isRunning)
             if(isRunning) handlerStopTimer();
             else handlerStartTimer();
         }
@@ -214,19 +213,19 @@
         }
     }
     ///////////////////// timer design  ///////////////////////
-    const classGoal = "absolute w-[calc(100%-3rem)]  scale-[60%] ";
-    const classHour = "absolute w-[calc(100%-3rem)]  scale-[94%]";
+    const classGoal = "absolute w-[calc(100%-3rem)]  scale-[94%] ";
+    const classHour = "absolute w-[calc(100%-3rem)]  scale-[60%]";
     const classClock = "relative w-[calc(100%-3rem)]  indent-0.5";
 
 </script>
 
-<div class=" flex-col h-full w-full relative border-4 border-dashed rounded-lg">
+<div class=" relative  flex-col h-full w-full border-4 border-double rounded-lg">
 <!--    <pre>{JSON.stringify($currentWork, null,2)}</pre>-->
 
     <div class=" w-full h-2/3 flex-col  p-4 max-h-[820px]">
 
         <Hr  width="w-full" height="h-2" class="">
-            <p class="text-[1.7rem]"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
+            <p class="text-[1.7rem] font-bold"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
         </Hr>
 
         <div class="w-full flex justify-center items-center h-full space-x-4 relative mt-2">
@@ -241,7 +240,6 @@
                         {timeLeft}
                         {timeDone}
                         state = {$currentWork.values.state}
-                        pomoGoal = {$currentWork.values.curGoalTime}
                         mode = "goalTimer"
                 />
                 <Timer
@@ -249,7 +247,6 @@
                         {timeLeft}
                         {timeDone}
                         state = {$currentWork.values.state}
-                        pomoGoal = {$currentWork.values.curGoalTime}
                         mode = "hourTimer"
                 />
                 <ClockDesign
@@ -264,14 +261,7 @@
                     />
                 </div>
 
-                <div class="flex-col mb-1 text-lg font-semibold absolute bg-white w-11/12 p-2 rounded-lg text-center bottom-2.5 opacity-80">
-                    <!--{#if $currentWork.values.state == "DONE"}-->
-                    <!--    <div class="flex text-[1.1vw] space-x-6">-->
-                    <!--        <div class="text-pink-800 text-[1.1vw]">  FINISH ! </div>-->
-                    <!--        <div> at </div>-->
-                    <!--        <div>{$currentTime.shortTime}</div>-->
-                    <!--    </div>-->
-                    <!--{:else}-->
+                <div class="flex-col mb-1 text-lg font-semibold absolute bg-white  p-2 rounded-lg text-center bottom-2.5 opacity-80">
                     <div class="text-[1.1vw] ">
                         <span class="text-pink-800 inline-block">
                             [{$currentWork.values.curGoalTime} min * {$defaultTimerSet.values.repeat}]
@@ -295,18 +285,29 @@
 
     </div>
 
-    <div class="h-1/3">
-        <Memo/>
-    </div>
-
     <Controller
-            {buttonDisable}
             {isRunning}
+            state = {$currentWork.values.state}
             on:start = {handlerStartTimer}
             on:stop = {handlerStopTimer}
             on:next = {handlerNextTimer}
             on:reset = {handlerResetTimer}
     />
+
+    <div class="absolute bottom-0 w-full h-1/4">
+        <Memo/>
+    </div>
+
+    <Modal title="DONE !" bind:open={clickOutsideModal} autoclose outsideclose class="flex-col w-1/3">
+        <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            goal time: {$currentWork.values.goalEndTime}
+        </p>
+        <svelte:fragment slot='footer'>
+            finish time: {$currentTime.shortTime}
+
+            <Button color="alternative" class="self-center">Close</Button>
+        </svelte:fragment>
+    </Modal>
 </div>
 
 

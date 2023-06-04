@@ -48,7 +48,7 @@ export function clearInput(){
 }
 </script>
 
-<form on:submit|preventDefault={handleAddMemo} >
+<form on:submit|preventDefault={handleAddMemo} class="absolute bottom-0 w-full p-3 right-0">
     <label for="chat" class="sr-only">Your message</label>
     <Alert color="dark" class="px-3 py-2">
         <svelte:fragment slot="icon">
