@@ -20,7 +20,7 @@
     </div>
     <div class=" w-1/5 h-full flex-col border-4 border-double rounded-lg p-4">
         <div class="flex-col w-full relative gap-y-4 h-full ">
-            <button  class={style_btnWeek_Color} >{week[$currentTime.day]}</button>
+            <button  class={style_btnWeek_Color} >{week[$currentTime.day-1]}</button>
             <div class="w-full text-center uppercase mb-2 text-lg font-bold ">
                 <span class="text-pink-600 absolute left-0">{$currentTime.month}</span>{$currentTime.date}</div>
             <div class="h-2/5"><TodoList/></div>
