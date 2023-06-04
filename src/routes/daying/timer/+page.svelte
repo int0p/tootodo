@@ -7,29 +7,16 @@
     import TodoSelect from "$lib/components/todoList.svelte";
     import TimeSelect from "./timeSelect.svelte";
     import TimerState from "./timerStateDisplay.svelte"
-    import TimerGoal from "./timerForGoal.svelte";
     import Controller from "./Controller.svelte";
     import {setContext} from "svelte";
     import {writable} from "svelte/store";
-    import {defaultSetKey,currentWorkKey} from './key.js';
+    import {currentWorkKey} from './key.js';
     import {currentTime} from '$lib/stores/clock.js';
-    import TimerHour from "./timerForHour.svelte";
     import ClockDesign from "$lib/components/clock-design.svelte";
     import { Button, Modal } from 'flowbite-svelte'
     let clickOutsideModal = false;
+    import {defaultTimerSet} from "$lib/stores/defaultSet.js";
 
-
-    const defaultTimerSet = writable({values:{
-            working: 5,
-            breaking:2,
-            repeat: 2, //tod o 마지막에 breaking없음
-
-            //todo: 얘넨 전체적인 환경설정이라 나중에 빼야함. -> setting페이지 에서 바꿀 수 있도록
-            dayStartTime: "09:00",
-            dayEndTime: "24:00"
-        }, errors:{}});
-    //todo: default는 바뀌면 안되는데 리더블이나 컨텍스트만 쓰는걸로 바꿀까? -> 나중에 setting창에서 바꿀 수 있긴함.
-    setContext(defaultSetKey,defaultTimerSet);
 
     const currentWork = writable({values:{
             todo:"",                    //선택한 toodo : todoSelect에서 선택한 todo의 title을 받아옴
@@ -186,7 +173,7 @@
     function resetPageVariables(){
         todoSelected = "";
         timeSelected = 0;
-        timeLeft = 0;
+        timeLeft = $currentWork.values.curGoalTime *60;
         timeDone = 0;
         isRunning = false;
     }
@@ -297,18 +284,17 @@
     <div class="absolute bottom-0 w-full h-1/4">
         <Memo/>
     </div>
-
-    <Modal title="DONE !" bind:open={clickOutsideModal} autoclose outsideclose class="flex-col w-1/3">
-        <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-            goal time: {$currentWork.values.goalEndTime}
-        </p>
-        <svelte:fragment slot='footer'>
-            finish time: {$currentTime.shortTime}
-
-            <Button color="alternative" class="self-center">Close</Button>
-        </svelte:fragment>
-    </Modal>
 </div>
+
+<Modal title="DONE !" bind:open={clickOutsideModal} autoclose outsideclose class="flex-col w-1/3">
+    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+        goal time: {$currentWork.values.goalEndTime}
+    </p>
+    <svelte:fragment slot='footer'>
+        finish time: {$currentTime.shortTime}
+<!--        <Button color="alternative" class="self-center">Close</Button>-->
+    </svelte:fragment>
+</Modal>
 
 
 <style lang="scss">

@@ -52,7 +52,7 @@
     function removeTodo(todoID){
         $todoList = $todoList.filter(toodo => toodo.id !== todoID);
     }
-    // $: console.log(todoList);
+    // $: console.log($todoList);
 </script>
 
 <!--목표: memoList는 memo를 보여주고, memoAdd는 memo를 추가하는 역할을 한다.-->

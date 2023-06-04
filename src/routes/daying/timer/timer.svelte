@@ -1,18 +1,7 @@
-<!--<script context="module">-->
-<!--    ////////////////////   import stores   ////////////////////-->
-<!--    const elements = new Set();-->
 
-
-<!--</script>-->
 
 <script>
     ////////////////////////////// timer setting //////////////////////////////
-    import {onMount} from 'svelte';
-
-    // onMount(() => {
-    //     elements.add(timer);
-    //     return () => elements.delete(timer);
-    // });
 
     let timer;
     export let state;
@@ -25,6 +14,7 @@
 
     ////////////////////////////// chart setting //////////////////////////////
     import { Doughnut } from 'svelte-chartjs';
+    import { onMount, beforeUpdate, afterUpdate } from 'svelte';
     import {
         Chart as ChartJS,
         Title,
@@ -36,7 +26,6 @@
     // export let pomoGoal;
     // $:repeatPerHour = Math.floor(pomoGoal/60);
     // $: console.log(repeatPerHour);
-
 
     $:{
         if(mode === "goalTimer"){
@@ -64,7 +53,6 @@
         }else{
             data.datasets[0].data  = [0,1];
         }
-        // console.log(repeatPerHour);
     }
     ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale);
 
