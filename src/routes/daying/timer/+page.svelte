@@ -63,6 +63,14 @@
     });
     setContext(currentWorkKey,currentWork);
 
+    ////////////////////////////// alarm setting //////////////////////////////
+    let alarmSound = null;
+    function playAlarm(){
+        if(alarmSound === null){
+            alarmSound = new Audio('https://freesound.org/data/previews/80/80921_1022651-lq.mp3');
+        }
+        alarmSound.play();
+    }
     ///////////////////// timer ///////////////////////
     import Timer from "./timer.svelte";
     import Memo from "../memo/+page.svelte";
@@ -102,11 +110,15 @@
                         return;
                     }
                     $currentWork.values.state = "BREAKING";
+                    playAlarm();
+
                     timeLeft = $defaultTimerSet.values.breaking *60;
                     timeDone = 0;
                     handlerStartTimer();
                 }else {
                     $currentWork.values.state = "WORKING";
+                    playAlarm();
+
                     timeLeft = $currentWork.values.curGoalTime *60;
                     timeDone = 0;
                     handlerStartTimer();
@@ -151,6 +163,7 @@
 
     }
     function stateDONE(endTime){
+        playAlarm();
         clickOutsideModal = true; //끝났음을 알리는 model등장!
         // $currentWork.values.state = "DONE";
         $currentWork.values.endTime = endTime;
