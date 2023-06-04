@@ -124,7 +124,7 @@
                     handlerStartTimer();
                 }
             }
-        },50);
+        },1000);
         // console.log(`repeated time: ${$currentWork.values.repeated}`);
     }
 
