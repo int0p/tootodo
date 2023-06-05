@@ -9,11 +9,11 @@
      $:console.log(group)
 </script>
 
-<Timeline class="w-full h-max-[350px]  overflow-y-scroll " >
+<Timeline class="w-full h-full  overflow-y-scroll " >
     <div class="mt-2"></div>
     <TimelineItem title="" date="Todo List" >
         <ul class="mt-1 bg-white rounded-lg border border-gray-200 divide-y divide-gray-200
-                h-full max-h-[38vh] overflow-y-scroll w-full">
+                h-full max-h-[38vh] overflow-y-scroll w-full ">
             {#if $todoList}
                 {#each $todoList as {title,id} (id)}
                     <li class="max-h-[64px] overflow-y-hidden p-3 ">

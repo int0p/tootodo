@@ -66,7 +66,7 @@
     }
 </script>
 
-<div class="w-full h-[60px] flex-col p-4  ">
+<div class="w-full h-[60px] flex-col py-4 ">
 
 <!--    <div class="flex-col relative mb-8  w-full">-->
 <!--        <Progressbar progress="10" size="h-5" class="my-3 font-bold "/>-->

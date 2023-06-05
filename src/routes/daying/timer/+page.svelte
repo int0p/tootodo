@@ -242,13 +242,13 @@
             <p class="text-[1.7rem] max-w-[700px] line-clamp-1 font-bold"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
         </Hr>
 
-        <div class="w-full flex justify-center items-center h-full space-x-4 relative mt-2">
-            <div class="flex-col w-2/5 h-full relative m-2">
+        <div class="w-full flex justify-center items-center h-[calc(100%-3rem)] space-x-4 relative mt-2">
+            <div class="flex-col w-2/5 h-full relative top-2">
                 <TodoSelect bind:todoSelected />
                 <TimeSelect bind:timeSelected/>
             </div>
 
-            <div class="relative timerBox w-3/5 flex justify-center items-center h-[calc(100%-2rem)]">
+            <div class="relative top-2 timerBox w-3/5 flex justify-center items-center h-[calc(100%-2rem)]">
                 <Timer
                         designTimer = {classGoal}
                         {timeLeft}
@@ -297,16 +297,18 @@
             </div>
         </div>
 
+        <Controller
+                {isRunning}
+                state = {$currentWork.values.state}
+                on:start = {handlerStartTimer}
+                on:stop = {handlerStopTimer}
+                on:next = {handlerNextTimer}
+                on:reset = {handlerResetTimer}
+        />
+
     </div>
 
-    <Controller
-            {isRunning}
-            state = {$currentWork.values.state}
-            on:start = {handlerStartTimer}
-            on:stop = {handlerStopTimer}
-            on:next = {handlerNextTimer}
-            on:reset = {handlerResetTimer}
-    />
+
 
     <div class="absolute bottom-0 w-full h-1/4">
         <Memo/>
