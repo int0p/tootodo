@@ -75,7 +75,7 @@
     import Timer from "./timer.svelte";
     import Memo from "../memo/+page.svelte";
 
-    let todoSelected = ""; // {id:1, title:""}
+    export let todoSelected = "";
     let timeSelected = 0;
     let timeLeft = $currentWork.values.curGoalTime *60 ;
     let timeDone = 0;
@@ -204,9 +204,24 @@
         }
     }
 
+    function getTodos(todoSelected){
+        let todos="";
+        if(todoSelected){
+            for(let i = 0; i<todoSelected.length; i++){
+                if(i === todoSelected.length-1)
+                    todos += todoSelected[i] + " ";
+                else
+                    todos += todoSelected[i] + ", ";
+            }
+            return todos;
+        }else{
+            return "Select todo!";
+        }
+    }
+
     $:{
         if ($currentWork.values.state == "IDLE") {
-            $currentWork.values.todo = todoSelected.title;
+            $currentWork.values.todo = getTodos(todoSelected);
             $currentWork.values.curGoalTime = $defaultTimerSet.values.working + timeSelected;
             const goalMinutes = $defaultTimerSet.values.repeat * ($currentWork.values.curGoalTime + $defaultTimerSet.values.breaking);
             $currentWork.values.goalEndTime = $currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes, goalMinutes);
@@ -216,7 +231,6 @@
     const classGoal = "absolute w-[calc(100%-3rem)]  scale-[94%] ";
     const classHour = "absolute w-[calc(100%-3rem)]  scale-[60%]";
     const classClock = "relative w-[calc(100%-3rem)]  indent-0.5";
-
 </script>
 
 <div class=" relative  flex-col h-full w-full border-4 border-double rounded-lg">
@@ -224,8 +238,8 @@
 
     <div class=" w-full h-2/3 flex-col  p-4 max-h-[820px]">
 
-        <Hr  width="w-full" height="h-2" class="">
-            <p class="text-[1.7rem] font-bold"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
+        <Hr  width="w-full overflow-x-hidden" height="h-2" class="">
+            <p class="text-[1.7rem] max-w-[700px] line-clamp-1 font-bold"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
         </Hr>
 
         <div class="w-full flex justify-center items-center h-full space-x-4 relative mt-2">
