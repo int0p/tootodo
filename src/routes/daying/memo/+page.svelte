@@ -59,16 +59,16 @@
 <!--현실: memoList에 메모의 북마크를 토글하거나 삭제하는 기능이 있다.-->
 <!--TODO: memoList와 memoAdd를 합치거나, 다른 방식으로 나누어야함.-->
 <div class="w-full h-full p-4 relative ">
-    <div class="w-full absolute top-0 h-[calc(100%-80px)]">
+    <div class="w-full absolute top-0 h-[calc(100%-70px)]">
         <MemoList
                 {memos}
                 on:removeMemo={handlerRemoveMemo}
                 on:toggleSave={handlerToggleSave}
         />
     </div>
-    <div class="absolute bottom-6 w-full right-0">
+    <div class="absolute bottom-0 w-full right-0">
         <MemoAdd
-                biwnd:this={memoList}
+                bind:this={memoList}
                 on:addMemo={handlerAddMemo}/>
     </div>
 

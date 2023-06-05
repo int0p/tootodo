@@ -236,13 +236,13 @@
 <div class=" relative  flex-col h-full w-full ">
 <!--    <pre>{JSON.stringify($currentWork, null,2)}</pre>-->
 
-    <div class=" relative w-full h-2/3 flex-col  p-4 max-h-[820px]">
+    <div class=" relative w-full h-2/3 flex-col  p-4 max-h-[790px]">
 
-        <Hr  width="w-full overflow-x-hidden" height="h-2" class="">
-            <p class="text-[1.7rem] max-w-[700px] line-clamp-1 font-bold"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
+        <Hr  width="w-full overflow-x-hidden" height="h-2" class="mb-2">
+            <p class="text-[1.7rem] max-w-[600px] line-clamp-2 font-bold"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
         </Hr>
 
-        <div class="w-full flex justify-center items-center h-[calc(100%-3rem)] space-x-4 relative mt-2">
+        <div class="w-full flex justify-center items-center h-[calc(100%-3rem)] space-x-4 relative mt-5">
             <div class="flex-col w-2/5 h-full relative top-2">
                 <TodoSelect bind:todoSelected />
                 <TimeSelect bind:timeSelected/>
@@ -310,7 +310,7 @@
 
     </div>
 
-    <div class="relative -bottom-14 w-full h-[30%]">
+    <div class="relative top-[66px] w-full h-[26%]">
         <Memo/>
     </div>
 </div>
@@ -328,9 +328,9 @@
 
 <style lang="scss">
   .timerBox {
-    border-radius: 20%;
-    border: 14px solid rgb(55, 55, 55);
-    box-shadow: inset 0 0 3px 3px rgba(50, 50, 50, 0.3), inset 0 0 1px 2px rgba(50, 50, 50, 0.2);
+    border-radius: 16%;
+    border: 13px solid rgb(55, 55, 55);
+    box-shadow: inset 0 0 3px 3px #52525b, inset 0 0 1px 2px rgba(50, 50, 50, 0.2);
   }
 </style>
 

@@ -14,8 +14,8 @@
 <Button color="dark" class="!bg-zinc-600 !rounded-2xl border-white border-4 w-full h-full flex-col py-2 space-y-1 divide-y-2"
         on:click={controlInTimer}
 >
-    <div class="text-center text-rose-100 w-full font-digital">{getFriendlyTime(timeLeft)}</div>
-    <div class="text-center w-full font-digital mt-1"> {state}</div>
+    <div class="text-center  w-full font-digital">{getFriendlyTime(timeLeft)}</div>
+    <div class="text-center text-rose-100 w-full font-digital mt-1"> {state}</div>
 </Button>
 
 <style>
