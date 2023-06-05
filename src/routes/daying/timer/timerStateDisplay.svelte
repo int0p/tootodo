@@ -14,14 +14,14 @@
 <Button color="dark" class="!bg-rose-950 !rounded-2xl border-white border-4 w-full h-full flex-col py-2 space-y-1 divide-y-2"
         on:click={controlInTimer}
 >
-    <div class="text-center  w-full font-digital">{getFriendlyTime(timeLeft)}</div>
-    <div class="text-center text-green-400 w-full font-digital mt-1"> {state}</div>
+    <div class="text-center  w-full font-digital font-extrabold">{getFriendlyTime(timeLeft)}</div>
+    <div class="text-center text-green-400 w-full font-digital mt-1 font-extrabold"> {state}</div>
 </Button>
 
 <style>
     .font-digital{
-        font-family: 'Zen Dots', cursive;
-        font-size: 1.2vw;
-        line-height: 1.2vw;
+        font-family: 'Quantico', sans-serif;
+        font-size: 1.5vw;
+        line-height: 1.5vw;
     }
 </style>

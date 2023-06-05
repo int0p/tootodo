@@ -24,19 +24,22 @@
             <div class="flex-col justify-start absolute top-0 w-full h-[80px]">
                 <button  class={style_btnWeek_Color} >{week[$currentTime.day]}</button>
                 <div class="w-full text-center uppercase mb-2 text-lg font-bold ">
-                    <span class="text-rose-600 absolute left-0">{$currentTime.month}</span>{$currentTime.date}</div>
+                    <div class=" absolute left-0 text-xl font-digital"><span class="text-rose-600">{$currentTime.month}</span> /{$currentTime.date}</div>
+                    <div class="text-3xl text-rose-950 font-digital absolute right-0">{$currentTime.shortTime}</div>
+                </div>
             </div>
 
             <div class="absolute h-[calc(100%-80px)] flex-col w-full top-20">
                 <div class="w-full h-2/5 absolute top-2"><DoneList/></div>
                 <div class="h-3/5 w-full absolute bottom-0"><TimeTable/></div>
-                <Button size="xl" gradient color="green"
-                        class="showWorks absolute bottom-0 right-0 !font-extrabold text-center text-lg !p-3 w-2/5
-                                   from-zinc-100 to-rose-500 bg-gradient-to-br hover:bg-gradient-to-l "
+                <Button size="xl" gradient color=""
+                        class="showWorks absolute bottom-0 right-0 !font-extrabold text-center text-lg !p-2 w-5/12
+                                   from-green-500 to-rose-500 bg-gradient-to-br hover:bg-gradient-to-l text-white text-xl"
                         on:mouseenter={() => showWorksColor = !showWorksColor}
                         on:mouseleave={() => showWorksColor = !showWorksColor}
                 >
-                    10H 30M</Button>
+                    <span class="font-digital font-extrabold ">10H 30M</span>
+                </Button>
 
                 {#if showWorksColor}
                     <Listgroup class="w-2/5 absolute bottom-0 left-12" active>
@@ -67,3 +70,9 @@
     </div>
 
 </div>
+
+<style>
+    .font-digital{
+        font-family: 'Quantico', sans-serif;
+    }
+</style>

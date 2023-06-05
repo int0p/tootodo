@@ -19,19 +19,19 @@
     <div class="w-full my-3 h-1/2  flex space-x-1 text-center bg-white">
         <button class={timeButtonStyle}
                 on:click ={()=> timeSet = 5}>
-            <Heading tag="h5" class={timeTextStyle}>5</Heading>
+            <Heading tag="h5" class={timeTextStyle}><span class="font-digital font-extrabold">5</span></Heading>
         </button>
         <button class={timeButtonStyle}
                 on:click ={()=> timeSet = 10}>
-            <Heading tag="h5" class={timeTextStyle}>10</Heading>
+            <Heading tag="h5" class={timeTextStyle}><span class="font-digital font-extrabold">10</span></Heading>
         </button>
         <button class={timeButtonStyle}
                 on:click ={()=> timeSet = 25}>
-            <Heading tag="h5" class={timeTextStyle}>25</Heading>
+            <Heading tag="h5" class={timeTextStyle}><span class="font-digital font-extrabold">25</span></Heading>
         </button>
         <button class={timeButtonStyle}
                 on:click ={()=> timeSet = 60}>
-            <Heading tag="h5" class={timeTextStyle}>60</Heading>
+            <Heading tag="h5" class={timeTextStyle}><span class="font-digital font-extrabold">60</span></Heading>
         </button>
     </div>
 
@@ -55,3 +55,9 @@
         </button></Badge>
     </div>
 </div>
+
+<style>
+    .font-digital{
+        font-family: 'Quantico', sans-serif;
+    }
+</style>
