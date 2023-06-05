@@ -233,10 +233,10 @@
     const classClock = "relative w-[calc(100%-3rem)]  indent-0.5";
 </script>
 
-<div class=" relative  flex-col h-full w-full border-4 border-double rounded-lg">
+<div class=" relative  flex-col h-full w-full ">
 <!--    <pre>{JSON.stringify($currentWork, null,2)}</pre>-->
 
-    <div class=" w-full h-2/3 flex-col  p-4 max-h-[820px]">
+    <div class=" relative w-full h-2/3 flex-col  p-4 max-h-[820px]">
 
         <Hr  width="w-full overflow-x-hidden" height="h-2" class="">
             <p class="text-[1.7rem] max-w-[700px] line-clamp-1 font-bold"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
@@ -297,20 +297,20 @@
             </div>
         </div>
 
-        <Controller
-                {isRunning}
-                state = {$currentWork.values.state}
-                on:start = {handlerStartTimer}
-                on:stop = {handlerStopTimer}
-                on:next = {handlerNextTimer}
-                on:reset = {handlerResetTimer}
-        />
+        <div class="relative w-full right-0">
+            <Controller
+                    {isRunning}
+                    state = {$currentWork.values.state}
+                    on:start = {handlerStartTimer}
+                    on:stop = {handlerStopTimer}
+                    on:next = {handlerNextTimer}
+                    on:reset = {handlerResetTimer}
+            />
+        </div>
 
     </div>
 
-
-
-    <div class="absolute bottom-0 w-full h-1/4">
+    <div class="relative -bottom-14 w-full h-[30%]">
         <Memo/>
     </div>
 </div>

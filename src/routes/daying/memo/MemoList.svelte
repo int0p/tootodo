@@ -56,7 +56,7 @@
 </script>
 
 <div bind:offsetHeight={listDivHeight} bind:this={listDiv}
-     class="w-full  h-5/6 h-max-[calc(100%-100px)] overflow-y-auto ">
+     class="w-full h-full overflow-y-auto ">
 
     <!-- memo list-->
     <div  class="w-full" >
