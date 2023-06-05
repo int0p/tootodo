@@ -66,7 +66,7 @@
                 on:toggleSave={handlerToggleSave}
         />
     </div>
-    <div class="absolute bottom-5 w-full right-0">
+    <div class="absolute bottom-6 w-full right-0">
         <MemoAdd
                 bind:this={memoList}
                 on:addMemo={handlerAddMemo}/>
