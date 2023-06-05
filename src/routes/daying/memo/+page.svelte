@@ -68,7 +68,7 @@
     </div>
     <div class="absolute bottom-6 w-full right-0">
         <MemoAdd
-                bind:this={memoList}
+                biwnd:this={memoList}
                 on:addMemo={handlerAddMemo}/>
     </div>
 
