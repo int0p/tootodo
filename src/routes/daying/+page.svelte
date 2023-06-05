@@ -30,9 +30,9 @@
             <div class="absolute h-[calc(100%-80px)] flex-col w-full top-20">
                 <div class="w-full h-2/5 absolute top-2"><DoneList/></div>
                 <div class="h-3/5 w-full absolute bottom-0"><TimeTable/></div>
-                <Button size="xl" gradient color="blue"
+                <Button size="xl" gradient color="green"
                         class="showWorks absolute bottom-0 right-0 !font-extrabold text-center text-lg !p-3 w-2/5
-                                   from-zinc-100 to-rose-500 bg-gradient-to-tr hover:bg-gradient-to-l "
+                                   from-zinc-100 to-rose-500 bg-gradient-to-br hover:bg-gradient-to-l "
                         on:mouseenter={() => showWorksColor = !showWorksColor}
                         on:mouseleave={() => showWorksColor = !showWorksColor}
                 >
