@@ -239,7 +239,7 @@
     <div class=" relative w-full h-2/3 flex-col  p-4 max-h-[790px]">
 
         <Hr  width="w-full overflow-x-hidden" height="h-2" class="mb-2">
-            <p class="text-[1.7rem] max-w-[600px] line-clamp-2 font-bold"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
+            <p class="text-[1.7rem] max-w-[800px] line-clamp-2 font-bold"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
         </Hr>
 
         <div class="w-full flex justify-center items-center h-[calc(100%-3rem)] space-x-4 relative mt-5">
