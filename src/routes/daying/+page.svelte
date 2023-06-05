@@ -6,13 +6,12 @@
     import DoneList from "$lib/components/doneList.svelte";
     let currentDate = new Date();
     import {currentTime} from "$lib/stores/clock.js";
-    import {Button, Listgroup, ListgroupItem } from "flowbite-svelte";
+    import {Button, Listgroup, ListgroupItem} from "flowbite-svelte";
 
     let style_btnWeek = "w-full text-center uppercase mb-2 text-lg font-bold bg-gray-100 py-2 rounded-md hover:bg-gray-200 ";
-    let style_btnWeek_Color = "w-full text-center uppercase mb-2 text-lg font-bold py-2 rounded-md hover:bg-pink-700 text-white bg-pink-800";
+    let style_btnWeek_Color = "w-full text-center uppercase mb-2 text-lg font-bold py-2 rounded-md hover:bg-rose-700 text-white bg-zinc-700";
     let week = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     let showWorksColor = false;
-
 </script>
 
 <div class="flex w-full h-full justify-center items-start space-x-4 my-6">
@@ -25,17 +24,20 @@
             <div class="flex-col justify-start absolute top-0 w-full h-[80px]">
                 <button  class={style_btnWeek_Color} >{week[$currentTime.day]}</button>
                 <div class="w-full text-center uppercase mb-2 text-lg font-bold ">
-                    <span class="text-pink-600 absolute left-0">{$currentTime.month}</span>{$currentTime.date}</div>
+                    <span class="text-rose-600 absolute left-0">{$currentTime.month}</span>{$currentTime.date}</div>
             </div>
 
             <div class="absolute h-[calc(100%-80px)] flex-col w-full top-20">
                 <div class="w-full h-2/5 absolute top-2"><DoneList/></div>
                 <div class="h-3/5 w-full absolute bottom-0"><TimeTable/></div>
-                <Button size="xl" gradient color="purpleToPink"
-                        class="absolute bottom-0 right-0 !font-extrabold text-center text-lg !p-3 w-2/5"
-                        on:click={() => showWorksColor = !showWorksColor}
+                <Button size="xl" gradient color="blue"
+                        class="showWorks absolute bottom-0 right-0 !font-extrabold text-center text-lg !p-3 w-2/5
+                                   from-zinc-100 to-rose-500 bg-gradient-to-tr hover:bg-gradient-to-l "
+                        on:mouseenter={() => showWorksColor = !showWorksColor}
+                        on:mouseleave={() => showWorksColor = !showWorksColor}
                 >
                     10H 30M</Button>
+
                 {#if showWorksColor}
                     <Listgroup class="w-2/5 absolute bottom-0 left-12" active>
                         <ListgroupItem class="flex">

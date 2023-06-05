@@ -277,7 +277,7 @@
 
                 <div class="flex-col mb-1 text-lg font-semibold absolute bg-white  p-2 rounded-lg text-center bottom-2.5 opacity-80">
                     <div class="text-[1.1vw] ">
-                        <span class="text-pink-800 inline-block">
+                        <span class="text-rose-700 inline-block">
                             [{$currentWork.values.curGoalTime} min * {$defaultTimerSet.values.repeat}]
                         </span>
 

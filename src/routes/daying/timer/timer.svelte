@@ -79,12 +79,12 @@
                 label: 'do / Goal',
                 data: [0,1],
                 backgroundColor: [
-                    'rgba(190,24,93, 1)', //bg-pink-700
-                    'rgb(157,23,77,0.1)', //bg-pink-800
+                    '#e11d48', //rose-6000
+                    '#f4f4f5', //zinc-100
                 ],
                 borderColor: [
-                    'rgba(190,24,93, 1)',
-                    'rgb(157,23,77,0.1)',
+                    '#e11d48', //rose-6000
+                    '#f4f4f5', //zinc-100
                 ],
                 borderWidth: 1,
                 cutout: "10%",

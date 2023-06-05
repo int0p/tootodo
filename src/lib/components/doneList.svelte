@@ -6,13 +6,13 @@
     let group = [];
     export let todoSelected = [];
      $: todoSelected = group;
-     $:console.log(group)
+     // $:console.log(group)
 </script>
 
 <Timeline class="w-full h-full  overflow-y-scroll " >
     <TimelineItem title="" date="Done List" >
         <ul class="mt-1 bg-white rounded-lg border border-gray-200 divide-y divide-gray-200
-                h-full max-h-[26vh] overflow-y-scroll w-full ">
+                h-full max-h-[25vh] overflow-y-scroll w-full ">
             {#if $todoList}
                 {#each $todoList as {title,id} (id)}
                     <li class="max-h-[64px] overflow-y-hidden p-3 ">

@@ -6,7 +6,7 @@
     let group = [];
     export let todoSelected = [];
      $: todoSelected = group;
-     $:console.log(group)
+     // $:console.log(group)
 </script>
 
 <Timeline class="w-full h-full  overflow-y-scroll " >
