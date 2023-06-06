@@ -80,11 +80,11 @@
                 data: [0,1],
                 backgroundColor: [
                     '#e11d48', //rose-6000
-                    '#f4f4f5', //zinc-100
+                    '#f7f4f5', //zinc-100
                 ],
                 borderColor: [
                     '#e11d48', //rose-6000
-                    '#f4f4f5', //zinc-100
+                    '#f6f4f5', //zinc-100
                 ],
                 borderWidth: 1,
                 cutout: "10%",
@@ -134,7 +134,6 @@
 
 <!--    <pre>{JSON.stringify({timeLeft}, null,2) }</pre>-->
 <Doughnut
-        bind:this={timer}
         {data} {options}
         class={designTimer}
 />

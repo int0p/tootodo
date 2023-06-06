@@ -17,7 +17,6 @@
     let clickOutsideModal = false;
     import {defaultTimerSet} from "$lib/stores/defaultSet.js";
 
-
     const currentWork = writable({values:{
             todo:"",                    //선택한 toodo : todoSelect에서 선택한 todo의 title을 받아옴
             curGoalTime:0,        //뽀모 하나 단위: 디폴트값에서 timeSelect에서 선택한 시간을 더함
@@ -72,7 +71,7 @@
         alarmSound.play();
     }
     ///////////////////// timer ///////////////////////
-    import Timer from "./timer.svelte";
+    import Timer from "./pomodoro.svelte";
     import Memo from "../memo/+page.svelte";
 
     export let todoSelected = "";
@@ -233,22 +232,27 @@
     const classClock = "relative w-[calc(100%-3rem)]  indent-0.5";
 </script>
 
-<div class=" relative  flex-col h-full w-full ">
+<div class=" relative flex-col h-full w-full ">
 <!--    <pre>{JSON.stringify($currentWork, null,2)}</pre>-->
 
     <div class=" relative w-full h-2/3 flex-col  p-4 max-h-[790px]">
+        <div class="h-[30px] w-full relative ">
+            <Hr  width="w-full" height="h-2" >
+                <p class="text-[1.6rem] line-clamp-2 font-bold w-auto max-w-[600px]"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
+            </Hr>
+        </div>
 
-        <Hr  width="w-full overflow-x-hidden" height="h-2" class="mb-2">
-            <p class="text-[1.7rem] max-w-[800px] line-clamp-2 font-bold"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
-        </Hr>
-
-        <div class="w-full flex justify-center items-center h-[calc(100%-3rem)] space-x-4 relative mt-5">
-            <div class="flex-col w-2/5 h-full relative top-2">
-                <TodoSelect bind:todoSelected />
-                <TimeSelect bind:timeSelected/>
+        <div class="w-full flex justify-center items-center h-[calc(100%-60px)] space-x-4 relative mt-5">
+            <div class="flex-col w-2/5 h-full relative ">
+                <div class="w-full h-5/6 max-h-[calc(100%-90px)]">
+                    <TodoSelect bind:todoSelected />
+                </div>
+                <div class="w-full  h-1/6 min-h-[86px] max-h-[110px]">
+                    <TimeSelect bind:timeSelected/>
+                </div>
             </div>
 
-            <div class="relative top-2 timerBox w-3/5 flex justify-center items-center h-[calc(100%-2rem)]">
+            <div class="relative top-1 timerBox w-3/5 flex justify-center items-center h-[calc(100%-0rem)]">
                 <Timer
                         designTimer = {classGoal}
                         {timeLeft}
@@ -297,20 +301,18 @@
             </div>
         </div>
 
-        <div class="relative w-full right-0">
-            <Controller
-                    {isRunning}
-                    state = {$currentWork.values.state}
-                    on:start = {handlerStartTimer}
-                    on:stop = {handlerStopTimer}
-                    on:next = {handlerNextTimer}
-                    on:reset = {handlerResetTimer}
-            />
-        </div>
+        <Controller
+                {isRunning}
+                state = {$currentWork.values.state}
+                on:start = {handlerStartTimer}
+                on:stop = {handlerStopTimer}
+                on:next = {handlerNextTimer}
+                on:reset = {handlerResetTimer}
+        />
 
     </div>
 
-    <div class="relative top-[66px] w-full h-[26%]">
+    <div class="relative top-[64px] w-full h-[26%]">
         <Memo/>
     </div>
 </div>

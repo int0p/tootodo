@@ -24,3 +24,28 @@ export function createLocStorage(key ,initialValue){
 }
 
 export const todoList = createLocStorage('todoList', []);
+export const defaultTimer = createLocStorage('defaultTimer', {
+    working: 50,
+    breaking:10,
+    repeat: 3, //tod o 마지막에 breaking없음
+    dayStartTime: "09:00",
+    dayEndTime: "00:00",
+    alarmSession: true,
+    alarmDone: true,
+    bgm:null,
+    useBgm: false,
+    reset:()=>{
+        defaultTimer.set({
+            working: 50,
+            breaking:10,
+            repeat: 3, //tod o 마지막에 breaking없음
+            dayStartTime: "09:00",
+            dayEndTime: "00:00",
+            alarmSession: true,
+            alarmDone: true,
+            bgm:null,
+            useBgm: false,
+        });
+    }
+},
+    );

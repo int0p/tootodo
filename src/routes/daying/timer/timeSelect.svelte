@@ -14,9 +14,8 @@
 
 </script>
 
-<div class="flex-col timeController w-full  h-1/6 absolute bottom-12 ">
-    <Hr height="h-1" class="absolute top-2"/>
-    <div class="w-full my-3 h-1/2  flex space-x-1 text-center bg-white">
+<div class="flex-col timeController w-full h-full relative border-t-4 mt-2">
+    <div class="w-full h-1/2  flex space-x-1 text-center bg-white absolute top-1">
         <button class={timeButtonStyle}
                 on:click ={()=> timeSet = 5}>
             <Heading tag="h5" class={timeTextStyle}><span class="font-digital font-extrabold">5</span></Heading>
@@ -35,7 +34,7 @@
         </button>
     </div>
 
-    <div class="w-full h-1/3 flex justify-between space-x-2 ">
+    <div class="w-full h-1/3 flex justify-between space-x-2 absolute bottom-0">
         <Badge color="green" small  class="w-2/12 !p-0 rounded-md " >
             <button class="w-full h-full text-center text-lg flex justify-center focus:ring-4 focus:ring-green-200  hover:bg-green-700 hover:text-white"
                     on:click={()=>timeSelected = 0}>
