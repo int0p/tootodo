@@ -27,6 +27,10 @@
 
             state:"IDLE",           // IDLE, WORKING, BREAKING, DONE
             repeated:0,             // 몇번의 뽀모가 지났는지.
+            repeatStartTime:{
+                hours:0,
+                minutes:0,
+            },
 
             endTime:"",              // toodo가 끝난시간.
             studyTime:0,           // 실제 공부한 시간.
@@ -42,7 +46,7 @@
                 let hours = Math.floor(newFullMinutes/60);
                 let minutes = Math.floor(newFullMinutes%60);
                 let ampm = hours >= 12 ? 'PM' : 'AM';
-                return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+                return `${(hours%12).toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${ampm}`;
             },
             resetCurrentWork:()=>{
                 $currentWork.values.todo = "";
@@ -53,6 +57,10 @@
                 $currentWork.values.goalEndTime = $currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes, goalMinutes);
                 $currentWork.values.state = "IDLE";
                 $currentWork.values.repeated = 0;
+                $currentWork.values.repeatStartTime={
+                    hours:0,
+                    minutes:0,
+                };
                 $currentWork.values.endTime = 0;
             }
         },
@@ -69,6 +77,7 @@
             alarmSound = new Audio('https://freesound.org/data/previews/80/80921_1022651-lq.mp3');
         }
         alarmSound.play();
+
     }
     ///////////////////// timer ///////////////////////
     import Timer from "./pomodoro.svelte";
@@ -88,8 +97,10 @@
         if(e){
             e.preventDefault();
             if($currentWork.values.state == "IDLE"){
-                $currentWork.values.startTime = e.detail.startTime;
-                $currentWork.values.date = e.detail.date;
+                $currentWork.values.startTime = $currentTime.shortTime;
+                $currentWork.values.repeatStartTime.hours = $currentTime.hours;
+                $currentWork.values.repeatStartTime.minutes = $currentTime.minutes;
+                $currentWork.values.date = $currentTime.shortDate;
                 timeLeft = $currentWork.values.curGoalTime *60;
                 $currentWork.values.state = "WORKING";
             }
@@ -101,29 +112,34 @@
             timeDone ++;
             if(timeLeft <= 0){
                 clearInterval(interval);
+
+                //설정한 반복횟수만큼 session 전환.
                 if($currentWork.values.state != 'BREAKING') {
                     $currentWork.values.repeated++;
+                    // 목표 반복횟수까지 도달했는지 확인. (마지막 반복에선 breaking하지 않음. )
                     if($currentWork.values.repeated === $defaultTimerSet.values.repeat){
                         // console.log("DONE")
                         stateDONE($currentTime.shortTime);
                         return;
                     }
+                    //breaking session으로의 전환
                     $currentWork.values.state = "BREAKING";
                     playAlarm();
-
                     timeLeft = $defaultTimerSet.values.breaking *60;
                     timeDone = 0;
                     handlerStartTimer();
                 }else {
+                    //working session으로의 전환, 목표 종료시간 & 시작시간 업데이트.
                     $currentWork.values.state = "WORKING";
                     playAlarm();
-
+                    $currentWork.values.repeatStartTime.hours = $currentTime.hours;
+                    $currentWork.values.repeatStartTime.minutes = $currentTime.minutes;
                     timeLeft = $currentWork.values.curGoalTime *60;
                     timeDone = 0;
                     handlerStartTimer();
                 }
             }
-        },1000);
+        },50);
         // console.log(`repeated time: ${$currentWork.values.repeated}`);
     }
 
@@ -287,9 +303,9 @@
 
                         {#if $currentWork.values.state == "WORKING"}
                             <div class="bg-white inline-block rounded-md px-2">
-                                {$currentWork.values.startTime}
+                                {($currentWork.values.repeatStartTime.hours%12).toString().padStart(2, '0')}:{$currentWork.values.repeatStartTime.minutes.toString().padStart(2, '0')}:{$currentWork.values.repeatStartTime.hours >= 12 ? 'PM' : 'AM'}
                             </div>
-                            - {$currentWork.functions.addMinutes($currentTime.hours,$currentTime.minutes,$currentWork.values.curGoalTime)}
+                            - {$currentWork.functions.addMinutes($currentWork.values.repeatStartTime.hours,$currentWork.values.repeatStartTime.minutes,$currentWork.values.curGoalTime)}
                         {:else }
                             <div class="bg-white inline-block rounded-md px-2">
                                 {$currentTime.shortTime}

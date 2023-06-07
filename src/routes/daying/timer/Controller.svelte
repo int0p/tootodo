@@ -31,9 +31,7 @@
             startTime: $currentTime.shortTime,
             date: $currentTime.shortDate,
         }
-        const isCancelled = dispatch("start", state,{
-            cancelable: true,
-        });
+        const isCancelled = dispatch("start");
     }
     function handleStopTimer(){
         const isCancelled = dispatch("stop");
