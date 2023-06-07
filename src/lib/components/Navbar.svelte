@@ -2,8 +2,14 @@
 import {goto} from "$app/navigation";
 import {onMount} from "svelte";
 import {page} from "$app/stores";
-import lapTimer from "@iconify/icons-radix-icons/lap-timer.js";
-import folderCopy from "@iconify/icons-material-symbols/folder-copy.js";
+import notebook2Fill from '@iconify/icons-mingcute/notebook-2-fill';
+import calendarMonthFill from '@iconify/icons-mingcute/calendar-month-fill';
+import chartPieFill from '@iconify/icons-mingcute/chart-pie-fill';
+import settings1Fill from '@iconify/icons-mingcute/settings-1-fill';
+import home3Fill from '@iconify/icons-mingcute/home-3-fill';
+
+
+import folderOpenFill from '@iconify/icons-mingcute/folder-open-fill';
 import chartPie from "@iconify/icons-uim/chart-pie.js";
 import settingFilled from "@iconify/icons-ant-design/setting-filled.js";
 import Icon from "@iconify/svelte";
@@ -23,29 +29,29 @@ const buttonClass="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:tex
             <BottomNavHeaderItem itemName="Following" />
         {/if}
     </BottomNavHeader>
-    <BottomNavItem btnName="Settings" id="group-settings" on:click={()=>goto('/setting')}>
-        <Icon icon={settingFilled} width="24" class={buttonClass}/>
-        <Tooltip arrow={false}>Settings</Tooltip>
+    <BottomNavItem btnName="Statistics" id="group-search" on:click={()=>goto('/statistics')}>
+        <Icon icon={chartPieFill} width="24" class={buttonClass} />
+        <Tooltip arrow={false}>Statistics</Tooltip>
     </BottomNavItem>
+
     <BottomNavItem btnName="Projects" id="group-home" on:click={()=>goto('/projects')}>
-        <Icon icon={folderCopy}  width="24" class={buttonClass}/>
+        <Icon icon={notebook2Fill} width="24" class={buttonClass}/>
         <Tooltip arrow={false}>Projects</Tooltip>
     </BottomNavItem>
+
     <BottomNavItem btnName="Home" id="group-home" on:click={()=>goto('/')}>
-        <svg class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-        </svg>
+        <Icon icon={home3Fill} width="24" class={buttonClass}/>
         <Tooltip arrow={false}>Home</Tooltip>
     </BottomNavItem>
 
     <BottomNavItem btnName="Weekly" id="group-bookmark" on:click={()=>goto('/weekly')}>
-        <Icon icon={lapTimer} width="24" class={buttonClass}/>
+        <Icon icon={calendarMonthFill} width="24" class={buttonClass}/>
         <Tooltip arrow={false}>Weekly</Tooltip>
     </BottomNavItem>
 
-    <BottomNavItem btnName="Statistics" id="group-search" on:click={()=>goto('/statistics')}>
-        <Icon icon={chartPie} width="24" class={buttonClass} />
-        <Tooltip arrow={false}>Statistics</Tooltip>
+    <BottomNavItem btnName="Settings" id="group-settings" on:click={()=>goto('/setting')}>
+        <Icon icon={settings1Fill} width="24" class={buttonClass}/>
+        <Tooltip arrow={false}>Settings</Tooltip>
     </BottomNavItem>
 
 </BottomNav>
