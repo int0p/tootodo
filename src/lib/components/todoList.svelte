@@ -1,5 +1,5 @@
 <script>
-    import {Timeline, TimelineItem, Checkbox, } from "flowbite-svelte";
+    import {Checkbox, Radio} from "flowbite-svelte";
     import {todoList} from "$lib/stores/useLocStorage.js";
     import deleteOutlineRounded from "@iconify/icons-material-symbols/delete-outline-rounded.js";
     import Icon from "@iconify/svelte";
@@ -19,12 +19,12 @@
         {#if $todoList}
             {#each $todoList as {title,id} (id)}
                 <Checkbox custom class="cursor-pointer !border-t-0 peer-checked:border-blue-600 hover:text-gray-600 peer-checked:text-gray-600 hover:bg-gray-50"
-                          bind:group value={title}>
+                          bind:group={todoSelected} value={title}>
                     <li class="max-h-[70px] px-2 py-3 w-full border-b border-dashed">
                         <div class="w-full relative space-x-2.5 flex justify-start items-centers w-max-[214px]  ">
-                            <div class="self-center w-[4px] h-full bg-blue-600 absolute left-0"></div>
                             <Checkbox class="self-center" />
-                            <p class="text-[1.1rem] w-full max-w-[calc(100%-68px)] line-clamp-2">{title}</p>
+                            <div class="self-center w-[4px] h-full bg-blue-600 absolute left-3.5 "></div>
+                            <p class="text-[1.1rem] w-full relative left-2 max-w-[calc(100%-68px)] line-clamp-2">{title}</p>
                             <Icon icon={deleteOutlineRounded} width="22" class="h-full aspect-square self-center absolute right-0 bg-white"/>
                         </div>
                     </li>
