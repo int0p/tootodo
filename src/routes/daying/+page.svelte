@@ -25,15 +25,15 @@
             <div class="flex-col justify-start absolute top-0 w-full h-[80px]">
                 <button  class={style_btnWeek_Color} >{week[$currentTime.day]}</button>
                 <div class="w-full text-center uppercase mb-2 text-lg font-bold ">
-                    <div class=" absolute left-0 text-xl font-digital"><span class="text-rose-600">{$currentTime.month}</span> /{$currentTime.date}</div>
+                    <div class=" absolute left-0 text-xl font-digital"><span class="text-rose-600">{$currentTime.date}</span> /{$currentTime.month}</div>
                     <div class="text-3xl text-rose-950 font-digital absolute right-0">{$currentTime.shortTime}</div>
                 </div>
             </div>
 
             <div class="absolute h-[calc(100%-80px)] flex-col w-full top-20">
                 <!--            Today, working result-->
-                <div class="w-full h-[30.5%] absolute top-2"><DoneList/></div>
-                <div class="h-[69.5%] w-full absolute bottom-0"><TimeTable/></div>
+                <div class="w-full h-[33%] absolute top-2"><DoneList/></div>
+                <div class="h-[67%] w-full absolute bottom-0"><TimeTable/></div>
 
                 <!--            study time -> mouse over, show works list -->
                 <Button size="xl" gradient color=""

@@ -1,0 +1,20 @@
+//Learn more : https://pris.ly/d/prisma-schema
+// ref lecture : https://www.youtube.com/watch?v=OUzaUJ3gEug&ab_channel=freeCodeCamp.org
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["darwin-arm64","windows","native"]
+}
+
+model Todo{
+  uid String @id @default(uuid())
+  createdAt DateTime @default(now())
+  title String
+  done Boolean @default(false)
+
+}

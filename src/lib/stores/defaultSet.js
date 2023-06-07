@@ -3,9 +3,9 @@ import { writable} from 'svelte/store';
 
 export const defaultTimerSet = writable({
         values: {
-            working: 5,
-            breaking:2,
-            repeat: 2, //tod o 마지막에 breaking없음
+            working: 50,
+            breaking:10,
+            repeat: 3, //tod o 마지막에 breaking없음
             dayStartTime: "09:00",
             dayEndTime: "24:00",
             alarmSession: true,
