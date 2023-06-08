@@ -23,7 +23,7 @@
         <tr class="sticky top-0">
             <th class="p-2 border bg-gray-100"></th>
             {#each dayMinutes as min}
-                <td class="text-xs sticky text-center py-1.5 px-1 border bg-zinc-500 text-white font-bold">
+                <td class="text-xs sticky text-center py-1 px-1 border bg-zinc-500 text-white font-bold">
                     <span class="font-digital">{min}</span>
 
                     <!--{#each events as event}-->
@@ -36,7 +36,7 @@
         </tr>
 
         {#each dayHours as hour}
-            <tr class="py-2 border">
+            <tr class="border">
                 <th class="text-xs py-2 border bg-zinc-700 text-white font-bold">
                     <span class="font-digital ">{hour}</span>
                 </th>

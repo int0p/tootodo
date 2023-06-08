@@ -19,13 +19,13 @@
         <Timer/>
     </div>
 
-    <div class=" w-1/5 h-full flex-col border-4 border-double rounded-lg p-4 max-w-[440px] min-w-[300px]">
-        <div class="flex-col w-full relative gap-y-4 h-full">
+    <div class=" w-1/5 h-full flex-col border-4 border-double rounded-lg p-4 max-w-[440px] min-w-[324px]">
+        <div class="flex-col w-full relative h-full">
 <!--            Today, date info-->
             <div class="flex-col justify-start absolute top-0 w-full h-[80px]">
                 <button  class={style_btnWeek_Color} >{week[$currentTime.day]}</button>
                 <div class="w-full text-center uppercase mb-2 text-lg font-bold ">
-                    <div class=" absolute left-0 text-xl font-digital"><span class="text-rose-600">{$currentTime.date}</span> /{$currentTime.month}</div>
+                    <div class=" absolute left-0 font-digital"><span class="text-rose-600 text-xl">{$currentTime.date}</span> /<span class="text-lg">{$currentTime.month}</span></div>
                     <div class="text-3xl text-rose-950 font-digital absolute right-0">{$currentTime.shortTime}</div>
                 </div>
             </div>
@@ -74,9 +74,3 @@
     </div>
 
 </div>
-
-<style>
-    .font-digital{
-        font-family: 'Quantico', sans-serif;
-    }
-</style>

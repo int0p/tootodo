@@ -45,6 +45,7 @@
 	"type": "module",
 	"dependencies": {
 		"@popperjs/core": "^2.11.7",
+		"@prisma/client": "^4.15.0",
 		"chart.js": "^4.3.0",
 		"classnames": "^2.3.2",
 		"flowbite": "^1.6.5",

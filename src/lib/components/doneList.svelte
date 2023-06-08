@@ -22,10 +22,16 @@
                           bind:group value={title}>
                     <li class="max-h-[64px] px-2 py-3 line-clamp-2 w-full  border-b border-dashed ">
                         <div class="w-full relative space-x-2 flex justify-start items-centers w-max-[214px] ">
-                            <Checkbox checked class="self-center"/>
-                            <div class="self-center w-[3px] h-full bg-blue-600 absolute left-3.5"></div>
-                            <p class="text-[0.9rem] max-w-[calc(100%-68px)] line-clamp-2 relative left-2">{title}</p>
-                            <Icon icon={deleteOutlineRounded} width="22" class="h-full aspect-square self-center absolute right-0 bg-white"/>
+
+                            <div class="self-center w-[3px] h-full bg-blue-600 absolute left-0"></div>
+                            <p class="text-[0.9rem] max-w-[calc(100%-40px)] line-clamp-2 relative left-1">{title}</p>
+                            <Checkbox checked class="self-center absolute right-0 "/>
+<!--                            체크박스가 가장 왼쪽에 위치.-->
+<!--                            <Checkbox checked class="self-center"/>-->
+<!--                            <div class="self-center w-[3px] h-full bg-blue-600 absolute left-3.5"></div>-->
+<!--                            <p class="text-[0.9rem] max-w-[calc(100%-68px)] line-clamp-2 relative left-2">{title}</p>-->
+<!--                            <Icon icon={deleteOutlineRounded} width="22" class="h-full aspect-square self-center absolute right-0 bg-white"/>-->
+
                         </div>
                     </li>
                 </Checkbox>

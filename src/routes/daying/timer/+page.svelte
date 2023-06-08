@@ -39,11 +39,11 @@
             diffTime:(initHours,initMinutes, diffTime)=>{
                 const diffMinutes = stringTimeToNumMinutes(diffTime); //빼고싶은 입력시간을 분으로 변환
                 const fullOriginalMinutes = (initHours%12)*60 + initMinutes;
-                console.log(`initHours : ${initHours}`)
-                console.log(`initMinutes : ${initMinutes}`)
-                console.log(`diffMinutes : ${diffMinutes}`)
-                console.log(`fullOriginalMinutes : ${fullOriginalMinutes}`)
-                console.log(`study time : ${Math.abs(fullOriginalMinutes - diffMinutes)}`)
+                // console.log(`initHours : ${initHours}`)
+                // console.log(`initMinutes : ${initMinutes}`)
+                // console.log(`diffMinutes : ${diffMinutes}`)
+                // console.log(`fullOriginalMinutes : ${fullOriginalMinutes}`)
+                // console.log(`study time : ${Math.abs(fullOriginalMinutes - diffMinutes)}`)
                 return Math.abs(fullOriginalMinutes - diffMinutes);
             },
             addMinutes:(initHours,initMinutes, addMinutes)=>{
@@ -219,15 +219,15 @@
         const workingMinutes = $currentWork.values.repeated*$currentWork.values.curGoalTime;
         const lastWorkingMinutes = $currentWork.functions.diffTime($currentWork.values.repeatStartTime.hours, $currentWork.values.repeatStartTime.minutes , endTime);
         const stopMinutes = Math.floor(stopSeconds/60);
-        console.log(`workingMinutes: ${workingMinutes}, lastWorkingMinutes: ${lastWorkingMinutes}, stopMinutes: ${stopMinutes}`)
+        // console.log(`workingMinutes: ${workingMinutes}, lastWorkingMinutes: ${lastWorkingMinutes}, stopMinutes: ${stopMinutes}`)
         $currentWork.values.studyTime =  workingMinutes + lastWorkingMinutes - stopMinutes;
         //todo: 배열 todayStudy에 추가.
-        console.log(`studyTime: ${$currentWork.values.studyTime}`)
+        // console.log(`studyTime: ${$currentWork.values.studyTime}`)
     }
     function stringTimeToNumMinutes(stringTime){ //todo: 얘 currentWork.functions로 옮기고, diffTime에서 쓰게하고싶은데..ㅠ
         const [hours, temp] = stringTime.split(":");
         const[minutes, ampm] = temp.split(" ");
-        console.log(`end hours: ${hours}, minutes: ${minutes}`)
+        // console.log(`end hours: ${hours}, minutes: ${minutes}`)
         return Number(hours)*60 + Number(minutes);
     }
 
@@ -348,7 +348,7 @@
 
     </div>
 
-    <div class="relative top-[64px] w-full h-[26%]">
+    <div class="relative top-[64px] w-full h-1/4">
         <Memo/>
     </div>
 </div>
