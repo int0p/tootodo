@@ -11,7 +11,7 @@
     // $:console.log(showSidebar);
 </script>
 <div class="flex-col h-screen">
-    <div class="max-w-[calc(100%-2rem)] h-[calc(100%-120px)] m-auto">
+    <div class="max-w-[calc(100%-2rem)] h-[calc(100%-110px)] m-auto">
         <slot />
     </div>
     <Navbar/>

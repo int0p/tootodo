@@ -58,8 +58,8 @@
 <!--목표: memoList는 memo를 보여주고, memoAdd는 memo를 추가하는 역할을 한다.-->
 <!--현실: memoList에 메모의 북마크를 토글하거나 삭제하는 기능이 있다.-->
 <!--TODO: memoList와 memoAdd를 합치거나, 다른 방식으로 나누어야함.-->
-<div class="w-full h-full p-4 relative ">
-    <div class="w-full absolute top-0 h-[calc(100%-70px)]">
+<div class="w-full h-full p-5 relative ">
+    <div class="w-full absolute -top-1 h-[calc(100%-54px)]">
         <MemoList
                 {memos}
                 on:removeMemo={handlerRemoveMemo}

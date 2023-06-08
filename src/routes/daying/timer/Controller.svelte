@@ -68,7 +68,7 @@
 
 </script>
 
-<div class="w-full h-full flex-col py-5 ">
+<div class="w-full h-full flex-col py-4 ">
     <!--    <div class="flex-col relative mb-8  w-full">-->
     <!--        <Progressbar progress="10" size="h-5" class="my-3 font-bold "/>-->
     <!--        <div class="flex justify-between absolute top-6 w-full">-->
@@ -76,8 +76,8 @@
     <!--            <div class="mb-1 text-xs font-medium dark:text-white absolute right-0">{$defaultTimerSetStore.values.dayEndTime}</div>-->
     <!--        </div>-->
     <!--    </div>-->
-    <div class="w-full flex justify-start">
-        <Toolbar class="w-full !justify-center relative bg-zinc-50">
+    <div class="w-full flex justify-start h-14 relative top-1">
+        <Toolbar class="w-full !justify-center  bg-zinc-50">
             <ToolbarButton  on:click={handleResetTimer}><Icon icon={skipForwardFill} hFlip={true} width="28" /></ToolbarButton>
 
             {#if isRunning}

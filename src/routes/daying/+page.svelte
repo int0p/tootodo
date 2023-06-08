@@ -14,7 +14,7 @@
     let showWorksColor = false;
 </script>
 
-<div class="flex w-full h-full justify-center items-start space-x-4 my-6">
+<div class="flex w-full h-full justify-center items-start space-x-4 my-4">
     <div class="h-full w-1/2 max-w-[1200px] min-w-[692px] border-4 border-double rounded-lg p-4">
         <Timer/>
     </div>
