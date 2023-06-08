@@ -8,7 +8,7 @@
 
 
     ///////////////// var //////////////////
-    // svg setting
+    // svg settings
     // circle
     const r = 50;
     const cx = 65;
@@ -18,7 +18,7 @@
     const vw=cx*2;
     const vh=cy*2;
 
-    // component setting
+    // component settings
     let lines = [];
 
     // time

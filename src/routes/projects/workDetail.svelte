@@ -74,7 +74,7 @@
         </Timeline>
     </div>
 
-    <!--  Memo setting-->
+    <!--  Memo settings-->
     <div class="flex justify-around border-t-2 absolute w-full bottom-0 right-0 bg-white">
         <form class="w-full">
             <label for="chat" class="sr-only">Your message</label>

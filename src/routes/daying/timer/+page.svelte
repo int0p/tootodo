@@ -76,7 +76,7 @@
     });
     setContext(currentWorkKey,currentWork);
 
-    ////////////////////////////// alarm setting //////////////////////////////
+    ////////////////////////////// alarm settings //////////////////////////////
     let alarmSound = null;
     function playAlarm(){
         if(alarmSound === null){
@@ -275,7 +275,7 @@
         </div>
 
         <div class="w-full flex justify-center items-center h-[calc(100%-50px)] space-x-4 relative mt-0">
-            <div class="flex-col w-2/5 h-full relative min-w-[230px] ">
+            <div class="flex-col w-2/5 h-full relative min-w-[250px] ">
                 <div class="w-full h-5/6 max-h-[calc(100%-84px)] ">
                     <TodoSelect bind:todoSelected />
                 </div>
@@ -284,7 +284,7 @@
                 </div>
             </div>
 
-            <div class="font-digital font-light relative top-1 timerBox w-3/5 flex justify-center items-center h-[calc(100%-0rem)]">
+            <div class="relative top-1 timerBox w-3/5 flex justify-center items-center h-[calc(100%+1rem)]">
                 <Timer
                         designTimer = {classGoal}
                         {timeLeft}

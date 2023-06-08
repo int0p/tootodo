@@ -13,13 +13,19 @@ import folderOpenFill from '@iconify/icons-mingcute/folder-open-fill';
 import chartPie from "@iconify/icons-uim/chart-pie.js";
 import settingFilled from "@iconify/icons-ant-design/setting-filled.js";
 import Icon from "@iconify/svelte";
-import { BottomNav, BottomNavItem,BottomNavHeaderItem,Tooltip,BottomNavHeader  } from "flowbite-svelte"
+import { BottomNav, BottomNavItem,BottomNavHeaderItem,Tooltip,BottomNavHeader, NavHamburger,Button  } from "flowbite-svelte"
 
 export let showSidebar;
 const buttonClass="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500"
 
 </script>
-
+<!--<div class="absolute left-0 top-0 flex-col w-[30px] h-full m-3 space-y-3">-->
+<!--    <Button class="aspect-square border-b border-0" color="alternative" size="xs" on:click={()=>goto('/')}><Icon icon={home3Fill} width="38" class={buttonClass}/></Button>-->
+<!--    <Button class="aspect-square border-b border-0" color="alternative" size="xs" on:click={()=>goto('/weekly')}><Icon icon={calendarMonthFill} width="38" class={buttonClass}/></Button>-->
+<!--    <Button class="aspect-square border-b border-0" color="alternative" size="xs" on:click={()=>goto('/projects')}><Icon icon={notebook2Fill} width="38" class={buttonClass}/></Button>-->
+<!--    <Button class="aspect-square border-b border-0" color="alternative" size="xs" on:click={()=>goto('/statistics')}><Icon icon={chartPieFill} width="38" class={buttonClass}/></Button>-->
+<!--    <Button class="aspect-square border-b border-0" color="alternative" size="xs" on:click={()=>goto('/settings')}><Icon icon={settings1Fill} width="38" class={buttonClass}/></Button>-->
+<!--</div>-->
 
 <BottomNav position="absolute" navType="group" innerDiv="grid-cols-5">
     <BottomNavHeader slot="header">
@@ -49,7 +55,7 @@ const buttonClass="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:tex
         <Tooltip arrow={false}>Weekly</Tooltip>
     </BottomNavItem>
 
-    <BottomNavItem btnName="Settings" id="group-settings" on:click={()=>goto('/setting')}>
+    <BottomNavItem btnName="Settings" id="group-settings" on:click={()=>goto('/settings')}>
         <Icon icon={settings1Fill} width="24" class={buttonClass}/>
         <Tooltip arrow={false}>Settings</Tooltip>
     </BottomNavItem>
