@@ -270,14 +270,12 @@
 <!--    <pre>{JSON.stringify($currentWork, null,2)}</pre>-->
 
     <div class=" relative w-full h-2/3 flex-col  p-4 max-h-[790px]">
-        <div class="h-[30px] w-full relative ">
-            <Hr  width="w-full" height="h-2" >
-                <p class="text-[1.6rem] line-clamp-2 font-bold w-auto max-w-[600px]"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
-            </Hr>
+        <div class="h-[40px] w-full relative -top-4 flex border-b-4 leading-8">
+            <p class="text-[1.6rem] line-clamp-1 font-bold w-auto"> {$currentWork.values.todo? $currentWork.values.todo:"Select Todo!" }</p>
         </div>
 
-        <div class="w-full flex justify-center items-center h-[calc(100%-60px)] space-x-4 relative mt-5">
-            <div class="flex-col w-2/5 h-full relative min-w-[240px] ">
+        <div class="w-full flex justify-center items-center h-[calc(100%-50px)] space-x-4 relative mt-0">
+            <div class="flex-col w-2/5 h-full relative min-w-[230px] ">
                 <div class="w-full h-5/6 max-h-[calc(100%-84px)] ">
                     <TodoSelect bind:todoSelected />
                 </div>
