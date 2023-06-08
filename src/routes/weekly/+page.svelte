@@ -29,9 +29,9 @@
             <div class="flex-col w-full relative gap-y-4 h-full">
                 <div class="flex-col justify-start absolute top-0 w-full h-[80px]">
                     <button  class={style_btnWeek_Color} class:today={isTodayDay(i+1)}>{week[i+1]}</button>
-                    <div class="w-full text-center uppercase mb-2 text-lg font-bold ">
-                        <div class=" absolute left-0 font-digital"><span class="text-rose-600 text-xl">{monDate+i}</span> /<span class="text-lg">{$currentTime.month}</span></div>
-                        <div class="text-2xl text-rose-950 font-digital absolute right-0">10H 30M</div>
+                    <div class="w-full text-center mb-2 text-lg font-bold ">
+                        <div class=" absolute left-0 font-digital uppercase"><span class="text-rose-600 text-xl">{monDate+i}</span><span class="text-sm">/{$currentTime.month}</span></div>
+                        <div class="text-2xl text-rose-950 font-digital absolute right-0">10h30m</div>
                     </div>
                 </div>
                 <div class="absolute h-[calc(100%-80px)] flex-col w-full top-16 mt-1">

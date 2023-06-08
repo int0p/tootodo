@@ -13,7 +13,19 @@ import folderOpenFill from '@iconify/icons-mingcute/folder-open-fill';
 import chartPie from "@iconify/icons-uim/chart-pie.js";
 import settingFilled from "@iconify/icons-ant-design/setting-filled.js";
 import Icon from "@iconify/svelte";
-import { BottomNav, BottomNavItem,BottomNavHeaderItem,Tooltip,BottomNavHeader, NavHamburger,Button  } from "flowbite-svelte"
+import {
+    BottomNav,
+    BottomNavItem,
+    BottomNavHeaderItem,
+    Tooltip,
+    BottomNavHeader,
+    NavHamburger,
+    Button,
+    ToolbarButton
+} from "flowbite-svelte"
+import skipForwardFill from "@iconify/icons-mingcute/skip-forward-fill.js";
+import pauseFill from "@iconify/icons-mingcute/pause-fill.js";
+import playFill from "@iconify/icons-mingcute/play-fill.js";
 
 export let showSidebar;
 const buttonClass="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500"
@@ -28,11 +40,16 @@ const buttonClass="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:tex
 <!--</div>-->
 
 <BottomNav position="absolute" navType="group" innerDiv="grid-cols-5">
-    <BottomNavHeader slot="header">
+    <BottomNavHeader slot="header" outerClass="w-full">
         {#if $page.url.pathname !== '/'}
-            <BottomNavHeaderItem itemName="New" />
-            <BottomNavHeaderItem itemName="Popular" active={true}/>
-            <BottomNavHeaderItem itemName="Following" />
+            <BottomNavHeaderItem itemName="todo" active={true} />
+            <BottomNavHeaderItem itemName="remain" />
+            <div class="flex justify-around mx-0 ">
+                <Icon icon={skipForwardFill} hFlip={true} width="28" />
+                <!--            <Icon icon={pauseFill} width="28" />-->
+                <Icon icon={playFill} width="28"  />
+                <Icon icon={skipForwardFill} width="28" />
+            </div>
         {/if}
     </BottomNavHeader>
     <BottomNavItem btnName="Statistics" id="group-search" on:click={()=>goto('/statistics')}>
