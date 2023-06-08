@@ -277,8 +277,8 @@
         </div>
 
         <div class="w-full flex justify-center items-center h-[calc(100%-60px)] space-x-4 relative mt-5">
-            <div class="flex-col w-2/5 h-full relative min-w-[250px] ">
-                <div class="w-full h-5/6 max-h-[calc(100%-90px)] ">
+            <div class="flex-col w-2/5 h-full relative min-w-[240px] ">
+                <div class="w-full h-5/6 max-h-[calc(100%-84px)] ">
                     <TodoSelect bind:todoSelected />
                 </div>
                 <div class="w-full  h-1/6 min-h-[80px] max-h-[110px]">
@@ -313,8 +313,8 @@
                     />
                 </div>
 
-                <div class="flex-col mb-1 text-lg font-semibold absolute bg-white  p-2 rounded-lg text-center bottom-2.5 opacity-80">
-                    <div class="text-[1.1vw] ">
+                <div class="flex-col mb-1 font-bold absolute bg-white  p-2 rounded-lg text-center bottom-2.5 opacity-80">
+                    <div class="text-[1.2vw] ">
                         <span class="text-rose-700 inline-block">
                             [{$currentWork.values.curGoalTime} min * {$defaultTimerSet.values.repeat}]
                         </span>
