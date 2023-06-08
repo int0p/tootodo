@@ -281,12 +281,12 @@
                 <div class="w-full h-5/6 max-h-[calc(100%-90px)]">
                     <TodoSelect bind:todoSelected />
                 </div>
-                <div class="w-full  h-1/6 min-h-[86px] max-h-[110px]">
+                <div class="w-full  h-1/6 min-h-[80px] max-h-[110px]">
                     <TimeSelect bind:timeSelected/>
                 </div>
             </div>
 
-            <div class="relative top-1 timerBox w-3/5 flex justify-center items-center h-[calc(100%-0rem)]">
+            <div class="font-digital font-light relative top-1 timerBox w-3/5 flex justify-center items-center h-[calc(100%-0rem)]">
                 <Timer
                         designTimer = {classGoal}
                         {timeLeft}
