@@ -66,7 +66,7 @@
 
                 <!--        message display-->
                 <!-- ask값이 true일땐 gpt와의 대화 모드가 되므로 대화창의 색을 초록으로 바꾼다. -->
-                <Alert color ={ ask ? "green" : "yellow"} class="max-w-[calc(100%-155px)] ">
+                <Alert color ={ ask ? "green" : "purple"} class="max-w-[calc(100%-155px)] ">
                     <!--           save값이 true일땐 아이콘을 꽉찬 북마크으로 설정한다. -->
                     <span slot="icon" on:click={()=>handleToggle(id)}>
                         {#if save}
