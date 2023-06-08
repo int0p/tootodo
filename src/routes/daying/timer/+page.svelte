@@ -277,8 +277,8 @@
         </div>
 
         <div class="w-full flex justify-center items-center h-[calc(100%-60px)] space-x-4 relative mt-5">
-            <div class="flex-col w-2/5 h-full relative ">
-                <div class="w-full h-5/6 max-h-[calc(100%-90px)]">
+            <div class="flex-col w-2/5 h-full relative min-w-[250px] ">
+                <div class="w-full h-5/6 max-h-[calc(100%-90px)] ">
                     <TodoSelect bind:todoSelected />
                 </div>
                 <div class="w-full  h-1/6 min-h-[80px] max-h-[110px]">
