@@ -42,11 +42,11 @@
                         on:mouseenter={() => showWorksColor = !showWorksColor}
                         on:mouseleave={() => showWorksColor = !showWorksColor}
                 >
-                    <span class="font-digital font-extrabold ">10H 30M</span>
+                    <span class="font-digital font-extrabold ">10h 30m</span>
                 </Button>
 
                 {#if showWorksColor}
-                    <Listgroup class="w-2/5 absolute bottom-0 -right-32" active>
+                    <Listgroup class="w-2/5 absolute bottom-0 -right-28" active>
                         <ListgroupItem class="flex">
                             <svg aria-hidden="true" class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path></svg>
                             Share

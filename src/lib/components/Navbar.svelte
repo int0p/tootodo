@@ -31,6 +31,7 @@ export let showSidebar;
 const buttonClass="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500"
 
 </script>
+<!--left side bar-->
 <!--<div class="absolute left-0 top-0 flex-col w-[30px] h-full m-3 space-y-3">-->
 <!--    <Button class="aspect-square border-b border-0" color="alternative" size="xs" on:click={()=>goto('/')}><Icon icon={home3Fill} width="38" class={buttonClass}/></Button>-->
 <!--    <Button class="aspect-square border-b border-0" color="alternative" size="xs" on:click={()=>goto('/weekly')}><Icon icon={calendarMonthFill} width="38" class={buttonClass}/></Button>-->
