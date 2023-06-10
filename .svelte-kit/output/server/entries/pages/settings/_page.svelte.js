@@ -1,0 +1,1 @@
+import{c as e,v as r}from"../../../chunks/index2.js";import"classnames";/* empty css                                                     */import{H as a}from"../../../chunks/Heading.js";const d=e((t,n,o,s)=>`${r(a,"Heading").$$render(t,{tag:"h2",class:"m-8 text-center"},{},{default:()=>"Setting Page "})}`);export{d as default};

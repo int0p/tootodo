@@ -2,6 +2,7 @@
     import { onMount, onDestroy } from 'svelte'
     import { Editor } from '@tiptap/core'
     import StarterKit from '@tiptap/starter-kit'
+    import { Badge,Button } from 'flowbite-svelte';
 
     let element
     let editor
@@ -27,26 +28,24 @@
     })
 </script>
 
-<div class="h-full flex-col overflow-x-hidden ">
+<div class="h-[calc(100%-70px)] border-4 border-purple-100 flex-col overflow-x-hidden ">
     {#if editor}
-        <button
+        <Badge
                 on:click={() => editor.chain().focus().toggleHeading({ level: 1}).run()}
-                class:active={editor.isActive('heading', { level: 1 })}
         >
-            H1
-        </button>
-        <button
+            <div  class:active={editor.isActive('heading', { level: 1 })}>H1</div>
+        </Badge>
+        <Badge
                 on:click={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-                class:active={editor.isActive('heading', { level: 2 })}
         >
-            H2
-        </button>
-        <button on:click={() => editor.chain().focus().setParagraph().run()} class:active={editor.isActive('paragraph')}>
-            P
-        </button>
+            <div class:active={editor.isActive('heading', { level: 2 })}>H2</div>
+        </Badge>
+        <Badge on:click={() => editor.chain().focus().setParagraph().run()} >
+            <div class:active={editor.isActive('paragraph')}>P</div>
+        </Badge>
     {/if}
 
-    <div bind:this={element} class="w-full h-full"/>
+    <div bind:this={element} class="w-full h-[calc(100%-1rem)]"/>
 </div>
 
 <style>

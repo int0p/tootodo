@@ -3,10 +3,12 @@
 	import '../app.postcss';
     import Navbar from "$lib/components/Navbar.svelte";
     import TimerSidebar from "./daying/+page.svelte";
-
     import { slide } from 'svelte/transition';
     import { quintOut } from 'svelte/easing';
-
+    //To disable server side rendering
+    export const prerender = true;
+    export const trailingSlash = 'always';
+    export const ssr = false;
     // let showSidebar = true;
     // $:console.log(showSidebar);
 </script>
