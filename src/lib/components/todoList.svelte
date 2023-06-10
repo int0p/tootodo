@@ -23,7 +23,7 @@
                     <li class="max-h-[70px] px-2 py-3 w-full border-b border-dashed">
                         <div class="w-full relative space-x-2.5 flex justify-start items-centers w-max-[220px]  ">
 <!--                            체크박스가 가장 오른쪽에 위치.-->
-                            <div class="self-center w-[4px] h-full bg-blue-600 absolute -left-2 "></div>
+                            <div class="self-center w-[4px] h-full bg-blue-600 absolute -left-0 "></div>
                             <p class="text-[1.0rem] w-full relative left-0 max-w-[calc(100%-50px)] line-clamp-2">{title}</p>
 <!--                            <Icon icon={deleteOutlineRounded} width="22" class="h-full aspect-square self-center "/>-->
                             <Checkbox class="self-center absolute right-0 " />

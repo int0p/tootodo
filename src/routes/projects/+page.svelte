@@ -1,19 +1,22 @@
 <script>
-
-    import WorkDetail from "./workDetail.svelte";
     import Status from "./status.svelte";
-    import ProjectList from "./projectList.svelte";
+    import ProjectDetail from "./projectDetail.svelte";
+    import Note from "./note.svelte";
 
 </script>
-<div class="flex-col m-4 h-full w-[calc(100%-1rem)]"> <!--    얘의 width가 full일 때 section모드에서 전체화면에 존재.  -->
+
+<div class="flex m-auto mt-6 h-[calc(100%-1rem)] w-[calc(100%-1rem)] space-x-3"> <!--    얘의 width가 full일 때 section모드에서 전체화면에 존재.  -->
 <!--        status: ongoing, done, not started, all-->
-    <Status /> <!--    h: 80px -->
 
 <!--        projects-->
-    <div class = "flex clear-both h-[calc(100%-100px)] ">
-        <ProjectList />
-        <WorkDetail />
-    </div>
+        <div class="w-1/3 h-[calc(100%-60px)] flex-col space-y-3">
+            <Status /> <!--    h: 40px -->
+            <ProjectDetail />
+        </div>
+
+        <div class="w-2/3 h-full">
+            <Note/>
+        </div>
 </div>
 
 

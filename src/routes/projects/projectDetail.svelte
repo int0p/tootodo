@@ -5,7 +5,7 @@
     let fullMemo = false;
 </script>
 
-<div class="flex h-[calc(100vh-290px)] overflow-x-hidden" class:fullWidth={fullMemo} class:fitWidth={!fullMemo}>
+<div class="flex h-full overflow-x-hidden" class:fullWidth={fullMemo} class:fitWidth={!fullMemo}>
     <WorkList bind:fullMemo/>
     <MemoList {fullMemo}/>
 </div>
