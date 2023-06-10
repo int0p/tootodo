@@ -84,24 +84,6 @@
     <svg viewBox="0 0 {vw} {vh}">
         <circle {cx} {cy} {r} stroke="black" fill="transparent"  />
 
-<!--        <rect-->
-<!--                x="calc({cx} - 0.7 * {r})"-->
-<!--                y = "calc({cy} - 0.3 * {r})"-->
-<!--                width = "calc({r} * 2 * 0.7)"-->
-<!--                height ="calc({r} * 2 * 0.21)"-->
-<!--                fill="white"-->
-<!--                stroke="black"-->
-<!--        ></rect>-->
-
-<!--        <circle {cx} {cy} r="1" stroke="black" fill="transparent" />-->
-
-
-<!--        <g transform="translate(50,50)" >-->
-<!--            <Icon icon={playCircle} width="30"/>-->
-<!--        </g>-->
-
-
-
         {#each lines as line}
             <line
                     x1={getLineCoordinates(line).x1}
@@ -117,6 +99,23 @@
                     font-size="8"
             >{line.text}</text>
         {/each}
+
+
+        <!--        <rect-->
+        <!--                x="calc({cx} - 0.7 * {r})"-->
+        <!--                y = "calc({cy} - 0.3 * {r})"-->
+        <!--                width = "calc({r} * 2 * 0.7)"-->
+        <!--                height ="calc({r} * 2 * 0.21)"-->
+        <!--                fill="white"-->
+        <!--                stroke="black"-->
+        <!--        ></rect>-->
+
+        <!--        <circle {cx} {cy} r="1" stroke="black" fill="transparent" />-->
+
+
+        <!--        <g transform="translate(50,50)" >-->
+        <!--            <Icon icon={playCircle} width="30"/>-->
+        <!--        </g>-->
     </svg>
 </div>
 
