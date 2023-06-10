@@ -24,7 +24,7 @@
                         <div class="w-full relative space-x-2 flex justify-start items-centers w-max-[214px] ">
 
                             <div class="self-center w-[3.5px] h-full bg-blue-600 absolute -left-0"></div>
-                            <p class="text-[0.9rem] max-w-[calc(100%-40px)] line-clamp-2 relative left-0">{title}</p>
+                            <p class="text-[0.9rem] max-w-[calc(100%-40px)] line-clamp-2 relative left-1">{title}</p>
                             <Checkbox checked class="self-center absolute right-0 "/>
 <!--                            체크박스가 가장 왼쪽에 위치.-->
 <!--                            <Checkbox checked class="self-center"/>-->
