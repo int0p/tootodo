@@ -1,6 +1,6 @@
 <script>
     import {Breadcrumb, BreadcrumbItem} from "flowbite-svelte";
-    import Editor from "./tiptap.svelte";
+    import Editor from "./lexical.svelte";
 </script>
 
 <Breadcrumb aria-label="Solid background breadcrumb example" class="bg-gray-50 py-3 px-5 dark:bg-gray-900 mb-2">
