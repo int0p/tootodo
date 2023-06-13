@@ -1,7 +1,9 @@
 <script>
     import {Breadcrumb, BreadcrumbItem} from "flowbite-svelte";
-    import Editor from "./lexical.svelte";
+    import Editor from "$lib/editor/+page.svelte";
 </script>
+
+<div class="h-full w-full">
 
 <Breadcrumb aria-label="Solid background breadcrumb example" class="bg-gray-50 py-3 px-5 dark:bg-gray-900 mb-2">
     <BreadcrumbItem href="/" home>
@@ -27,4 +29,7 @@
         Flowbite Svelte</BreadcrumbItem>
 </Breadcrumb>
 
-<Editor />
+    <div class="h-[calc(100%-50px)] w-full">
+        <Editor />
+    </div>
+</div>
