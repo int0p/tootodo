@@ -2,7 +2,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-	plugins: [sveltekit()],
+	plugins: [sveltekit(),],
 
 // vite가 Rust 오류를 감추지 않게 한다.
 	clearScreen: false,
@@ -32,5 +32,6 @@ export default defineConfig({
 				additionalData: '@use "src/variables.scss" as *;'
 			}
 		}
-	}
+	},
+
 });

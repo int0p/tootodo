@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native","darwin-arm64","windows"]
+  output = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Todo{
+  uid String @id @default(uuid())
+  created_at DateTime @default(now())
+  title String
+  done Boolean @default(false)
+}
+
+model Memo{
+  uid String @id @default(uuid())
+  created_at DateTime @default(now())
+  content String
+  isTodo Boolean @default(false)
+  isAsk Boolean @default(false)
+}
+
+model studyRecord{
+  uid String @id @default(uuid())
+  created_at DateTime @default(now())
+  todo_title String
+  todo_id String
+  startTime DateTime
+  endTime DateTime
+  studyMinutes Int
+}
